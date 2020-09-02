@@ -6,14 +6,27 @@
 {% endblock %}
 
 {% block body %}
-    {{ include('admin/include/top_menu.html.twig') }}
-    {# menu latéral #}
+    <div class="row">
+        <div class="col">
+            {{ include('admin/include/top_menu.html.twig') }}
+        </div>
+    </div>
 
-    <div>
+    {{ include('admin/include/right_menu.html.twig') }}
+
+<div class="row">
+    <div class="col">
+        SOMETHING
         {# page content #}
     </div>
+</div>
+
+    
+
+    
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/admin/admin_layout.js') }}"></script>
 {% endblock %}
