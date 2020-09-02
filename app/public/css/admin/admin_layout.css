@@ -1,0 +1,8 @@
+body {
+    background-color: #ecf0f5;
+}
+
+#main-navbar-toggler:hover {
+    color: #bdbdbd!important;
+    border-color: #bdbdbd!important;
+}

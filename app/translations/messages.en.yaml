@@ -1,0 +1,5 @@
+admin:
+    logout: Log Out
+
+cms:
+    name: Symfony CMS

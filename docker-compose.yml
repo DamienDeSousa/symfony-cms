@@ -1,0 +1,25 @@
+version:  '3.7'
+
+services:
+  mysql:
+    image: mysql:5.7.29
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: example
+    volumes:
+      - db-data:/var/lib/mysql
+    ports: 
+      - 3307:3306
+  
+  php73:
+    build: php73
+    # user: $UID:$GID
+    ports:
+      - "8080:80"
+    volumes:
+        - ./vhosts:/etc/apache2/sites-enabled
+        - ./app:/var/www
+
+volumes: 
+  db-data: {}

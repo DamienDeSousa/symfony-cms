@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/admin/admin_layout.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+    {{ include('admin/include/top_menu.html.twig') }}
+    {# menu latéral #}
+
+    <div>
+        {# page content #}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
