@@ -3,10 +3,12 @@ body {
     overflow-x: hidden;
 }
 
+/** Start Side navbar toggler **/
 #main-navbar-toggler:hover {
     color: #bdbdbd!important;
     border-color: #bdbdbd!important;
 }
+/** End Side navbar toggler **/
 
 
 

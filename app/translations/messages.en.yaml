@@ -1,5 +1,10 @@
 admin:
     logout: Log Out
+    login:
+        header: Administration
+        username: User Name
+        password: Password
+        submit: Submit
 
 cms:
     name: Symfony CMS

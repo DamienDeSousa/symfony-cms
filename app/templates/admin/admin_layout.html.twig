@@ -14,16 +14,7 @@
 
     {{ include('admin/include/right_menu.html.twig') }}
 
-<div class="row">
-    <div class="col">
-        SOMETHING
-        {# page content #}
-    </div>
-</div>
-
-    
-
-    
+    {% block content %} {% endblock %}
 {% endblock %}
 
 {% block javascripts %}

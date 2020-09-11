@@ -1,2 +1,10 @@
 admin:
     logout: Déconnexion
+    login:
+        header: Administration
+        username: Nom d'utilisateur
+        password: Mot de passe
+        submit: Connexion
+
+cms:
+    name: Symfony CMS

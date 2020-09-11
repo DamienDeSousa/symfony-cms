@@ -1,9 +1,20 @@
 <?php
 
-// src/Security/LoginFormAuthenticator.php
-namespace App\Security;
+/**
+ * Define the admin login form authentificator guard.
+ *
+ * @author    Damien DE SOUSA <email@email.com>
+ * @copyright 2020 Damien DE SOUSA
+ */
 
+namespace App\Security\Admin;
+
+use App\Controller\Admin\Index;
+use App\Controller\Admin\Security\Login;
+use App\Controller\Admin\Security\LoginCheck;
 use App\Entity\User;
+use App\Security\Admin\AuthSecurizer;
+use App\Security\UserRoles;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,36 +32,83 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
+/**
+ * Guard that controls all the authentification steps.
+ */
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'fos_user_security_check';
-    public const LOGIN_PAGE_ROUTE = 'fos_user_security_login';
+    /**
+     * Entity manager.
+     *
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
 
-    private $entityManager;
-    private $urlGenerator;
-    private $csrfTokenManager;
-    private $passwordEncoder;
+    /**
+     * Url generator.
+     *
+     * @var UrlGeneratorInterface
+     */
+    protected $urlGenerator;
 
+    /**
+     * Csrf token manager.
+     *
+     * @var CsrfTokenManagerInterface
+     */
+    protected $csrfTokenManager;
+
+    /**
+     * User password encoder.
+     *
+     * @var UserPasswordEncoderInterface
+     */
+    protected $passwordEncoder;
+
+    /**
+     * Authorization securizer.
+     *
+     * @var AuthSecurizer
+     */
+    protected $authSecurizer;
+
+    /**
+     * Constructor.
+     *
+     * @param EntityManagerInterface       $entityManager
+     * @param UrlGeneratorInterface        $urlGenerator
+     * @param CsrfTokenManagerInterface    $csrfTokenManager
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param AuthSecurizer                $authSecurizer
+     */
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordEncoderInterface $passwordEncoder,
+        AuthSecurizer $authSecurizer
     ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->authSecurizer = $authSecurizer;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function supports(Request $request)
     {
-        return self::LOGIN_ROUTE === $request->attributes->get('_route')
+        return LoginCheck::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getCredentials(Request $request)
     {
         $credentials = [
@@ -66,6 +124,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         return $credentials;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
@@ -77,43 +138,52 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
 
         return $user;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function checkCredentials($credentials, UserInterface $user)
     {
         $userRoles = $user->getRoles();
         $isUserAdmin = false;
-        if (in_array('ROLE_ADMIN', $userRoles) || in_array('ROLE_SUPER_ADMIN', $userRoles)) {
+        if ($this->authSecurizer->isGranted($user, UserRoles::ROLE_ADMIN)) {
             $isUserAdmin = true;
         }
+
         return $isUserAdmin && $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * @inheritDoc
      */
     public function getPassword($credentials): ?string
     {
         return $credentials['password'];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return new RedirectResponse($this->getLoginUrl());
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse(static::LOGIN_PAGE_ROUTE);
+            return new RedirectResponse($targetPath);
         }
+        $adminDefaultUrl = $this->urlGenerator->generate(Index::INDEX_ROUTE);
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);
+        return new RedirectResponse($adminDefaultUrl);
     }
 
-    protected function getLoginUrl()
+    /**
+     * @inheritDoc
+     */
+    protected function getLoginUrl(): string
     {
-        return $this->urlGenerator->generate(self::LOGIN_PAGE_ROUTE);
+        return $this->urlGenerator->generate(Login::LOGIN_PAGE_ROUTE);
     }
 }

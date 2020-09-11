@@ -1,2 +1,6 @@
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+# fos_user:
+#     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+fos_user_security_logout:
+    path: /logout
+    controller: fos_user.security.controller:logoutAction
+    methods: GET|POST
