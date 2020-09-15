@@ -1,5 +1,7 @@
 {% extends 'layout.html.twig' %}
 
+{% block meta_robot %}noindex, nofollow{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('css/admin/admin_layout.css') }}" rel="stylesheet"/>

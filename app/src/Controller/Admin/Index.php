@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Controller that render the admin index page.
  *
- * @Route("/admin", name="admin_index")
+ * @Route("/admin/", name="admin_index")
  */
 class Index extends AbstractController
 {
