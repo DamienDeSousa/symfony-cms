@@ -5,6 +5,8 @@ admin:
         username: User Name
         password: Password
         submit: Submit
+    sections:
+        home: Home
 
 cms:
     name: Symfony CMS

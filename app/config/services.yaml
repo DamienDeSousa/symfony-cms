@@ -32,3 +32,9 @@ services:
     App\Security\UserRoles:
         arguments:
             $roles: '%security.role_hierarchy.roles%'
+
+    App\Twig\Admin\SidebarSection:
+        arguments:
+            $routes:
+                - name: 'admin_index'
+                  section_name: 'admin.sections.home'

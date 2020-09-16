@@ -25,12 +25,4 @@ class DefaultController extends AbstractController
             '<html><body>' . print_r($this->userRoles->getDefinedRoles(), true) . '</body></html>'
         );
     }
-
-    /**
-     * @Route("/admin/", name="admin-home")
-     */
-    public function admin()
-    {
-        return $this->render('admin/admin_layout.html.twig');
-    }
 }
