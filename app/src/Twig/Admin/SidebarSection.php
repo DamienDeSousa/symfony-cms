@@ -56,14 +56,36 @@ class SidebarSection implements RuntimeExtensionInterface
     {
         $sections = [];
         foreach ($this->routes as $route) {
-            $section['route'] = (isset($route['args'])) ?
-                $this->router->generate($route['name'], $route['args'])
-                : $this->router->generate($route['name']);
+            if (!$this->isRouteValid($route)) {
+                //log something and continue
+            }
+
+            (isset($route['args'])) ?
+                $section['route'] = $this->router->generate($route['name'], $route['args'])
+                : $section['route'] = $this->router->generate($route['name']);
 
             $section['name'] = $route['section_name'];
             $sections[] = $section;
         }
 
         return $sections;
+    }
+
+    /**
+     * Check if the given route is valid.
+     *
+     * @param array $route
+     *
+     * @return boolean
+     */
+    protected function isRouteValid(array $route): bool
+    {
+        $isValid = false;
+
+        if (isset($route['name']) && isset($route['section_name'])) {
+            $isValid = true;
+        }
+
+        return $isValid;
     }
 }
