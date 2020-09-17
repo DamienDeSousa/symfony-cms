@@ -38,9 +38,9 @@ class AuthSecurizer
     /**
      * Check if the given user has equal or better role that given.
      *
-     * @param User $user
+     * @param User   $user
      * @param string $attribute
-     * @param null $object
+     * @param null   $object
      *
      * @return boolean
      */
