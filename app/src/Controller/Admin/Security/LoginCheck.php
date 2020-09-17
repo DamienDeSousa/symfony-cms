@@ -34,6 +34,9 @@ class LoginCheck extends AbstractController
      */
     public function __invoke()
     {
-        throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
+        $message = 'You must configure the check path to be handled by the firewall ';
+        $message .= 'using form_login in your security firewall configuration.';
+
+        throw new \RuntimeException($message);
     }
 }
