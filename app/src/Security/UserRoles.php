@@ -7,6 +7,8 @@
  * @copyright 2020 Damien DE SOUSA
  */
 
+declare(strict_types=1);
+
 namespace App\Security;
 
 use FOS\UserBundle\Model\UserInterface;
