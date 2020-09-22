@@ -7,6 +7,6 @@ admin:
         submit: Connexion
     sections:
         home: Accueil
-
+        site: Paramètres Généraux
 cms:
     name: Symfony CMS

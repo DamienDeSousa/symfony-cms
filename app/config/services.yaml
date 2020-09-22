@@ -38,3 +38,5 @@ services:
             $routes:
                 - name: 'admin_index'
                   section_name: 'admin.sections.home'
+                - name: 'admin_site_show'
+                  section_name: 'admin.sections.site'
