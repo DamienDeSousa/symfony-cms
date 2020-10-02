@@ -151,7 +151,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        $userRoles = $user->getRoles();
         $isUserAdmin = false;
         if ($this->authSecurizer->isGranted($user, UserRoles::ROLE_ADMIN)) {
             $isUserAdmin = true;
@@ -173,7 +172,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
+        if ($targetPath) {
             return new RedirectResponse($targetPath);
         }
         $adminDefaultUrl = $this->urlGenerator->generate(Index::INDEX_ROUTE);

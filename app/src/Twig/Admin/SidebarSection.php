@@ -56,8 +56,10 @@ class SidebarSection implements RuntimeExtensionInterface
     {
         $sections = [];
         foreach ($this->routes as $route) {
-            (isset($route['args'])) ? $section['route'] = $this->router->generate($route['name'], $route['args'])
-                : $section['route'] = $this->router->generate($route['name']);
+            $section['route'] = (isset($route['args'])) ?
+                $this->router->generate($route['name'], $route['args'])
+                : $this->router->generate($route['name']);
+
             $section['name'] = $route['section_name'];
             $sections[] = $section;
         }
