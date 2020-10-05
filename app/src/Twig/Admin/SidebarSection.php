@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Twig\Admin;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 
@@ -36,13 +37,21 @@ class SidebarSection implements RuntimeExtensionInterface
     protected $router;
 
     /**
+     * Logger.
+     *
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * Constructor.
      *
      * @param UrlGeneratorInterface $router
      * @param array                 $routes
      */
-    public function __construct(UrlGeneratorInterface $router, array $routes = [])
+    public function __construct(LoggerInterface $logger, UrlGeneratorInterface $router, array $routes = [])
     {
+        $this->logger = $logger;
         $this->router = $router;
         $this->routes = $routes;
     }
@@ -57,7 +66,10 @@ class SidebarSection implements RuntimeExtensionInterface
         $sections = [];
         foreach ($this->routes as $route) {
             if (!$this->isRouteValid($route)) {
-                //log something and continue
+                $this->logger->error(
+                    'The route ' . json_encode($route) . ' is not valid. Please check the config file.'
+                );
+                continue;
             }
 
             (isset($route['args'])) ?
