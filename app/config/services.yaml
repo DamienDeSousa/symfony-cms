@@ -40,3 +40,9 @@ services:
                   section_name: 'admin.sections.home'
                 - name: 'admin_site_show'
                   section_name: 'admin.sections.site'
+    
+    App\Override\Fos\UserBundle\Command\PromoteUserCommand:
+        decorates:
+            'fos_user.command.promote_user'
+        arguments:
+            $manipulator: '@fos_user.util.user_manipulator'
