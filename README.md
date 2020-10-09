@@ -16,7 +16,7 @@ Cache HTTP
 Cache applicatif  
 Créer un nouvel env pour exécuter les tests fonctionnels  
 Rédiger de la doc !  
-Extraire la gestion des erreurs, du last login et de l'affichage du captcha dans des services.  
+Afficher le captcha dans des services si 3 tentatives ou plus sur la page de login.  
 
 ## Installation
 
