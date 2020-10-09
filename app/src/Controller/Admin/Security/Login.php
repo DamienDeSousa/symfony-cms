@@ -13,13 +13,12 @@ namespace App\Controller\Admin\Security;
 
 use App\Security\Admin\AuthError;
 use App\Security\Admin\LastUsername;
+use App\Security\Admin\Login\Captcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Login admin controller.
@@ -53,20 +52,28 @@ class Login extends AbstractController
     protected $lastUsername;
 
     /**
+     * @var Captcha
+     */
+    protected $captcha;
+
+    /**
      * Constructor.
      *
      * @param CsrfTokenManagerInterface $tokenManager
      * @param AuthError                 $authError
      * @param LastUsername              $lastUsername
+     * @param Captcha                   $captcha
      */
     public function __construct(
         CsrfTokenManagerInterface $tokenManager,
         AuthError $authError,
-        LastUsername $lastUsername
+        LastUsername $lastUsername,
+        Captcha $captcha
     ) {
         $this->tokenManager = $tokenManager;
         $this->authError = $authError;
         $this->lastUsername = $lastUsername;
+        $this->captcha = $captcha;
     }
 
     /**
@@ -84,13 +91,13 @@ class Login extends AbstractController
             ? $this->tokenManager->getToken('authenticate')->getValue()
             : null;
 
-        // $session->set('', '');
-        // $session->get(''); // retourne null si non trouvé
+        $activateCaptcha = $this->captcha->activate($request);
 
         return $this->render('admin/security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
             'csrf_token' => $csrfToken,
+            'enable_captcha' => $activateCaptcha
         ]);
     }
 }

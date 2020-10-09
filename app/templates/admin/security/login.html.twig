@@ -30,6 +30,11 @@
                         <label for="password">{{ 'admin.login.password'|trans }}</label>
                         <input type="password" class="form-control" id="password" name="_password" required="required" autocomplete="current-password">
                     </div>
+                    {% if enable_captcha %}
+                        <div class="form-group">
+                            le captcha doit apparaitre.
+                        </div>
+                    {% endif %}
                     <button type="submit" class="btn btn-success" id="_submit" name="_submit" value="{{ 'admin.login.submit'|trans }}">{{ 'admin.login.submit'|trans }}</button>
                 </form>
             </div>

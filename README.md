@@ -16,7 +16,9 @@ Cache HTTP
 Cache applicatif  
 Créer un nouvel env pour exécuter les tests fonctionnels  
 Rédiger de la doc !  
-Afficher le captcha dans des services si 3 tentatives ou plus sur la page de login.  
+Afficher le captcha dans des services si 3 tentatives ou plus sur la page de login.
+Utiliser un symfony form pour le formulaire de login de la page admin et pour tous les futurs formulaires.  
+Utiliser un observer pour setter la valeur en session de la clé login_page_submitted.  
 
 ## Installation
 
