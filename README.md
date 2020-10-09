@@ -10,13 +10,13 @@ Mettre en place les vérifications / logs
 Mettre en place un systeme de log via le logger  
 Créer une page de configuration gloale du site permettant de gérer: Title, icon  
 Mettre captcha sur page de login admin  
-Ajouter tests fonctionnels  
+Ajouter tests fonctionnels sur page accueil, page login admin, page accueil admin, page affichage site  
+S'assurer de la présence de la barre horizontale et latéral sur les pages admins  
 Cache HTTP  
 Cache applicatif  
-Décorer la méthode FOS\UserBundle\Command\PromoteUserCommand->executeRoleCommand(...) pour empecher de saisir un role qui n'existe pas  
-Même chose pour la méthode FOS\UserBundle\Command\DemoteUserCommand->executeRoleCommand(...)  
 Créer un nouvel env pour exécuter les tests fonctionnels  
 Rédiger de la doc !  
+Extraire la gestion des erreurs, du last login et de l'affichage du captcha dans des services.  
 
 ## Installation
 

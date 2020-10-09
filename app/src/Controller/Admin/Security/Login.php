@@ -18,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Login admin controller.
@@ -59,7 +60,7 @@ class Login extends AbstractController
      */
     public function __invoke(Request $request): Response
     {
-        /** @var $session Session */
+        /** @var Session $session */
         $session = $request->getSession();
 
         $authErrorKey = Security::AUTHENTICATION_ERROR;
@@ -84,6 +85,9 @@ class Login extends AbstractController
         $csrfToken = $this->tokenManager
             ? $this->tokenManager->getToken('authenticate')->getValue()
             : null;
+
+        $session->set('', '');
+        $session->get(''); // retourne null si non trouvé
 
 
         return $this->render('admin/security/login.html.twig', [

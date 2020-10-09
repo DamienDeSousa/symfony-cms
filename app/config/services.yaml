@@ -41,8 +41,14 @@ services:
                 - name: 'admin_site_show'
                   section_name: 'admin.sections.site'
     
-    App\Override\Fos\UserBundle\Command\PromoteUserCommand:
+    App\Decorator\Fos\UserBundle\Command\PromoteUserCommand:
         decorates:
             'fos_user.command.promote_user'
+        arguments:
+            $manipulator: '@fos_user.util.user_manipulator'
+
+    App\Decorator\Fos\UserBundle\Command\DemoteUserCommand:
+        decorates:
+            'fos_user.command.demote_user'
         arguments:
             $manipulator: '@fos_user.util.user_manipulator'
