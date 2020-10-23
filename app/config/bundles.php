@@ -15,4 +15,5 @@ return [
     FOS\UserBundle\FOSUserBundle::class => ['all' => true],
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true, 'functional_test' => true],
     FOS\JsRoutingBundle\FOSJsRoutingBundle::class => ['all' => true],
+    Gregwar\CaptchaBundle\GregwarCaptchaBundle::class => ['all' => true],
 ];
