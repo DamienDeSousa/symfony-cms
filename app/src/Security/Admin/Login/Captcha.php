@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Define Captcha class that indicates when the captcha must be displayed on admin login page.
+ *
+ * @author    Damien DE SOUSA <dades@gmail.com>
+ * @copyright 2020 Damien DE SOUSA
+ */
+
 namespace App\Security\Admin\Login;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -9,12 +16,12 @@ class Captcha
     /**
      * Session variable name containing the number of times the login was submitted.
      */
-    protected const LOGIN_PAGE_SUBMITTED = 'login_page_submitted';
+    private const LOGIN_PAGE_SUBMITTED = 'admin_login_page_submitted';
 
     /**
      * Reach this limit will display the captcha on login admin page.
      */
-    protected const LIMIT_DISPLAY_CAPTCHA = 3;
+    private const LIMIT_DISPLAY_CAPTCHA = 3;
 
     /**
      * Return true if the captcha must be activated.
@@ -25,7 +32,6 @@ class Captcha
      */
     public function activate(Request $request): bool
     {
-        $this->setLoginPageDisplayed($request);
         $session = $request->getSession();
         $nbTimesLoginPageDisplayed = ($session->get(static::LOGIN_PAGE_SUBMITTED) !== null)
             ? $session->get(static::LOGIN_PAGE_SUBMITTED)
