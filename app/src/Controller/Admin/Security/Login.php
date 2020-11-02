@@ -106,26 +106,6 @@ class Login extends AbstractController
         $activateCaptcha = $this->captcha->activate($request);
         $captcha = $this->botDetectCaptcha->setConfig('LoginCaptcha');
 
-        $authErrorKey = Security::AUTHENTICATION_ERROR;
-        $lastUsernameKey = Security::LAST_USERNAME;
-        if ($request->isMethod('POST')) {
-            // validate the user-entered Captcha code when the form is submitted
-            $captchaCode = $request->request->get('captchaCode');
-            $isHuman = $captcha->Validate($captchaCode);
-            if ($isHuman) {
-                // Captcha validation passed, check username and password
-                return $this->redirect($this->generateUrl('admin_login_check'), 307);
-            } else {
-                // Captcha validation failed, set an invalid captcha exception in $authErrorKey attribute
-                $invalidCaptchaEx = new InvalidCaptchaException('CAPTCHA validation failed, try again.');
-                $request->attributes->set($authErrorKey, $invalidCaptchaEx);
-
-                // set last username entered by the user
-                $username = $request->request->get('_username', null);
-                $request->getSession()->set($lastUsernameKey, $username);
-            }
-        }
-
         return $this->render('admin/security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,

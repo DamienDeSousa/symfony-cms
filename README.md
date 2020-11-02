@@ -8,17 +8,14 @@ Documenter les manip à faire
 
 Mettre en place les vérifications / logs  
 Mettre en place un systeme de log via le logger  
-Créer une page de configuration gloale du site permettant de gérer: Title, icon  
-Mettre captcha sur page de login admin  
+Créer une page de configuration gloale du site permettant de gérer: Title, icon   
 Ajouter tests fonctionnels sur page accueil, page login admin, page accueil admin, page affichage site  
 S'assurer de la présence de la barre horizontale et latéral sur les pages admins  
 Cache HTTP  
 Cache applicatif  
 Créer un nouvel env pour exécuter les tests fonctionnels  
 Rédiger de la doc !  
-Afficher le captcha dans des services si 3 tentatives ou plus sur la page de login.
-Utiliser un symfony form pour le formulaire de login de la page admin et pour tous les futurs formulaires.  
-Utiliser un observer pour setter la valeur en session de la clé login_page_submitted.  
+Utiliser un symfony form pour tous les futurs formulaires.  
 
 ## Installation
 

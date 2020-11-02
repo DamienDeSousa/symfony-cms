@@ -41,6 +41,24 @@ class Captcha
     }
 
     /**
+     * Return true if the captcha is displayed.
+     * False otherwise.
+     *
+     * @param Request $request
+     *
+     * @return boolean
+     */
+    public function isCaptchaDisplayed(Request $request)
+    {
+        $session = $request->getSession();
+        $nbTimesLoginPageDisplayed = ($session->get(static::LOGIN_PAGE_SUBMITTED) !== null)
+            ? $session->get(static::LOGIN_PAGE_SUBMITTED)
+            : 0;
+        
+        return $nbTimesLoginPageDisplayed > static::LIMIT_DISPLAY_CAPTCHA;
+    }
+
+    /**
      * Set the number of times that the login page if displayed.
      *
      * @param Request $request

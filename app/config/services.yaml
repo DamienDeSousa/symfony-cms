@@ -57,6 +57,7 @@ services:
         decorates:
             'App\Security\Admin\LoginFormAuthenticator'
         arguments:
+            $botDetectCaptcha: '@captcha'
 
     App\Controller\Admin\Security\Login:
         arguments:
