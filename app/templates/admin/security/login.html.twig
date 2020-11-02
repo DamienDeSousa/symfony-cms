@@ -17,7 +17,7 @@
                     <div class="text-danger mb-1">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
 
-                <form action="{{ path("admin_login_check") }}" method="post">
+                <form action="{{ path("admin_login") }}" method="post">
                     {% if csrf_token %}
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                     {% endif %}
@@ -32,7 +32,8 @@
                     </div>
                     {% if enable_captcha %}
                         <div class="form-group">
-                            le captcha doit apparaitre.
+                            {{ captcha_html | raw  }}
+                            <input type="text" id="captchaCode" name="captchaCode">
                         </div>
                     {% endif %}
                     <button type="submit" class="btn btn-success" id="_submit" name="_submit" value="{{ 'admin.login.submit'|trans }}">{{ 'admin.login.submit'|trans }}</button>
