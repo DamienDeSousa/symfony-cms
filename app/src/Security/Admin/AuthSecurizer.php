@@ -21,17 +21,10 @@ use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface
 class AuthSecurizer
 {
     /**
-     * Access decision manager.
-     *
      * @var AccessDecisionManagerInterface
      */
     protected $accessDecisionManager;
 
-    /**
-     * Constructor.
-     *
-     * @param AccessDecisionManagerInterface $accessDecisionManager
-     */
     public function __construct(AccessDecisionManagerInterface $accessDecisionManager)
     {
         $this->accessDecisionManager = $accessDecisionManager;
@@ -46,7 +39,7 @@ class AuthSecurizer
      *
      * @return boolean
      */
-    public function isGranted(User $user, string $attribute, $object = null)
+    public function isGranted(User $user, string $attribute, $object = null): bool
     {
         $token = new UsernamePasswordToken($user, 'none', 'none', $user->getRoles());
 

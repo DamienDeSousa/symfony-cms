@@ -1,8 +1,9 @@
 <?php
 
 /**
- * Define the logic of the sidebar_sections() twig function.
+ * Define the logic of the sidebar_sections() twig function. Twig extension that get the admin sidebar sections.
  *
+ * @see       config/services.yaml
  * @author    Damien DE SOUSA <email@email.com>
  * @copyright 2020 Damien DE SOUSA
  */
@@ -15,10 +16,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 
-/**
- * Twig extension that get the admin sidebar sections.
- * @see config/services.yaml
- */
 class SidebarSection implements RuntimeExtensionInterface
 {
     /**
@@ -30,25 +27,15 @@ class SidebarSection implements RuntimeExtensionInterface
     protected $routes;
 
     /**
-     * Router.
-     *
      * @var UrlGeneratorInterface
      */
     protected $router;
 
     /**
-     * Logger.
-     *
      * @var LoggerInterface
      */
     protected $logger;
 
-    /**
-     * Constructor.
-     *
-     * @param UrlGeneratorInterface $router
-     * @param array                 $routes
-     */
     public function __construct(LoggerInterface $logger, UrlGeneratorInterface $router, array $routes = [])
     {
         $this->logger = $logger;
@@ -61,7 +48,7 @@ class SidebarSection implements RuntimeExtensionInterface
      *
      * @return array
      */
-    public function getSections()
+    public function getSections(): array
     {
         $sections = [];
         foreach ($this->routes as $route) {

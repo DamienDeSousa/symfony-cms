@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Define the admin login form authentificator guard.
+ * Define the admin login form authentificator guard. Guard that controls all the authentification steps.
  *
  * @author    Damien DE SOUSA <email@email.com>
  * @copyright 2020 Damien DE SOUSA
@@ -34,57 +34,35 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-/**
- * Guard that controls all the authentification steps.
- */
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
 
     /**
-     * Entity manager.
-     *
      * @var EntityManagerInterface
      */
     protected $entityManager;
 
     /**
-     * Url generator.
-     *
      * @var UrlGeneratorInterface
      */
     protected $urlGenerator;
 
     /**
-     * Csrf token manager.
-     *
      * @var CsrfTokenManagerInterface
      */
     protected $csrfTokenManager;
 
     /**
-     * User password encoder.
-     *
      * @var UserPasswordEncoderInterface
      */
     protected $passwordEncoder;
 
     /**
-     * Authorization securizer.
-     *
      * @var AuthSecurizer
      */
     protected $authSecurizer;
 
-    /**
-     * Constructor.
-     *
-     * @param EntityManagerInterface       $entityManager
-     * @param UrlGeneratorInterface        $urlGenerator
-     * @param CsrfTokenManagerInterface    $csrfTokenManager
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param AuthSecurizer                $authSecurizer
-     */
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,

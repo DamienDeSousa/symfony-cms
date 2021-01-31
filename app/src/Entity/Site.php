@@ -1,8 +1,16 @@
 <?php
 
+/**
+ * File that define the Site class. This class is an entity which represents the Site.
+ *
+ * @author    Damien DE SOUSA <desousadamien30@gmail.com>
+ * @copyright 2021 Damien DE SOUSA
+ */
+
+declare(strict_types=1);
+
 namespace App\Entity;
 
-use App\Repository\SiteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

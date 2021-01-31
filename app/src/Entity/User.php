@@ -41,9 +41,6 @@ class User extends BaseUser
      */
     protected $captchaCode;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct();

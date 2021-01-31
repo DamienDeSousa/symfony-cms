@@ -7,6 +7,8 @@
  * @copyright 2020 Damien DE SOUSA
  */
 
+declare(strict_types=1);
+
 namespace App\Decorator\Security\Admin;
 
 use App\Security\Admin\AuthSecurizer;
@@ -49,17 +51,6 @@ class CaptchaLoginFormDecorator extends LoginFormAuthenticator
      */
     private $captchaEnabler;
 
-    /**
-     * CaptchaLoginFormDecorator constructor.
-     *
-     * @param EntityManagerInterface       $entityManager
-     * @param UrlGeneratorInterface        $urlGenerator
-     * @param CsrfTokenManagerInterface    $csrfTokenManager
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param AuthSecurizer                $authSecurizer
-     * @param LoginFormAuthenticator       $loginFormAuthenticator
-     * @param Captcha                      $captcha
-     */
     public function __construct(
         Captcha $captchaEnabler,
         BotDetectCaptcha $botDetectCaptcha,
