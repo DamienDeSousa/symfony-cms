@@ -21,13 +21,7 @@ Utiliser un symfony form pour tous les futurs formulaires.
 
 Il faut dans un premier temps posséder une première version stable.
 git clone https://github.com/DamienDeSousa/symfony-cms.git  
-docker-compose up -d  
-composer install --ignore-platform-reqs  
-
-Se connecter au conteneur du PHP
-docker exec -it symfony-cms_php73_1 bash
-php bin/console doctrine:database:create  
-php bin/console doctrine:migrations:migrate  
+make install  
 
 ## Configuration
 
