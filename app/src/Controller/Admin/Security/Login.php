@@ -15,12 +15,10 @@ use App\Security\Admin\AuthError;
 use App\Security\Admin\LastUsername;
 use App\Security\Admin\Login\Captcha;
 use Captcha\Bundle\CaptchaBundle\Integration\BotDetectCaptcha;
-use Captcha\Bundle\CaptchaBundle\Security\Core\Exception\InvalidCaptchaException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
@@ -104,14 +102,18 @@ class Login extends AbstractController
             : null;
 
         $activateCaptcha = $this->captcha->activate($request);
-        $captcha = $this->botDetectCaptcha->setConfig('LoginCaptcha');
+        $htmlCaptcha = '';
+        if ($activateCaptcha) {
+            $captcha = $this->botDetectCaptcha->setConfig('LoginCaptcha');
+            $htmlCaptcha = $captcha->Html();
+        }
 
         return $this->render('admin/security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
             'csrf_token' => $csrfToken,
             'enable_captcha' => $activateCaptcha,
-            'captcha_html' => $captcha->Html(),
+            'captcha_html' => $htmlCaptcha,
         ]);
     }
 }

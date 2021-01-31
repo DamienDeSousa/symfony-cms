@@ -23,7 +23,9 @@ Il faut dans un premier temps posséder une première version stable.
 git clone https://github.com/DamienDeSousa/symfony-cms.git  
 docker-compose up -d  
 composer install --ignore-platform-reqs  
+
 Se connecter au conteneur du PHP
+docker exec -it symfony-cms_php73_1 bash
 php bin/console doctrine:database:create  
 php bin/console doctrine:migrations:migrate  
 
@@ -39,7 +41,12 @@ Pour créer un nouvel environnement il suffit de suivre la documentation à ce s
 Il est toutefois à noter qu'il faut également vérifier les bundles à utiliser en fonctions des environnements (voir le fichier config/bundles.php).  
 Si un bundle est nécessaire pour un environnement, il faut vérifier qu'il est bien retourné pour cet environnement dans le fichier config/bundles.php.  
 
-### Exécution des tests fonctionnels
+## Exécution des tests fonctionnels
 
 L'environnement functional_test permet d'exécuter les tests fonctionnels de l'application.  
-Dans cet environnement est défini une nouvelle base de données dans laquelle les fixtures peuvent être créer sans polluer la base de données de dev.  
+Dans cet environnement est défini une nouvelle base de données dans laquelle les fixtures peuvent être créer sans polluer la base de données de dev.
+
+Changer la viariable d'environnement APP_ENV (dans le fichier .env) comme suit:  
+APP_ENV=functional_test  
+Lancer ensuite la commande suivante pour exécuter tous les tests fonctionnels:  
+./bin/phpunit
