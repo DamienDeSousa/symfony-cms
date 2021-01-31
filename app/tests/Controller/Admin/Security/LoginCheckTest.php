@@ -2,6 +2,9 @@
 
 /**
  * File that defines the login check test class. This class test the access to the admin page.
+ *
+ * @author    Damien DE SOUSA <desousadamien30@gmail.com>
+ * @copyright 2021 Damien DE SOUSA
  */
 
 declare(strict_types=1);
