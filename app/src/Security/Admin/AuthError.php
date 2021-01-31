@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * File that defines Auth error class. This class retrieves the errors from the securoty component.
+ *
+ * @author    Damien DE SOUSA <desousadamien30@gmail.com>
+ * @copyright 2021 Damien DE SOUSA
+ */
+
+declare(strict_types=1);
+
 namespace App\Security\Admin;
 
 use Symfony\Component\Security\Core\Security;

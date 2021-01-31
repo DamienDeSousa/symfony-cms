@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * File that defines the Site repository class. This class is used to query site.
+ *
+ * @author    Damien DE SOUSA <desousadamien30@gmail.com>
+ * @copyright 2021 Damien DE SOUSA
+ */
+
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Site;
@@ -18,33 +27,4 @@ class SiteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Site::class);
     }
-
-    // /**
-    //  * @return Site[] Returns an array of Site objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Site
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

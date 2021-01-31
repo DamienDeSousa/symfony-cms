@@ -7,6 +7,8 @@
  * @copyright 2020 Damien DE SOUSA
  */
 
+declare(strict_types=1);
+
 namespace App\Security\Admin\Login;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -40,15 +42,7 @@ class Captcha
         return $nbTimesLoginPageDisplayed >= static::LIMIT_DISPLAY_CAPTCHA;
     }
 
-    /**
-     * Return true if the captcha is displayed.
-     * False otherwise.
-     *
-     * @param Request $request
-     *
-     * @return boolean
-     */
-    public function isCaptchaDisplayed(Request $request)
+    public function isCaptchaDisplayed(Request $request): bool
     {
         $session = $request->getSession();
         $nbTimesLoginPageDisplayed = ($session->get(static::LOGIN_PAGE_SUBMITTED) !== null)

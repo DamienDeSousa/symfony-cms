@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * File that defines the Las user name class. This class retrieves the last username set in a form.
+ *
+ * @author    Damien DE SOUSA <desousadamien30@gmail.com>
+ * @copyright 2021 Damien DE SOUSA
+ */
+
+declare(strict_types=1);
+
 namespace App\Security\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -7,7 +16,7 @@ use Symfony\Component\Security\Core\Security;
 
 class LastUsername
 {
-    public function getLastUserName(Request $request)
+    public function getLastUserName(Request $request): string
     {
         /** @var Session $session */
         $session = $request->getSession();

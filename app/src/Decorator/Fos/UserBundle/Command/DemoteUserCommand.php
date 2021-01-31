@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Define DemoteUserCommand class that decorate the FOSDemoteUserCommand class.
+ * It test the availability of the given role.
+ *
+ * @author    Damien DE SOUSA <email@email.com>
+ * @copyright 2020 Damien DE SOUSA
+ */
+
+declare(strict_types=1);
+
 namespace App\Decorator\Fos\UserBundle\Command;
 
 use FOS\UserBundle\Command\DemoteUserCommand as FOSDemoteUserCommand;
@@ -19,13 +29,6 @@ class DemoteUserCommand extends FOSDemoteUserCommand
      */
     protected $fosDemotedUserCommand;
 
-    /**
-     * Constructor.
-     *
-     * @param UserManipulator       $manipulator
-     * @param FOSDemoteUserCommand $fosDemotedUserCommand
-     * @param UserRoles             $userRoles
-     */
     public function __construct(
         UserManipulator $manipulator,
         FOSDemoteUserCommand $fosDemotedUserCommand,

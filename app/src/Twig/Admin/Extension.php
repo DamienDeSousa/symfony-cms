@@ -14,9 +14,6 @@ namespace App\Twig\Admin;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-/**
- * Declare admin Twig extensions.
- */
 class Extension extends AbstractExtension
 {
     /**

@@ -22,10 +22,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
- * Login admin controller.
- *
- * Render the login admin page.
- *
  * @Route("/admin-GC2NeDwu26y6pred", name="admin_login")
  */
 class Login extends AbstractController
@@ -36,8 +32,6 @@ class Login extends AbstractController
     public const LOGIN_PAGE_ROUTE = 'admin_login';
 
     /**
-     * Csrf token manager.
-     *
      * @var CsrfTokenManagerInterface
      */
     protected $tokenManager;
@@ -62,15 +56,6 @@ class Login extends AbstractController
      */
     private $botDetectCaptcha;
 
-    /**
-     * Constructor.
-     *
-     * @param CsrfTokenManagerInterface $tokenManager
-     * @param AuthError                 $authError
-     * @param LastUsername              $lastUsername
-     * @param Captcha                   $captcha
-     * @param BotDetectCaptcha          $botDetectCaptcha
-     */
     public function __construct(
         CsrfTokenManagerInterface $tokenManager,
         AuthError $authError,
@@ -85,13 +70,6 @@ class Login extends AbstractController
         $this->botDetectCaptcha = $botDetectCaptcha;
     }
 
-    /**
-     * Render the admin login page.
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function __invoke(Request $request): Response
     {
         //Add LoginUserType

@@ -15,10 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Login admin controller.
- *
- * Render the login admin page.
- *
  * @Route("/admin-login-check", name="admin_login_check")
  */
 class LoginCheck extends AbstractController
@@ -29,12 +25,9 @@ class LoginCheck extends AbstractController
     public const LOGIN_ROUTE = 'admin_login_check';
 
     /**
-     * Admin login check.
      * @see config/packages/security.yaml
-     *
-     * @return void
      */
-    public function __invoke()
+    public function __invoke(): void
     {
         $message = 'You must configure the check path to be handled by the firewall ';
         $message .= 'using form_login in your security firewall configuration.';

@@ -8,6 +8,8 @@
  * @copyright 2020 Damien DE SOUSA
  */
 
+declare(strict_types=1);
+
 namespace App\Decorator\Fos\UserBundle\Command;
 
 use App\Security\UserRoles;
@@ -27,13 +29,6 @@ class PromoteUserCommand extends FOSPromoteUserCommand
      */
     protected $fosPromotedUserCommand;
 
-    /**
-     * Constructor.
-     *
-     * @param UserManipulator       $manipulator
-     * @param FOSPromoteUserCommand $fosPromotedUserCommand
-     * @param UserRoles             $userRoles
-     */
     public function __construct(
         UserManipulator $manipulator,
         FOSPromoteUserCommand $fosPromotedUserCommand,
