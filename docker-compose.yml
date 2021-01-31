@@ -14,7 +14,6 @@ services:
   
   php73:
     build: php73
-    # user: $UID:$GID
     ports:
       - "8080:80"
     volumes:

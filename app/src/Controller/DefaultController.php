@@ -15,14 +15,24 @@ class DefaultController extends AbstractController
     {
         $this->userRoles = $userRoles;
     }
+
     /**
      * @Route("/", name="index")
      */
     public function number()
     {
-
         return new Response(
             '<html><body>' . print_r($this->userRoles->getDefinedRoles(), true) . '</body></html>'
+        );
+    }
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test()
+    {
+        return new Response(
+            'Test page'
         );
     }
 }

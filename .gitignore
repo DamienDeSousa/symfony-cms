@@ -1,5 +1,6 @@
 
 ###> symfony/framework-bundle ###
+app/.env
 /app/.env.local
 /app/.env.local.php
 /app/.env.*.local
@@ -7,6 +8,7 @@
 /app/public/bundles/
 /app/var/
 /app/vendor/
+app/src/.preload.php
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
