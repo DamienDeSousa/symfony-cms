@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Security;
 
 class LastUsername
 {
-    public function getLastUserName(Request $request): string
+    public function getLastUserName(Request $request): ?string
     {
         /** @var Session $session */
         $session = $request->getSession();
