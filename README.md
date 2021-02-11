@@ -21,6 +21,8 @@ Utiliser un outils pour installer les assets (voir avec adluc)
 Il faut dans un premier temps posséder une première version stable.
 git clone https://github.com/DamienDeSousa/symfony-cms.git  
 make install  
+make connection-php-container  
+php bin/console fos:user:create  
 
 ## Configuration
 
@@ -36,10 +38,10 @@ Si un bundle est nécessaire pour un environnement, il faut vérifier qu'il est 
 
 ## Exécution des tests fonctionnels
 
-L'environnement functional_test permet d'exécuter les tests fonctionnels de l'application.  
+L'environnement test permet d'exécuter les tests fonctionnels de l'application.  
 Dans cet environnement est défini une nouvelle base de données dans laquelle les fixtures peuvent être créer sans polluer la base de données de dev.
 
 Changer la viariable d'environnement APP_ENV (dans le fichier .env) comme suit:  
-APP_ENV=functional_test  
+APP_ENV=test  
 Lancer ensuite la commande suivante pour exécuter tous les tests fonctionnels:  
 ./bin/phpunit

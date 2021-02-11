@@ -12,11 +12,16 @@ declare(strict_types=1);
 namespace App\Tests\Controller;
 
 use Symfony\Component\Panther\PantherTestCase;
+use App\Fixture\FixtureAttachedTrait;
 
 class DisplayHomePageTest extends PantherTestCase
 {
+    use FixtureAttachedTrait;
+
     public function testSomething()
     {
+        $user = $this->fixtureRepository->getReference('user');
+        dump($user);
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
 
