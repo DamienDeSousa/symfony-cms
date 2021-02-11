@@ -9,14 +9,19 @@
 
 declare(strict_types=1);
 
-namespace App\Test\Controller\Admin\Security;
+namespace App\Tests\Controller\Admin\Security;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Panther\PantherTestCase;
+use App\Fixture\FixtureAttachedTrait;
 
-class LoginCheckTest extends WebTestCase
+class LoginCheckTest extends PantherTestCase
 {
+    use FixtureAttachedTrait;
+
     public function testDisplayLoginAdminPage()
     {
+        $user = $this->fixtureRepository->getReference('user');
+        dump($user);
         $client = static::createClient();
         $crawler = $client->request('GET', '/admin-GC2NeDwu26y6pred');
 
