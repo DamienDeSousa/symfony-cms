@@ -13,10 +13,10 @@ class LoginCheckTestFixture extends Fixture
     public function load(ObjectManager $manager)
     {
         $user = new User();
-        $user->setEmail('test@dades.fr')
-            ->setPassword('test')
+        $user->setEmail('dades@dades.fr')
+            ->setPassword('dades')
             ->setRoles(['ROLE_SUPER_ADMIN'])
-            ->setUsername('test');
+            ->setUsername('dades');
 
         $manager->persist($user);
         $manager->flush();

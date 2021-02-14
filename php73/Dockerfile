@@ -10,7 +10,7 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Quelques library necessaires
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends locales apt-utils git libicu-dev g++ libpng-dev libzip-dev libjpeg-dev libftgl-dev;
+    && apt-get install -y --no-install-recommends locales apt-utils git libicu-dev g++ libpng-dev libzip-dev libjpeg-dev libftgl-dev chromium chromium-driver zip unzip;
 
 # les locales, toujours utiles
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
@@ -19,6 +19,10 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
 
 RUN a2enmod rewrite
 
+ENV PANTHER_CHROME_DRIVER_BINARY /usr/bin/chromedriver
+ENV PANTHER_NO_SANDBOX 1
+ENV PANTHER_WEB_SERVER_PORT 9800
+ENV CUSTOM_PANTHER_BASE_URL http://127.0.0.1:9800
 # On copie le php.ini du repertoire actuel dans le contenaire
 # COPY php.ini /usr/local/etc/php/php.ini
 

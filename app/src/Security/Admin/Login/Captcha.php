@@ -23,7 +23,7 @@ class Captcha
     /**
      * Reach this limit will display the captcha on login admin page.
      */
-    private const LIMIT_DISPLAY_CAPTCHA = 3;
+    public const LIMIT_DISPLAY_CAPTCHA = 3;
 
     /**
      * Return true if the captcha must be activated.
@@ -38,7 +38,7 @@ class Captcha
         $nbTimesLoginPageDisplayed = ($session->get(static::LOGIN_PAGE_SUBMITTED) !== null)
             ? $session->get(static::LOGIN_PAGE_SUBMITTED)
             : 0;
-        
+
         return $nbTimesLoginPageDisplayed >= static::LIMIT_DISPLAY_CAPTCHA;
     }
 
@@ -48,7 +48,7 @@ class Captcha
         $nbTimesLoginPageDisplayed = ($session->get(static::LOGIN_PAGE_SUBMITTED) !== null)
             ? $session->get(static::LOGIN_PAGE_SUBMITTED)
             : 0;
-        
+
         return $nbTimesLoginPageDisplayed > static::LIMIT_DISPLAY_CAPTCHA;
     }
 
