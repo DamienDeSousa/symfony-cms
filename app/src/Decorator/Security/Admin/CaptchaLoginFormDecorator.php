@@ -14,15 +14,16 @@ namespace App\Decorator\Security\Admin;
 use App\Security\Admin\AuthSecurizer;
 use App\Security\Admin\Login\Captcha;
 use App\Security\Admin\LoginFormAuthenticator;
+use Captcha\Bundle\CaptchaBundle\Integration\BotDetectCaptcha;
+use Captcha\Bundle\CaptchaBundle\Security\Core\Exception\InvalidCaptchaException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Captcha\Bundle\CaptchaBundle\Security\Core\Exception\InvalidCaptchaException;
-use Captcha\Bundle\CaptchaBundle\Integration\BotDetectCaptcha;
 
 class CaptchaLoginFormDecorator extends LoginFormAuthenticator
 {
@@ -124,5 +125,15 @@ class CaptchaLoginFormDecorator extends LoginFormAuthenticator
         }
 
         return $this->loginFormAuthenticator->onAuthenticationFailure($request, $exception);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    {
+        $this->captcha->unsetSessionPageDisplayed($request);
+
+        return $this->loginFormAuthenticator->onAuthenticationSuccess($request, $token, $providerKey);
     }
 }
