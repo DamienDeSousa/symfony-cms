@@ -20,6 +20,17 @@ class LoginCheckTest extends PantherTestCase
 {
     use FixtureAttachedTrait;
 
+    public function testDisplayLoginAdminPage()
+    {
+        $client = static::createPantherClient();
+        $crawler = $client->request('GET', '/admin-GC2NeDwu26y6pred');
+        $usernameInput = $crawler->filter('#username')->count();
+        $passwordInput = $crawler->filter('#password')->count();
+
+        $this->assertEquals(1, $usernameInput, 'Assert that user name input exists');
+        $this->assertEquals(1, $passwordInput, 'Assert that password input exists');
+    }
+
     /**
      * Put this test in first to avoid session problems with connections failure.
      * If you put this test after login tests failure, the captcha will be displayed on form.
@@ -44,17 +55,18 @@ class LoginCheckTest extends PantherTestCase
             $crawler->getUri(),
             'Assert that authentification succeed and redirect to admin home page'
         );
-    }
 
-    public function testDisplayLoginAdminPage()
-    {
-        $client = static::createPantherClient();
-        $crawler = $client->request('GET', '/admin-GC2NeDwu26y6pred');
-        $usernameInput = $crawler->filter('#username')->count();
-        $passwordInput = $crawler->filter('#password')->count();
+        $client->waitFor('#dropdownMenuButton');
+        $client->executeScript("document.querySelector('#dropdownMenuButton').click()");
 
-        $this->assertEquals(1, $usernameInput, 'Assert that user name input exists');
-        $this->assertEquals(1, $passwordInput, 'Assert that password input exists');
+        $link = $crawler->filter('#logout')->attr('href');
+        $crawler = $client->request('GET', $link);
+
+        $this->assertEquals(
+            getenv('CUSTOM_PANTHER_BASE_URL') . '/',
+            $crawler->getUri(),
+            'Assert that logout succeed and redirect to home page'
+        );
     }
 
     public function testDisplayErrorMessageBadCredentials()

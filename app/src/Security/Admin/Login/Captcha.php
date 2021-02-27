@@ -71,4 +71,10 @@ class Captcha
         $session->set(static::LOGIN_PAGE_SUBMITTED, $nbLoginPageDisplayed);
         $request->setSession($session);
     }
+
+    public function unsetSessionPageDisplayed(Request $request): void
+    {
+        $session = $request->getSession();
+        $session->remove(static::LOGIN_PAGE_SUBMITTED);
+    }
 }
