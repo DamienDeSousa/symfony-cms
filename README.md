@@ -6,8 +6,7 @@ Appliquer les PSR
 Documenter les manip à faire  
 
 Mettre en place les vérifications / logs  
-Mettre en place un systeme de log via le logger  
-Ajouter tests fonctionnels sur page accueil, page login admin, page accueil admin, page affichage site  
+Mettre en place un systeme de log via le logger   
 S'assurer de la présence de la barre horizontale et latéral sur les pages admins  
 Cache HTTP  
 Cache applicatif  

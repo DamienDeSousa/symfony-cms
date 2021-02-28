@@ -11,8 +11,8 @@ down: ## stop containers
 
 install: ## install CMS
 	$(MAKE) up
-	composer install --ignore-platform-reqs
 	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create
+	$(MAKE) composer-install
 	$(MAKE) migration-migrate
 
 migration-migrate: ## run migrations
@@ -26,3 +26,9 @@ run-tests: ## run automated tests
 
 connection-php-container: ## connect to php container
 	docker exec -it symfony-cms_php73_1 bash
+
+connection-db-container: ## connect to database
+	docker exec -it symfony-cms_mysql_1 mysql -uroot -proot symfony_cms
+
+composer-install: ## composer install
+	docker exec symfony-cms_php73_1 composer install
