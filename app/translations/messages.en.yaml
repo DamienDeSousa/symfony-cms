@@ -11,3 +11,12 @@ admin:
 
 cms:
     name: Symfony CMS
+
+site:
+    show:
+        unavailable:
+            title: The site does not exist !
+            message: The site does not exist, please run the following command to create it, cms:site:create
+        informations: Informations
+        title: "Title of the site:"
+        icon: "Icon of the site:"

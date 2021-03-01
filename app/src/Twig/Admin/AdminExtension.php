@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace App\Twig\Admin;
 
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Twig\Extension\AbstractExtension;
 
-class Extension extends AbstractExtension
+class AdminExtension extends AbstractExtension
 {
     /**
      * @inheritDoc
@@ -23,6 +23,7 @@ class Extension extends AbstractExtension
     {
         return [
             new TwigFunction('sidebar_sections', [SidebarSection::class, 'getSections']),
+            new TwigFunction('get_title', [SiteTitle::class, 'getTitle']),
         ];
     }
 }

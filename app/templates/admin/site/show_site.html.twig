@@ -1,0 +1,22 @@
+{% extends 'admin/admin_layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/admin/site/show_site.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card text-center mt-5">
+        <div class="card-header">
+            {% trans %}site.show.informations{% endtrans %}
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><span class="h5">{% trans %}site.show.title{% endtrans %}</span> <span class="lead">{{ site.title }}</lead></li>
+            <li class="list-group-item"><span class="h5">{% trans %}site.show.icon{% endtrans %}</span> {{ site.icon }}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin/site/show_site.js') }}"></script>
+{% endblock %}
