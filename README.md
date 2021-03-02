@@ -27,7 +27,36 @@ php bin/console fos:user:create
 ## Utilisation
 
 ## Notes techniques
+CMS
 
+Un site est composé de plusieurs pages (OneToMany)
+Une page ne comporte qu’un seul layout qui l’architecte (OneToOne)
+Une page est composée de plusieurs blocs (ManyToMany)
+
+Site:
+- Title
+- name
+- favicon
+
+Page:
+- (Id)
+- Title
+- Name
+- layout
+- Liste de blocs
+- Route ? (Avec args ?)
+
+Layout:
+- Title
+- Twig
+- Type de layout ?
+- Page ?
+
+Bloc:
+- Title
+- Name
+- Type (footer, header , etc..)
+- Un twig
 ### Création nouvel environnement
 
 Pour créer un nouvel environnement il suffit de suivre la documentation à ce sujet.  
