@@ -11,14 +11,19 @@ down: ## stop containers
 
 install: ## install CMS
 	$(MAKE) up
-	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create
 	$(MAKE) composer-install
+	$(MAKE) cache-clear
+	$(MAKE) asset-install
+	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create
 	$(MAKE) migration-migrate
+
+asset-install: ## install asset
+	docker exec symfony-cms_php73_1 php bin/console assets:install /var/www/public/
 
 migration-migrate: ## run migrations
 	docker exec symfony-cms_php73_1 php bin/console doctrine:migrations:migrate --no-interaction
 
-cache-clean: ## clean cache
+cache-clear: ## clear cache
 	docker exec symfony-cms_php73_1 php bin/console cache:clear
 
 run-tests: ## run automated tests 
