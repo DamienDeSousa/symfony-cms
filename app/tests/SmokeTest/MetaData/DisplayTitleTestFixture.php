@@ -11,25 +11,20 @@ declare(strict_types=1);
 
 namespace App\Tests\SmokeTest\MetaData;
 
-use App\Entity\Site;
-use App\Entity\User;
+use App\Tests\Provider\Data\SiteProvider;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Tests\Provider\Data\UserProvider;
 
 class DisplayTitleTestFixture extends Fixture
 {
+    use UserProvider;
+    use SiteProvider;
 
     public function load(ObjectManager $manager)
     {
-        $user = new User();
-        $user->setEnabled(true)
-            ->setPassword('dades')
-            ->setRoles(['ROLE_SUPER_ADMIN'])
-            ->setUsername('dades')
-            ->setEmail('dades@dades.fr');
-
-        $site = new Site();
-        $site->setTitle('Site Title');
+        $user = $this->provideSuperAdminUser();
+        $site = $this->provideSite();
 
         $manager->persist($user);
         $manager->persist($site);
