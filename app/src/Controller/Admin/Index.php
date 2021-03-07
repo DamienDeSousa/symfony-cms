@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin/", name="admin_index")
@@ -21,6 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class Index extends AbstractController
 {
     public const INDEX_ROUTE = 'admin_index';
+
+    public const ADMIN_HOME_PAGE_URI = '/admin/';
 
     public function __invoke(): Response
     {

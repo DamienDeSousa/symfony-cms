@@ -13,6 +13,7 @@ namespace App\Tests\SmokeTest\MetaData;
 
 use App\Entity\Site;
 use App\Fixture\FixtureAttachedTrait;
+use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
 
 class DisplayTitleTest extends PantherTestCase
@@ -21,6 +22,8 @@ class DisplayTitleTest extends PantherTestCase
         setUp as setUpTrait;
     }
 
+    use AdminUriProvider;
+
     protected function setUp(): void
     {
         $this->setUpTrait();
@@ -28,7 +31,7 @@ class DisplayTitleTest extends PantherTestCase
         $user = $this->fixtureRepository->getReference('user');
 
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', '/admin-GC2NeDwu26y6pred');
+        $crawler = $client->request('GET', $this->provideAdminLoginUri());
         $loginForm = $crawler->selectButton('_submit')->form([
             '_username' => $user->getUsername(),
             '_password' => $user->getPassword()
@@ -39,9 +42,9 @@ class DisplayTitleTest extends PantherTestCase
     public function provideUrls()
     {
         return [
-            ['/admin-GC2NeDwu26y6pred'],
-            ['/admin/'],
-            ['/admin/site/show'],
+            [$this->provideAdminLoginUri()],
+            [$this->provideAdminHomePageUri()],
+            [$this->provideAdminSiteShowUri()],
         ];
     }
 
@@ -63,7 +66,7 @@ class DisplayTitleTest extends PantherTestCase
     protected function tearDown(): void
     {
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', '/admin/');
+        $crawler = $client->request('GET', $this->provideAdminHomePageUri());
         $client->waitFor('#dropdownMenuButton');
         $client->executeScript("document.querySelector('#dropdownMenuButton').click()");
 

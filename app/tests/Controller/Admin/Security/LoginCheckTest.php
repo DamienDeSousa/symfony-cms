@@ -14,15 +14,24 @@ namespace App\Tests\Controller\Admin\Security;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Entity\User;
 use App\Fixture\FixtureAttachedTrait;
+use App\Tests\Provider\Uri\AdminUriProvider;
+use App\Tests\Provider\Uri\UriProvider;
+use App\Tests\Provider\Url\AdminUrlProvider;
 
 class LoginCheckTest extends PantherTestCase
 {
     use FixtureAttachedTrait;
 
+    use AdminUriProvider;
+
+    use UriProvider;
+
+    use AdminUrlProvider;
+
     public function testDisplayLoginAdminPage()
     {
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', '/admin-GC2NeDwu26y6pred');
+        $crawler = $client->request('GET', $this->provideAdminLoginUri());
         $usernameInput = $crawler->filter('#username')->count();
         $passwordInput = $crawler->filter('#password')->count();
 
@@ -41,7 +50,7 @@ class LoginCheckTest extends PantherTestCase
         /** @var User $user */
         $user = $this->fixtureRepository->getReference('user');
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', '/admin-GC2NeDwu26y6pred');
+        $crawler = $client->request('GET', $this->provideAdminLoginUri());
         $loginForm = $crawler->selectButton('_submit')->form([
             '_username' => $user->getUsername(),
             '_password' => $user->getPassword()
@@ -49,7 +58,7 @@ class LoginCheckTest extends PantherTestCase
         $crawler = $client->submit($loginForm);
 
         $this->assertEquals(
-            getenv('CUSTOM_PANTHER_BASE_URL') . '/admin/',
+            $this->provideAdminBaseUrl() . $this->provideAdminHomePageUri(),
             $crawler->getUri(),
             'Assert that authentification succeed and redirect to admin home page'
         );
@@ -61,7 +70,7 @@ class LoginCheckTest extends PantherTestCase
         $crawler = $client->request('GET', $link);
 
         $this->assertEquals(
-            getenv('CUSTOM_PANTHER_BASE_URL') . '/',
+            $this->provideAdminBaseUrl() . $this->provideHomePageUri(),
             $crawler->getUri(),
             'Assert that logout succeed and redirect to home page'
         );
@@ -72,7 +81,7 @@ class LoginCheckTest extends PantherTestCase
         /** @var User $user */
         $user = $this->fixtureRepository->getReference('user');
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', '/admin-GC2NeDwu26y6pred');
+        $crawler = $client->request('GET', $this->provideAdminLoginUri());
         $loginForm = $crawler->selectButton('_submit')->form([
             '_username' => $user->getUsername(),
             '_password' => 'wrong_password'
