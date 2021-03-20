@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace App\Tests\Controller\Admin\Site;
 
 use App\Fixture\FixtureAttachedTrait;
+use App\Entity\User;
+use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
 
@@ -21,25 +23,18 @@ class ShowNoSiteControllerTest extends PantherTestCase
 
     use AdminUriProvider;
 
+    use LogAction;
+
     public function testDisplayNoSitePage()
     {
         /** @var User $user */
         $user = $this->fixtureRepository->getReference('user');
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', $this->provideAdminLoginUri());
-        $loginForm = $crawler->selectButton('_submit')->form([
-            '_username' => $user->getUsername(),
-            '_password' => $user->getPassword()
-        ]);
-        $crawler = $client->submit($loginForm);
+        $crawler = $this->login($user, $this->provideAdminLoginUri(), $client);
         $crawler = $client->request('GET', $this->provideAdminSiteShowUri());
 
         $this->assertSelectorTextSame('.card-title', 'Le site n\'existe pas !');
 
-        $client->waitFor('#dropdownMenuButton');
-        $client->executeScript("document.querySelector('#dropdownMenuButton').click()");
-
-        $link = $crawler->filter('#logout')->attr('href');
-        $crawler = $client->request('GET', $link);
+        $crawler = $this->adminLogout($client, $crawler);
     }
 }

@@ -17,6 +17,7 @@ use App\Fixture\FixtureAttachedTrait;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use App\Tests\Provider\Uri\UriProvider;
 use App\Tests\Provider\Url\AdminUrlProvider;
+use App\Tests\Provider\Actions\LogAction;
 
 class LoginCheckTest extends PantherTestCase
 {
@@ -27,6 +28,8 @@ class LoginCheckTest extends PantherTestCase
     use UriProvider;
 
     use AdminUrlProvider;
+
+    use LogAction;
 
     public function testDisplayLoginAdminPage()
     {
@@ -50,12 +53,7 @@ class LoginCheckTest extends PantherTestCase
         /** @var User $user */
         $user = $this->fixtureRepository->getReference('user');
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', $this->provideAdminLoginUri());
-        $loginForm = $crawler->selectButton('_submit')->form([
-            '_username' => $user->getUsername(),
-            '_password' => $user->getPassword()
-        ]);
-        $crawler = $client->submit($loginForm);
+        $crawler = $this->login($user, $this->provideAdminLoginUri(), $client);
 
         $this->assertEquals(
             $this->provideAdminBaseUrl() . $this->provideAdminHomePageUri(),
@@ -63,11 +61,7 @@ class LoginCheckTest extends PantherTestCase
             'Assert that authentification succeed and redirect to admin home page'
         );
 
-        $client->waitFor('#dropdownMenuButton');
-        $client->executeScript("document.querySelector('#dropdownMenuButton').click()");
-
-        $link = $crawler->filter('#logout')->attr('href');
-        $crawler = $client->request('GET', $link);
+        $crawler = $this->adminLogout($client, $crawler);
 
         $this->assertEquals(
             $this->provideAdminBaseUrl() . $this->provideHomePageUri(),
