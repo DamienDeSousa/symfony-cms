@@ -8,5 +8,15 @@ admin:
     sections:
         home: Accueil
         site: Paramètres Généraux
+
 cms:
     name: Symfony CMS
+
+site:
+    show:
+        unavailable:
+            title: Le site n'existe pas !
+            message: Site n'existe pas, vous devez le créer via la ligne de commande cms:site:create
+        informations: Informations
+        title: "Titre du site :"
+        icon: "Icone du site :"

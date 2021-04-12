@@ -2,14 +2,14 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('css/admin/site/show.css') }}" rel="stylesheet"/>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="card mt-5">
+    <div class="card text-white bg-info mt-5">
         <div class="card-body">
-            This is some text within a card body.
+          <h5 class="card-title">{% trans %}site.show.unavailable.title{% endtrans %}</h5>
+          <p class="card-text">{% trans %}site.show.unavailable.message{% endtrans %}</p>
         </div>
     </div>
 </div>
@@ -17,5 +17,4 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/admin/site/show.js') }}"></script>
 {% endblock %}

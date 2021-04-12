@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace App\Tests\Controller\Admin\Security;
 
 use Symfony\Component\Panther\PantherTestCase;
-use App\Security\Admin\Login\Captcha;
 use App\Entity\User;
 use App\Fixture\FixtureAttachedTrait;
 
@@ -47,7 +46,6 @@ class LoginCheckTest extends PantherTestCase
             '_username' => $user->getUsername(),
             '_password' => $user->getPassword()
         ]);
-        $chromeClient = $client->createChromeClient();
         $crawler = $client->submit($loginForm);
 
         $this->assertEquals(
@@ -83,23 +81,5 @@ class LoginCheckTest extends PantherTestCase
         $errorMessage = $crawler->filter('.text-danger')->count();
 
         $this->assertEquals(1, $errorMessage, 'Assert that login failed and bad credential message is present');
-    }
-
-    public function testDisplayCaptchaOnThirdLoginFailed()
-    {
-        /** @var User $user */
-        $user = $this->fixtureRepository->getReference('user');
-        $client = static::createPantherClient();
-        $crawler = $client->request('GET', '/admin-GC2NeDwu26y6pred');
-        for ($i = 0; $i < Captcha::LIMIT_DISPLAY_CAPTCHA; $i++) {
-            $loginForm = $crawler->selectButton('_submit')->form([
-                '_username' => $user->getUsername(),
-                '_password' => 'wrong_password'
-            ]);
-            $crawler = $client->submit($loginForm);
-        }
-        $captchaCodeInput = $crawler->filter('#captchaCode')->count();
-
-        $this->assertEquals(1, $captchaCodeInput, 'Assert that the captcha input is display if the limit is reached');
     }
 }
