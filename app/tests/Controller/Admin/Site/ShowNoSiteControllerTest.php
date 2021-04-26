@@ -12,24 +12,27 @@ declare(strict_types=1);
 namespace App\Tests\Controller\Admin\Site;
 
 use App\Fixture\FixtureAttachedTrait;
+use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
 
 class ShowNoSiteControllerTest extends PantherTestCase
 {
     use FixtureAttachedTrait;
 
+    use AdminUriProvider;
+
     public function testDisplayNoSitePage()
     {
         /** @var User $user */
         $user = $this->fixtureRepository->getReference('user');
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', '/admin-GC2NeDwu26y6pred');
+        $crawler = $client->request('GET', $this->provideAdminLoginUri());
         $loginForm = $crawler->selectButton('_submit')->form([
             '_username' => $user->getUsername(),
             '_password' => $user->getPassword()
         ]);
         $crawler = $client->submit($loginForm);
-        $crawler = $client->request('GET', '/admin/site/show');
+        $crawler = $client->request('GET', $this->provideAdminSiteShowUri());
 
         $this->assertSelectorTextSame('.card-title', 'Le site n\'existe pas !');
 

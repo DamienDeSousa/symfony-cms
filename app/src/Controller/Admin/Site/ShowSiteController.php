@@ -12,15 +12,19 @@ declare(strict_types=1);
 namespace App\Controller\Admin\Site;
 
 use App\Service\Site\SiteReaderService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin/site/show", name="admin_site_show")
  */
 class ShowSiteController extends AbstractController
 {
+    public const SITE_SHOW_URI = '/admin/site/show';
+
+    public const SITE_SHOW_ROUTE_NAME = 'admin_site_show';
+
     /**
      * @var SiteReaderService
      */

@@ -14,22 +14,21 @@ namespace App\Controller\Admin\Security;
 use App\Security\Admin\AuthError;
 use App\Security\Admin\LastUsername;
 use App\Security\Admin\Login\Captcha;
-use Captcha\Bundle\CaptchaBundle\Integration\BotDetectCaptcha;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Captcha\Bundle\CaptchaBundle\Integration\BotDetectCaptcha;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin-GC2NeDwu26y6pred", name="admin_login")
  */
 class Login extends AbstractController
 {
-    /**
-     * Admin login route name.
-     */
     public const LOGIN_PAGE_ROUTE = 'admin_login';
+
+    public const LOGIN_PAGE_URI = '/admin-GC2NeDwu26y6pred';
 
     /**
      * @var CsrfTokenManagerInterface

@@ -13,11 +13,14 @@ namespace App\Tests\Controller\Admin\Site;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Fixture\FixtureAttachedTrait;
+use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
 
 class ShowSiteControllerTest extends PantherTestCase
 {
     use FixtureAttachedTrait;
+
+    use AdminUriProvider;
 
     public function testDisplaySitePage()
     {
@@ -27,13 +30,13 @@ class ShowSiteControllerTest extends PantherTestCase
         $site = $this->fixtureRepository->getReference('site');
 
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', '/admin-GC2NeDwu26y6pred');
+        $crawler = $client->request('GET', $this->provideAdminLoginUri());
         $loginForm = $crawler->selectButton('_submit')->form([
             '_username' => $user->getUsername(),
             '_password' => $user->getPassword()
         ]);
         $crawler = $client->submit($loginForm);
-        $crawler = $client->request('GET', '/admin/site/show');
+        $crawler = $client->request('GET', $this->provideAdminSiteShowUri());
 
         $this->assertSelectorTextSame('.card-header', 'Informations');
 
