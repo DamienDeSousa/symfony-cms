@@ -18,9 +18,12 @@ Utiliser un outils pour installer les assets (voir avec adluc)
 
 Il faut dans un premier temps posséder une première version stable.
 git clone https://github.com/DamienDeSousa/symfony-cms.git  
+export CUSTOM_UID=$UID  
+export GID=$(id -g)  
 make install  
 make connection-php-container  
 php bin/console fos:user:create  
+make up  
 
 ## Configuration
 

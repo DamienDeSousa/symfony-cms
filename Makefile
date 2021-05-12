@@ -1,4 +1,5 @@
 MAKE=make
+CURRENT_USER := $(value USER)
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -18,22 +19,22 @@ install: ## install CMS
 	$(MAKE) migration-migrate
 
 asset-install: ## install asset
-	docker exec symfony-cms_php73_1 php bin/console assets:install /var/www/public/
+	docker exec -u $(CURRENT_USER) symfony-cms_php73_1 php bin/console assets:install /var/www/public/
 
 migration-migrate: ## run migrations
-	docker exec symfony-cms_php73_1 php bin/console doctrine:migrations:migrate --no-interaction
+	docker exec -u $(CURRENT_USER) symfony-cms_php73_1 php bin/console doctrine:migrations:migrate --no-interaction
 
 cache-clear: ## clear cache
-	docker exec symfony-cms_php73_1 php bin/console cache:clear
+	docker exec -u $(CURRENT_USER) symfony-cms_php73_1 php bin/console cache:clear
 
 run-tests: ## run automated tests 
-	docker exec symfony-cms_php73_1 ./bin/phpunit
+	docker exec -u $(CURRENT_USER) symfony-cms_php73_1 ./bin/phpunit
 
 connection-php-container: ## connect to php container
-	docker exec -it symfony-cms_php73_1 bash
+	docker exec -u $(CURRENT_USER) -it symfony-cms_php73_1 bash
 
 connection-db-container: ## connect to database
-	docker exec -it symfony-cms_mysql_1 mysql -uroot -proot symfony_cms
+	docker exec -u $(CURRENT_USER) -it symfony-cms_mysql_1 mysql -uroot -proot symfony_cms
 
 composer-install: ## composer install
-	docker exec symfony-cms_php73_1 composer install
+	docker exec -u $(CURRENT_USER) symfony-cms_php73_1 composer install

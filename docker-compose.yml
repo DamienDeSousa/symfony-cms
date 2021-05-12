@@ -13,7 +13,13 @@ services:
       - 3307:3306
   
   php73:
-    build: php73
+    build:
+      context: ./php73
+      dockerfile: Dockerfile
+      args: 
+        USER_ID: ${CUSTOM_UID}
+        GROUP_ID: ${GID}
+        USER_NAME: ${USER}
     ports:
       - "8080:80"
     volumes:

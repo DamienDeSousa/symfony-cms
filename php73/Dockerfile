@@ -1,9 +1,9 @@
 # image à utiliser
 FROM php:7.3-apache
 
-ARG USER_ID=1000
-ARG GROUP_ID=1000
-ARG USER_NAME=damien
+ARG USER_ID
+ARG GROUP_ID
+ARG USER_NAME
 
 # On envoie le nom du serveur à apache, c'est avec ça que l'on appelera nos pages
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
