@@ -18,6 +18,7 @@ use App\Tests\Provider\Uri\AdminUriProvider;
 use App\Tests\Provider\Uri\UriProvider;
 use App\Tests\Provider\Url\AdminUrlProvider;
 use App\Tests\Provider\Actions\LogAction;
+use App\Tests\Provider\Css\Admin\AdminCssProvider;
 
 class LoginCheckTest extends PantherTestCase
 {
@@ -31,12 +32,14 @@ class LoginCheckTest extends PantherTestCase
 
     use LogAction;
 
+    use AdminCssProvider;
+
     public function testDisplayLoginAdminPage()
     {
         $client = static::createPantherClient();
         $crawler = $client->request('GET', $this->provideAdminLoginUri());
-        $usernameInput = $crawler->filter('#username')->count();
-        $passwordInput = $crawler->filter('#password')->count();
+        $usernameInput = $crawler->filter($this->provideUsernameLoginId())->count();
+        $passwordInput = $crawler->filter($this->providePasswdLoginId())->count();
 
         $this->assertEquals(1, $usernameInput, 'Assert that user name input exists');
         $this->assertEquals(1, $passwordInput, 'Assert that password input exists');
@@ -76,12 +79,12 @@ class LoginCheckTest extends PantherTestCase
         $user = $this->fixtureRepository->getReference('user');
         $client = static::createPantherClient();
         $crawler = $client->request('GET', $this->provideAdminLoginUri());
-        $loginForm = $crawler->selectButton('_submit')->form([
-            '_username' => $user->getUsername(),
-            '_password' => 'wrong_password'
+        $loginForm = $crawler->selectButton($this->provideSubmitLoginName())->form([
+            $this->provideUsernameLoginName() => $user->getUsername(),
+            $this->providePasswdLoginName() => 'wrong_password'
         ]);
         $crawler = $client->submit($loginForm);
-        $errorMessage = $crawler->filter('.text-danger')->count();
+        $errorMessage = $crawler->filter($this->provideErrorMsgClass())->count();
 
         $this->assertEquals(1, $errorMessage, 'Assert that login failed and bad credential message is present');
     }
