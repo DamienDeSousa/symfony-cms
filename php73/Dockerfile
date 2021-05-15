@@ -26,10 +26,7 @@ ENV CUSTOM_PANTHER_BASE_URL http://127.0.0.1:9800
 # On copie le php.ini du repertoire actuel dans le contenaire
 # COPY php.ini /usr/local/etc/php/php.ini
 
-# on télécharge et deplace le composer
-# RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
-#    mv composer.phar /usr/local/bin/composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+EXPOSE 9800
 
 # Quelques extesnions de php utiles
 RUN docker-php-ext-configure intl
