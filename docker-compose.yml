@@ -6,7 +6,7 @@ services:
     restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: example
+      MYSQL_DATABASE: symfony_cms
     volumes:
       - db-data:/var/lib/mysql
     ports: 
@@ -23,6 +23,15 @@ services:
   composer-installer:
     image: composer:2.0
     working_dir: /var/www
+    volumes:
+      - ./app:/var/www
+  
+  node:
+    image: node:16.3.0-buster
+    command: bash -c "ls -l && yarn install && yarn encore dev --watch"
+    working_dir: /var/www
+    ports:
+      - 3000:3000
     volumes:
       - ./app:/var/www
 

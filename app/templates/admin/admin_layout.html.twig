@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('css/admin/admin_layout.css') }}" rel="stylesheet"/>
+    {{ encore_entry_link_tags('admin_admin_layout') }}
 {% endblock %}
 
 {% block body %}
@@ -17,5 +17,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/admin/admin_layout.js') }}"></script>
+    {{ encore_entry_script_tags('admin_admin_layout') }}
 {% endblock %}
