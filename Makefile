@@ -36,4 +36,4 @@ connection-db-container: ## connect to database
 	docker exec -it symfony-cms_mysql_1 mysql -uroot -proot symfony_cms
 
 composer-install: ## composer install
-	docker exec symfony-cms_php73_1 composer install
+	docker-compose run composer-installer composer install
