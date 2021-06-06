@@ -14,6 +14,7 @@ namespace App\Tests\Controller\Admin\Site;
 use App\Fixture\FixtureAttachedTrait;
 use App\Entity\User;
 use App\Tests\Provider\Actions\LogAction;
+use App\Tests\Provider\Css\Admin\AdminSiteCssProvider;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
 
@@ -25,6 +26,8 @@ class ShowNoSiteControllerTest extends PantherTestCase
 
     use LogAction;
 
+    use AdminSiteCssProvider;
+
     public function testDisplayNoSitePage()
     {
         /** @var User $user */
@@ -33,7 +36,7 @@ class ShowNoSiteControllerTest extends PantherTestCase
         $crawler = $this->login($user, $this->provideAdminLoginUri(), $client);
         $crawler = $client->request('GET', $this->provideAdminSiteShowUri());
 
-        $this->assertSelectorTextSame('.card-title', 'Le site n\'existe pas !');
+        $this->assertSelectorTextSame($this->provideCardTitleClass(), 'Le site n\'existe pas !');
 
         $crawler = $this->adminLogout($client, $crawler);
     }

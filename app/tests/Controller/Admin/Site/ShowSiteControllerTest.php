@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * File that defines the show site controller test.
+ * This class is used to the page when a site is created.
  *
  * @author    Damien DE SOUSA <desousadamien30@gmail.com>
  * @copyright 2021 Damien DE SOUSA
@@ -14,6 +16,7 @@ use App\Entity\Site;
 use App\Entity\User;
 use App\Fixture\FixtureAttachedTrait;
 use App\Tests\Provider\Actions\LogAction;
+use App\Tests\Provider\Css\Admin\AdminSiteCssProvider;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
 
@@ -24,6 +27,8 @@ class ShowSiteControllerTest extends PantherTestCase
     use AdminUriProvider;
 
     use LogAction;
+
+    use AdminSiteCssProvider;
 
     public function testDisplaySitePage()
     {
@@ -36,7 +41,7 @@ class ShowSiteControllerTest extends PantherTestCase
         $crawler = $this->login($user, $this->provideAdminLoginUri(), $client);
         $crawler = $client->request('GET', $this->provideAdminSiteShowUri());
 
-        $this->assertSelectorTextSame('.card-header', 'Informations');
+        $this->assertSelectorTextSame($this->provideCardHeaderClass(), 'Informations');
 
         $crawler = $this->adminLogout($client, $crawler);
     }
