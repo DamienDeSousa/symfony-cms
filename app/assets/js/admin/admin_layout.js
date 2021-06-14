@@ -1,3 +1,6 @@
+import '../../css/admin/admin_layout.css'
+import $ from 'jquery';
+
 $(document).ready(function() {
     $(".menu-toggle").click(function(e) {
         e.preventDefault();

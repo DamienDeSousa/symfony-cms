@@ -9,6 +9,8 @@ app/.env
 /app/var/
 /app/vendor/
 app/src/.preload.php
+app/node_modules/
+app/public/build/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
