@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="robots" content="{% block meta_robot %}index, follow{% endblock %}">
         <title>{% block title %}{{ get_title() }}{% endblock %}</title>
+        {% if get_icon() is not null %}
+            <link rel="icon" href="{{ asset(get_icon()) }}">
+        {% endif %}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}

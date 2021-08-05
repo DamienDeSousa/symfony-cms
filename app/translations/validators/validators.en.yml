@@ -1,0 +1,5 @@
+site:
+    update:
+        icon:
+            error:
+                mimetypes: Please upload an image with a valid format.

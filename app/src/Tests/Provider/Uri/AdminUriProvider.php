@@ -15,6 +15,7 @@ namespace App\Tests\Provider\Uri;
 use App\Controller\Admin\Index;
 use App\Controller\Admin\Security\Login;
 use App\Controller\Admin\Site\ShowSiteController;
+use App\Controller\Admin\Site\UpdateSiteController;
 
 trait AdminUriProvider
 {
@@ -31,5 +32,10 @@ trait AdminUriProvider
     public function provideAdminSiteShowUri(): string
     {
         return ShowSiteController::SITE_SHOW_URI;
+    }
+
+    public function provideAdminSiteUpdateUri(): string
+    {
+        return UpdateSiteController::SITE_UPDATE_URI;
     }
 }

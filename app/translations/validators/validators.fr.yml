@@ -1,0 +1,5 @@
+site:
+    update:
+        icon:
+            error:
+                mimetypes: Veuillez sélectionner une image au format valide.

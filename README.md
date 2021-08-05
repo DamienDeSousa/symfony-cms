@@ -33,7 +33,6 @@ Une page est composée de plusieurs blocs (ManyToMany)
 
 Site:
 - Title
-- name
 - favicon
 
 Page:
@@ -66,7 +65,7 @@ Si un bundle est nécessaire pour un environnement, il faut vérifier qu'il est 
 L'environnement test permet d'exécuter les tests fonctionnels de l'application.  
 Dans cet environnement est défini une nouvelle base de données dans laquelle les fixtures peuvent être créer sans polluer la base de données de dev.
 
-Changer la viariable d'environnement APP_ENV (dans le fichier .env) comme suit:  
+Changer la variable d'environnement APP_ENV (dans le fichier .env) comme suit:  
 APP_ENV=test  
 Lancer ensuite la commande suivante pour exécuter tous les tests fonctionnels:  
 ./bin/phpunit

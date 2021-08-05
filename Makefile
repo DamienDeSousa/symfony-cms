@@ -1,6 +1,6 @@
 MAKE=make
 
-SHELL = /bin/sh
+SHELL := /bin/bash
 
 CURRENT_UID := $(shell id -u)
 CURRENT_GID := $(shell id -g)
@@ -22,7 +22,15 @@ install: ## install CMS
 	$(MAKE) asset-install
 	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create
 	$(MAKE) migration-migrate
+        $(MAKE) setup-public-directory
 	$(MAKE) fix-permission
+
+reset-from-new-git-branch:
+	$(MAKE) up
+	$(MAKE) composer-install
+	$(MAKE) cache-clear
+	$(MAKE) migration-migrate
+	$(MAKE) setup-public-directory
 
 asset-install: ## install asset
 	docker exec symfony-cms_php73_1 php bin/console assets:install /var/www/public/
@@ -49,5 +57,5 @@ fix-permission: ## fix permission on project files
 	sudo chown ${CURRENT_UID}:${CURRENT_GID} -R .
 	docker exec -it symfony-cms_php73_1 chown www-data:www-data -R public/uploads
 
-run:
-	@echo $$FOO
+setup-public-directory: ## create icon directory not exists
+	@mkdir -p app/public/uploads/icon/

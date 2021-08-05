@@ -20,3 +20,9 @@ site:
         informations: Informations
         title: "Title of the site:"
         icon: "Icon of the site:"
+    update:
+        title: Title
+        icon: Icon
+        save: Save
+        error: An error occured when trying to update the site.
+        icon_help: "Available extensions: ico, png, jpeg"
