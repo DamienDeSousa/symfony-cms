@@ -59,3 +59,10 @@ fix-permission: ## fix permission on project files
 
 setup-public-directory: ## create icon directory not exists
 	@mkdir -p app/public/uploads/icon/
+
+composer-update: ## composer update
+	docker-compose run composer-installer composer update
+	docker-compose run composer-installer ./bin/phpunit
+
+yarn-update:
+	docker exec -it symfony-cms_node_1 yarn upgrade
