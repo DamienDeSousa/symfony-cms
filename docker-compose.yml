@@ -11,14 +11,25 @@ services:
       - db-data:/var/lib/mysql
     ports: 
       - 3307:3306
+
+  web:
+    build: web
+    ports: 
+      - 8080:80
+    volumes: 
+      - ./app:/var/www
+    depends_on: 
+      - mysql
+      - php73
   
   php73:
     build: php73
-    ports:
-      - "8080:80"
+    expose:
+      - 9000
     volumes:
-        - ./vhosts:/etc/apache2/sites-enabled
         - ./app:/var/www
+    depends_on: 
+      - mysql
 
   composer-installer:
     image: composer:2.0

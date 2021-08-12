@@ -1,8 +1,8 @@
 # image à utiliser
-FROM php:7.3-apache
+FROM php:7.3-fpm-buster
 
 # On envoie le nom du serveur à apache, c'est avec ça que l'on appelera nos pages
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+# RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Quelques library necessaires
 RUN apt-get update \
@@ -13,7 +13,7 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen
 
-RUN a2enmod rewrite
+# RUN a2enmod rewrite
 
 ENV PANTHER_CHROME_DRIVER_BINARY /usr/bin/chromedriver
 ENV PANTHER_NO_SANDBOX 1
