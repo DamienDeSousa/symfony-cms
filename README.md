@@ -11,8 +11,6 @@ S'assurer de la présence de la barre horizontale et latéral sur les pages admi
 Cache HTTP  
 Cache applicatif  
 Rédiger de la doc !  
-Utiliser un symfony form pour tous les futurs formulaires.  
-Utiliser un outils pour installer les assets (voir avec adluc)  
 
 ## Installation
 
