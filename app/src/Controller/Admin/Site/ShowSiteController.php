@@ -25,13 +25,15 @@ class ShowSiteController extends AbstractController
 
     public const SITE_SHOW_ROUTE_NAME = 'admin_site_show';
 
-    /**
-     * @var SiteReaderService
-     */
+    /** @var SiteReaderService */
     private $siteReader;
 
-    public function __construct(SiteReaderService $siteReader)
+    /** @var string */
+    private $iconDirectory;
+
+    public function __construct(SiteReaderService $siteReader, string $iconDirectory)
     {
+        $this->iconDirectory = $iconDirectory;
         $this->siteReader = $siteReader;
     }
 
@@ -39,7 +41,10 @@ class ShowSiteController extends AbstractController
     {
         $site = $this->siteReader->read();
         $response = $site ?
-            $this->render('admin/site/show_site.html.twig', ['site' => $site])
+            $this->render(
+                'admin/site/show_site.html.twig',
+                ['site' => $site, 'icon_directory' => $this->iconDirectory]
+            )
             : $this->render('admin/site/unavailable_site.html.twig');
 
         return $response;

@@ -11,7 +11,7 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><span class="h5">{% trans %}site.show.title{% endtrans %}</span> <span class="lead">{{ site.title }}</lead></li>
-            <li class="list-group-item"><span class="h5">{% trans %}site.show.icon{% endtrans %}</span> {{ site.icon }}</li>
+            <li class="list-group-item"><span class="h5">{% trans %}site.show.icon{% endtrans %}</span> <img src="{{ asset(icon_directory ~ site.icon) }}" class="img-thumbnail"></li>
         </ul>
     </div>
 </div>

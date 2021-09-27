@@ -13,8 +13,8 @@ declare(strict_types=1);
 namespace App\Twig\Admin;
 
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\RuntimeExtensionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SidebarSection implements RuntimeExtensionInterface
 {
@@ -64,6 +64,7 @@ class SidebarSection implements RuntimeExtensionInterface
                 : $section['route'] = $this->router->generate($route['name']);
 
             $section['name'] = $route['section_name'];
+            $section['link_id'] = $route['link_id'];
             $sections[] = $section;
         }
 
@@ -81,7 +82,7 @@ class SidebarSection implements RuntimeExtensionInterface
     {
         $isValid = false;
 
-        if (isset($route['name']) && isset($route['section_name'])) {
+        if (isset($route['name']) && isset($route['section_name']) && isset($route['link_id'])) {
             $isValid = true;
         }
 
