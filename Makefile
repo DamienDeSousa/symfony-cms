@@ -22,7 +22,7 @@ install: ## install CMS
 	$(MAKE) asset-install
 	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create
 	$(MAKE) migration-migrate
-        $(MAKE) setup-public-directory
+	$(MAKE) setup-public-directory
 	$(MAKE) fix-permission
 
 reset-from-new-git-branch:
@@ -42,6 +42,7 @@ cache-clear: ## clear cache
 	docker exec symfony-cms_php73_1 php bin/console cache:clear
 
 run-tests: ## run automated tests, optionnally you can specify the PATH_TEST argument to run specific tests 
+	docker exec symfony-cms_php73_1 php bin/console doctrine:migrations:migrate --no-interaction --env=test
 	docker exec symfony-cms_php73_1 ./bin/phpunit $$PATH_TEST
 
 connection-php-container: ## connect to php container
