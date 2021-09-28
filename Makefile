@@ -22,7 +22,7 @@ install: ## install CMS
 	$(MAKE) asset-install
 	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create
 	$(MAKE) migration-migrate
-        $(MAKE) setup-public-directory
+	$(MAKE) setup-public-directory
 	$(MAKE) fix-permission
 
 reset-from-new-git-branch:
