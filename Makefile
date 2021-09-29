@@ -25,10 +25,14 @@ install: ## install CMS
 	$(MAKE) setup-public-directory
 	$(MAKE) fix-permission
 
-reset-from-new-git-branch:
+reset-workspace-from-develop: ##clean workspace before starting new development
+	$(MAKE) down
+	git reset --hard origin/develop
+	git pull --rebase origin develop
 	$(MAKE) up
 	$(MAKE) composer-install
 	$(MAKE) cache-clear
+	$(MAKE) expose-js-routes
 	$(MAKE) migration-migrate
 	$(MAKE) setup-public-directory
 
@@ -65,5 +69,8 @@ composer-update: ## composer update
 	docker-compose run composer-installer composer update
 	docker-compose run composer-installer ./bin/phpunit
 
-yarn-update:
+yarn-update: ## yarn update
 	docker exec -it symfony-cms_node_1 yarn upgrade
+
+expose-js-routes: ## expose symfony routes to js
+	docker exec symfony-cms_php73_1 php bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json

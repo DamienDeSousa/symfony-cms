@@ -8,6 +8,7 @@ admin:
     sections:
         home: Home
         site: Global settings
+        page_template: Page templates
 
 cms:
     name: Symfony CMS
@@ -26,3 +27,17 @@ site:
         save: Save
         error: An error occured when trying to update the site.
         icon_help: "Available extensions: ico, png, jpeg"
+
+page-template:
+    grid:
+        id: ID
+        name: Name
+        layout: Layout
+    create:
+        error: An error occured when trying to create the page template.
+        card-header: Create new one
+        name: Name
+        layout: Layout
+        submit: Create
+        flash-message:
+            success: Page Template created successfully !

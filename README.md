@@ -53,7 +53,8 @@ Bloc:
 - Title
 - Name
 - Type (footer, header , etc..)
-- Un twig
+- Un twig  
+
 ### Création nouvel environnement
 
 Pour créer un nouvel environnement il suffit de suivre la documentation à ce sujet.  
@@ -68,4 +69,11 @@ Dans cet environnement est défini une nouvelle base de données dans laquelle l
 Changer la variable d'environnement APP_ENV (dans le fichier .env) comme suit:  
 APP_ENV=test  
 Lancer ensuite la commande suivante pour exécuter tous les tests fonctionnels:  
-./bin/phpunit
+./bin/phpunit  
+
+## Exposer une nouvelle route pour le Javascript (FosJsBundle)
+
+Créer une route classique.  
+Ajouter le name de la route dans config/packages/fos_js.yaml.  
+Lancer la commande make expose-js-routes.  
+Dans le javascript, faire appel à la route comme suit: Routing.generate('admin_site_update')  

@@ -8,6 +8,7 @@ admin:
     sections:
         home: Accueil
         site: Paramètres Généraux
+        page_template: Templates de pages
 
 cms:
     name: Symfony CMS
@@ -24,5 +25,19 @@ site:
         title: Titre
         icon: Icône
         save: Enregistrer
-        error: An error occured when trying to update the site.
+        error: Une erreur est survenue lors de la mise à jour du site.
         icon_help: "Extensions possible: ico, png, jpeg"
+
+page-template:
+    grid:
+        id: ID
+        name: Nom
+        layout: disposition
+    create:
+        error: Une erreur est survenue lors de la création du patron de page.
+        card-header: Créer un nouveau patron de page
+        name: Nom
+        layout: Disposition
+        submit: Créer
+        flash-message:
+            success: Patron de page créé avec succès !
