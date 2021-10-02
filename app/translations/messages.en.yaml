@@ -41,3 +41,8 @@ page-template:
         submit: Create
         flash-message:
             success: Page Template created successfully !
+
+error:
+    Forbidden:
+        title: Oops, something went wrong
+        message: The requested page isn't accessible. It seems that you don't have enough permissions to view this page.

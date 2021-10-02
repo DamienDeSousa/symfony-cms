@@ -11,9 +11,11 @@
         <div class="col">
             {{ include('admin/include/flash_messages.html.twig') }}
         </div>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
         <div class="col-sm-1">
             <button class="btn btn-success" id="create-page-template-button">Create</button>
         </div>
+        {% endif %}
     </div>
     <div class="row mt-5">
         <div class="col">

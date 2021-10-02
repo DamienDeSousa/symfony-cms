@@ -13,6 +13,7 @@ namespace App\Controller\Admin\PageTemplate;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Security\Admin\Voter\PageTemplateVoter;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\Structure\PageTemplateRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,6 +27,8 @@ class GridPageTemplateController extends AbstractController
 {
     public const GRID_PAGE_TEMPLATE_ROUTE_NAME = 'admin_page_template_grid';
 
+    public const GRID_PAGE_TEMPLATE_ROUTE_URI = '/admin/page-template';
+
     /** @var PageTemplateRepository */
     private $pageTemplateRepository;
 
@@ -37,6 +40,7 @@ class GridPageTemplateController extends AbstractController
     public function __invoke(Request $request): Response
     {
         $pageTemplates = $this->pageTemplateRepository->findAll();
+        $this->denyAccessUnlessGranted(PageTemplateVoter::PAGE_TEMPLATE_READ, $pageTemplates);
         $pageTemplatesHeader = [
             'page-template.grid.id',
             'page-template.grid.name',
