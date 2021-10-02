@@ -3,3 +3,9 @@ site:
         icon:
             error:
                 mimetypes: Please upload an image with a valid format.
+
+page-template:
+    create:
+        error:
+            name: Name is already taken.
+            layout: Twig layout is already used.

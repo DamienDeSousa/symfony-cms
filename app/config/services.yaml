@@ -47,6 +47,9 @@ services:
                 - name: 'admin_site_show'
                   section_name: 'admin.sections.site'
                   link_id: 'link_admin_site_show_id'
+                - name: 'admin_page_template_grid'
+                  section_name: 'admin.sections.page_template'
+                  link_id: 'admin_page_template_grid_id'
     
     App\Decorator\Fos\UserBundle\Command\PromoteUserCommand:
         decorates:

@@ -7,8 +7,10 @@ const Routing = require('../../route/routing.js');
 $(document).ready(function() {
     $('.card').hover(function() {
         $(this).addClass('shadow rounded');
+        $(this).css('cursor', 'pointer');
     }, function() {
         $(this).removeClass('shadow rounded');
+        $(this).css('cursor', 'default');
     });
 
     $('.card').click(function() {

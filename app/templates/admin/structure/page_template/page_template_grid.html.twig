@@ -1,0 +1,37 @@
+{% extends 'admin/admin_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin_page_template_grid_page_template') }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5 justify-content-end">
+        <div class="col">
+            {{ include('admin/include/flash_messages.html.twig') }}
+        </div>
+        <div class="col-sm-1">
+            <button class="btn btn-success" id="create-page-template-button">Create</button>
+        </div>
+    </div>
+</div>
+GRID WILL BE HERE<br/>
+exemple de grille configurable:<br/>
+envoyer entête :<br/>
+[id, name, layout]<br/>
+
+envoyer valeur :<br/>
+values = [];<br/>
+foreach(page_templates as page_template) {<br/>
+    $values[] = ['id' => page_template.id, 'name' => page_template.name, 'layout' => page_template.layout]<br/>
+}<br/>
+vars = {'header_columns' : entête, 'clomn_values' : values}<br/>
+include 'grid.tiwg.html' with vars<br/>
+{{ dump(page_templates) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('admin_page_template_grid_page_template') }}
+{% endblock %}
