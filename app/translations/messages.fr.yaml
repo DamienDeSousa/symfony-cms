@@ -32,7 +32,7 @@ page-template:
     grid:
         id: ID
         name: Nom
-        layout: disposition
+        layout: Disposition
     create:
         error: Une erreur est survenue lors de la création du patron de page.
         card-header: Créer un nouveau patron de page
