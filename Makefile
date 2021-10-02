@@ -25,7 +25,7 @@ install: ## install CMS
 	$(MAKE) setup-public-directory
 	$(MAKE) fix-permission
 
-reset-workspace-from-develop: ##clean workspace before starting new development
+reset-workspace-from-develop: ## clean workspace before starting new development
 	$(MAKE) down
 	git reset --hard origin/develop
 	git pull --rebase origin develop
@@ -45,9 +45,18 @@ migration-migrate: ## run migrations
 cache-clear: ## clear cache
 	docker exec symfony-cms_php73_1 php bin/console cache:clear
 
-run-tests: ## run automated tests, optionnally you can specify the PATH_TEST argument to run specific tests 
+run-tests: ## run automated tests, specify the PATH_TEST argument to run specific tests 
+	docker exec symfony-cms_php73_1 php bin/console cache:clear --env=test
 	docker exec symfony-cms_php73_1 php bin/console doctrine:migrations:migrate --no-interaction --env=test
 	docker exec symfony-cms_php73_1 ./bin/phpunit $$PATH_TEST
+
+#Tests are splited because there is a chromium issue when running too mush tests in the same time.
+run-all-tests: ## run all automated tests
+	docker exec symfony-cms_php73_1 php bin/console cache:clear --env=test
+	docker exec symfony-cms_php73_1 php bin/console doctrine:migrations:migrate --no-interaction --env=test
+	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Command
+	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller
+	docker exec symfony-cms_php73_1 ./bin/phpunit tests/SmokeTest
 
 connection-php-container: ## connect to php container
 	docker exec -it symfony-cms_php73_1 bash

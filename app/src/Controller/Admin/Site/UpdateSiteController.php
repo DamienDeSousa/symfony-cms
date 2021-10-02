@@ -13,6 +13,7 @@ namespace App\Controller\Admin\Site;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormError;
+use App\Security\Admin\Voter\SiteVoter;
 use App\Service\Site\SiteReaderService;
 use App\Service\Site\SiteUpdaterService;
 use App\Form\Type\Admin\Site\UpdateSiteType;
@@ -58,6 +59,7 @@ class UpdateSiteController extends AbstractController
     public function __invoke(Request $request): Response
     {
         $site = $this->siteReaderService->read();
+        $this->denyAccessUnlessGranted(SiteVoter::SITE_UPDATE, $site);
         $form = $this->createForm(UpdateSiteType::class, $site);
         $form->handleRequest($request);
         $response = null;

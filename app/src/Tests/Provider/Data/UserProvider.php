@@ -27,4 +27,16 @@ trait UserProvider
 
         return $user;
     }
+
+    public function provideAdminUser(): User
+    {
+        $user = new User();
+        $user->setUsername('adsal');
+        $user->setEmail('adsal@adsal.fr');
+        $user->setPassword('adsal');
+        $user->setEnabled(true);
+        $user->addRole('ROLE_ADMIN');
+
+        return $user;
+    }
 }

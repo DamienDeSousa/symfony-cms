@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin_admin_layout') }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col">
+            <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading">{{ error.forbidden.title|trans}}</h4>
+                <hr>
+                <p>{{ error.forbidden.message|trans}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('admin_admin_layout') }}
+{% endblock %}

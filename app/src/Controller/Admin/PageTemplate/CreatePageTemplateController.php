@@ -15,6 +15,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Security\Admin\Voter\PageTemplateVoter;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Form\Type\Admin\PageTemplate\CreatePageTemplateType;
@@ -28,6 +29,8 @@ use App\Service\Structure\PageTemplate\PageTemplateCreatorService;
  */
 class CreatePageTemplateController extends AbstractController
 {
+    public const CREATE_PAGE_TEMPLATE_ROUTE_URI = '/admin/page-template/create';
+
     /** @var PageTemplateCreatorService */
     private $pageTemplateCreatorService;
 
@@ -50,6 +53,7 @@ class CreatePageTemplateController extends AbstractController
     public function __invoke(Request $request): Response
     {
         $pageTemplate = $this->pageTemplateCreatorService->create();
+        $this->denyAccessUnlessGranted(PageTemplateVoter::PAGE_TEMPLATE_CREATE, $pageTemplate);
         $form = $this->createForm(CreatePageTemplateType::class, $pageTemplate);
         $response = null;
         $form->handleRequest($request);

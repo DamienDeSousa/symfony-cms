@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace App\Tests\Provider\Uri;
 
 use App\Controller\Admin\Index;
+use App\Controller\Admin\PageTemplate\CreatePageTemplateController;
+use App\Controller\Admin\PageTemplate\GridPageTemplateController;
 use App\Controller\Admin\Security\Login;
 use App\Controller\Admin\Site\ShowSiteController;
 use App\Controller\Admin\Site\UpdateSiteController;
@@ -37,5 +39,15 @@ trait AdminUriProvider
     public function provideAdminSiteUpdateUri(): string
     {
         return UpdateSiteController::SITE_UPDATE_URI;
+    }
+
+    public function provideAdminPageTemplateGridUri(): string
+    {
+        return GridPageTemplateController::GRID_PAGE_TEMPLATE_ROUTE_URI;
+    }
+
+    public function provideAdminPageTemplateCreateUri(): string
+    {
+        return CreatePageTemplateController::CREATE_PAGE_TEMPLATE_ROUTE_URI;
     }
 }

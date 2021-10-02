@@ -17,7 +17,7 @@ use Symfony\Component\Panther\DomCrawler\Crawler;
 
 trait LogAction
 {
-    public function login(User $user, $loginUrl, Client $client): Crawler
+    public function login(User $user, string $loginUrl, Client $client): Crawler
     {
         $crawler = $client->request('GET', $loginUrl);
         $loginForm = $crawler->selectButton('_submit')->form([

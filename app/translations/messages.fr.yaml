@@ -41,3 +41,8 @@ page-template:
         submit: Créer
         flash-message:
             success: Patron de page créé avec succès !
+
+error:
+    forbidden:
+        title: Une erreur est survenue
+        message: La page demandée n'est pas accessible. Il semble que vous n'ayez pas les droits suffisants pour voir cette page.
