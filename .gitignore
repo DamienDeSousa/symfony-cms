@@ -9,8 +9,6 @@ app/.env
 /app/var/
 /app/vendor/
 app/src/.preload.php
-app/node_modules/
-app/public/build/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -18,3 +16,10 @@ app/public/build/
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> symfony/webpack-encore-bundle ###
+app/node_modules/
+app/public/build/
+app/npm-debug.log
+app/yarn-error.log
+###< symfony/webpack-encore-bundle ###

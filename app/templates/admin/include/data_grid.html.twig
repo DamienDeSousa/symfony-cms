@@ -8,7 +8,8 @@
     </thead>
     <tbody>
         {% for value_column in value_columns %}
-        <tr>
+            {% set meta_data = attribute(value_column, 'meta_data') %}
+        <tr data-entity-id="{{ attribute(meta_data, 'id') }}" data-route-name="{{ attribute(meta_data, 'route_name') }}">
             {% for head_column in head_columns %}
             <td>{{ attribute(value_column, head_column) }}</td>
             {% endfor %}

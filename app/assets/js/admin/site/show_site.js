@@ -5,7 +5,8 @@ const Routing = require('../../route/routing.js');
 
 
 $(document).ready(function() {
-    $('.card').hover(function() {
+    let card = $('.card');
+    card.hover(function() {
         $(this).addClass('shadow rounded');
         $(this).css('cursor', 'pointer');
     }, function() {
@@ -13,7 +14,7 @@ $(document).ready(function() {
         $(this).css('cursor', 'default');
     });
 
-    $('.card').click(function() {
+    card.click(function() {
         window.location.replace(Routing.generate('admin_site_update'));
     })
 });

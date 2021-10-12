@@ -15,6 +15,7 @@ namespace App\Tests\Provider\Uri;
 use App\Controller\Admin\Index;
 use App\Controller\Admin\PageTemplate\CreatePageTemplateController;
 use App\Controller\Admin\PageTemplate\GridPageTemplateController;
+use App\Controller\Admin\PageTemplate\ShowPageTemplateController;
 use App\Controller\Admin\Security\Login;
 use App\Controller\Admin\Site\ShowSiteController;
 use App\Controller\Admin\Site\UpdateSiteController;
@@ -49,5 +50,10 @@ trait AdminUriProvider
     public function provideAdminPageTemplateCreateUri(): string
     {
         return CreatePageTemplateController::CREATE_PAGE_TEMPLATE_ROUTE_URI;
+    }
+
+    public function provideAdminPageTemplateShowUri(): string
+    {
+        return ShowPageTemplateController::SHOW_PAGE_TEMPLATE_ROUTE_URI;
     }
 }
