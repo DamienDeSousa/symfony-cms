@@ -19,10 +19,10 @@ install: ## install CMS
 	$(MAKE) up
 	$(MAKE) composer-install
 	$(MAKE) cache-clear
-	$(MAKE) asset-install
-	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create
+	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create --if-not-exists
 	$(MAKE) migration-migrate
 	$(MAKE) setup-public-directory
+	$(MAKE) asset-install
 	$(MAKE) fix-permission
 
 reset-workspace-from-develop: ## clean workspace before starting new development

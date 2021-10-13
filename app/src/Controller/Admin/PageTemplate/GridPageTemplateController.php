@@ -46,13 +46,16 @@ class GridPageTemplateController extends AbstractController
             'page-template.grid.name',
             'page-template.grid.layout',
         ];
-        $formatedPageTemplates = [];
-
+        $formattedPageTemplates = [];
         foreach ($pageTemplates as $pageTemplate) {
-            $formatedPageTemplates[] = [
+            $formattedPageTemplates[] = [
                 'page-template.grid.id' => $pageTemplate->getId(),
                 'page-template.grid.name' => $pageTemplate->getName(),
                 'page-template.grid.layout' => $pageTemplate->getLayout(),
+                'meta_data' => [
+                    'id' => $pageTemplate->getId(),
+                    'route_name' => ShowPageTemplateController::SHOW_PAGE_TEMPLATE_ROUTE_NAME,
+                ],
             ];
         }
 
@@ -60,7 +63,8 @@ class GridPageTemplateController extends AbstractController
             'admin/structure/page_template/page_template_grid.html.twig',
             [
                 'page_template_header' => $pageTemplatesHeader,
-                'page_templates' => $formatedPageTemplates
+                'page_templates' => $formattedPageTemplates,
+                'page_template_meta_data' => []
             ]
         );
     }
