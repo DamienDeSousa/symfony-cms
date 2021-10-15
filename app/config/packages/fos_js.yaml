@@ -1,2 +1,2 @@
 fos_js_routing:
-    routes_to_expose: [ admin_site_update, admin_page_template_create, admin_page_template_show]
+    routes_to_expose: [ admin_site_update, admin_page_template_create, admin_page_template_show, admin_page_template_update]

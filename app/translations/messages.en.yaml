@@ -33,6 +33,8 @@ page-template:
         id: ID
         name: Name
         layout: Layout
+        button:
+            create: Create
     create:
         error: An error occured when trying to create the page template.
         card-header: Create new one
@@ -41,6 +43,12 @@ page-template:
         submit: Create
         flash-message:
             success: Page Template created successfully !
+    update:
+        submit: Update
+        card-header: Update page template
+        error: An error occured when trying to update the page template.
+        flash-message:
+            success: Page Template updated successfully !
 
 error:
     Forbidden:

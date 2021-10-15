@@ -20,6 +20,7 @@ install: ## install CMS
 	$(MAKE) composer-install
 	$(MAKE) cache-clear
 	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create --if-not-exists
+	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create --if-not-exists --env=test
 	$(MAKE) migration-migrate
 	$(MAKE) setup-public-directory
 	$(MAKE) asset-install
@@ -83,3 +84,6 @@ yarn-update: ## yarn update
 
 expose-js-routes: ## expose symfony routes to js
 	docker exec symfony-cms_php73_1 php bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json
+
+install-phpunit:
+	docker-compose run composer-installer ./vendor/bin/simple-phpunit
