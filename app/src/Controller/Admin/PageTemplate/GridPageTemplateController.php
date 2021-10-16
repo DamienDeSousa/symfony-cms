@@ -56,6 +56,7 @@ class GridPageTemplateController extends AbstractController
                     'id' => $pageTemplate->getId(),
                     'route_name' => ShowPageTemplateController::SHOW_PAGE_TEMPLATE_ROUTE_NAME,
                     'route_name_update' => UpdatePageTemplateController::UPDATE_PAGE_TEMPLATE_ROUTE_NAME,
+                    'route_name_delete' => DeletePageTemplateController::DELETE_PAGE_TEMPLATE_ROUTE_NAME,
                 ],
             ];
         }
