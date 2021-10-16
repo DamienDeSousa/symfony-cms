@@ -54,7 +54,7 @@ class ShowPageTemplateTest extends PantherTestCase
         usleep(1000000);
         $linkPageGrid = $crawler->filter('#admin_page_template_grid_id')->link();
         $crawler = $this->client->click($linkPageGrid);
-        $this->client->executeScript("document.querySelector('table > tbody > tr:nth-child(1)').click()");
+        $this->client->executeScript("document.querySelector('.btn-outline-info').click()");
         $crawler = $this->client->waitFor('table');
         $numberOflineInTable = $crawler->filter('table > tbody')->children()->count();
 

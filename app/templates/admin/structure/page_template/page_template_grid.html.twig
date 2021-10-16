@@ -6,14 +6,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row mt-5 justify-content-end">
         <div class="col">
             {{ include('admin/include/flash_messages.html.twig') }}
         </div>
         {% if is_granted('ROLE_SUPER_ADMIN') %}
         <div class="col-sm-1">
-            <button class="btn btn-success" id="create-page-template-button">Create</button>
+            <button class="btn btn-success" id="create-page-template-button">{% trans %}page-template.grid.button.create{% endtrans %}</button>
         </div>
         {% endif %}
     </div>

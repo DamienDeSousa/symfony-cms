@@ -33,6 +33,8 @@ page-template:
         id: ID
         name: Nom
         layout: Disposition
+        button:
+            create: Créer
     create:
         error: Une erreur est survenue lors de la création du patron de page.
         card-header: Créer un nouveau patron de page
@@ -41,6 +43,12 @@ page-template:
         submit: Créer
         flash-message:
             success: Patron de page créé avec succès !
+    update:
+        submit: Mettre à jour
+        card-header: Mettre à jour un patron de page
+        error: Une erreur est survenue lors de la mise à jour du patron de page.
+        flash-message:
+            success: Patron de page mis à jour avec succès !
 
 error:
     forbidden:

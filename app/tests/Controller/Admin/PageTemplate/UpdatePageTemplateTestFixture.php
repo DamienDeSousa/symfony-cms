@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File that defines the ShowPageTemplateTestFixture class.
+ * File that defines the UpdatePageTemplateTestFixture class.
  *
  * @author    Damien DE SOUSA
  * @copyright 2021
@@ -17,9 +17,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use App\Tests\Provider\Data\PageTemplateProvider;
 
 /**
- * This class is used to load fixtures for the ShowPageTemplateTest class.
+ * This class is used to load fixtures for the UpdatePageTemplateTest class.
  */
-class ShowPageTemplateTestFixture extends Fixture
+class UpdatePageTemplateTestFixture extends Fixture
 {
     use PageTemplateProvider;
 
