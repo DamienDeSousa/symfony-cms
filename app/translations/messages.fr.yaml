@@ -49,6 +49,14 @@ page-template:
         error: Une erreur est survenue lors de la mise à jour du patron de page.
         flash-message:
             success: Patron de page mis à jour avec succès !
+    delete:
+        flash-message:
+            success: Patron de page supprimé avec succès !
+        modal:
+            cancel-button: Annuler
+            delete-button: Supprimer
+            header: Suppression
+            body: Etes-vous sûr de vouloir supprimer ce patron de page ?            
 
 error:
     forbidden:

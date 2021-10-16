@@ -49,6 +49,14 @@ page-template:
         error: An error occured when trying to update the page template.
         flash-message:
             success: Page Template updated successfully !
+    delete:
+        flash-message:
+            success: Page template deleted successfully !
+        modal:
+            cancel-button: Cancel
+            delete-button: Delete
+            header: Deletion
+            body: Are you sure you want to delete this page template?
 
 error:
     Forbidden:

@@ -16,4 +16,11 @@ $(document).ready(function() {
         let routeName = $(this).data('route-name');
         window.location.replace(Routing.generate(routeName, {id: entityId}));
     });
+
+    let modalDeleteBtn = $('div.modal.fade > div > div > div.modal-footer > button.btn.btn-danger');
+    modalDeleteBtn.click(function (e) {
+        let entityId = $(this).data('entity-id');
+        let routeName = $(this).data('route-name');
+        window.location.replace(Routing.generate(routeName, {id: entityId}));
+    });
 });
