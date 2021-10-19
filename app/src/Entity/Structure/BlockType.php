@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Entity\Structure;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\Structure\BlockTypeRepository;
 
 /**
@@ -31,6 +32,18 @@ class BlockType
      */
     private $type;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Structure\PageTemplateBlockType", mappedBy="pageTemplate")
+     */
+    private $pageTemplateBlockTypes;
+
+    public function __construct()
+    {
+        $this->pageTemplateBlockTypes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +57,27 @@ class BlockType
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPageTemplateBlockTypes(): ArrayCollection
+    {
+        return $this->pageTemplateBlockTypes;
+    }
+
+    public function addPageTemplateBlockType(PageTemplateBlockType $pageTemplateBlockType): self
+    {
+        $this->pageTemplateBlockTypes->add($pageTemplateBlockType);
+
+        return $this;
+    }
+
+    public function removePageTemplateBlockType(PageTemplateBlockType $pageTemplateBlockType): self
+    {
+        if ($this->pageTemplateBlockTypes->contains($pageTemplateBlockType)) {
+            $this->pageTemplateBlockTypes->removeElement($pageTemplateBlockType);
+        }
 
         return $this;
     }

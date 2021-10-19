@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Entity\Structure;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\Structure\PageTemplateRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -24,6 +25,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class PageTemplate
 {
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -31,6 +34,8 @@ class PageTemplate
     private $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      *
      * @Assert\NotBlank
@@ -39,12 +44,26 @@ class PageTemplate
     private $name;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      *
      * @Assert\NotBlank
      * @Assert\Type("string")
      */
     private $layout;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Structure\PageTemplateBlockType", mappedBy="pageTemplate")
+     */
+    private $pageTemplateBlockTypes;
+
+    public function __construct()
+    {
+        $this->pageTemplateBlockTypes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -82,5 +101,26 @@ class PageTemplate
             'name' => $this->name,
             'layout' => $this->layout,
         ];
+    }
+
+    public function getPageTemplateBlockTypes(): ArrayCollection
+    {
+        return $this->pageTemplateBlockTypes;
+    }
+
+    public function addPageTemplateBlockType(PageTemplateBlockType $pageTemplateBlockType): self
+    {
+        $this->pageTemplateBlockTypes->add($pageTemplateBlockType);
+
+        return $this;
+    }
+
+    public function removePageTemplateBlockType(PageTemplateBlockType $pageTemplateBlockType): self
+    {
+        if ($this->pageTemplateBlockTypes->contains($pageTemplateBlockType)) {
+            $this->pageTemplateBlockTypes->removeElement($pageTemplateBlockType);
+        }
+
+        return $this;
     }
 }
