@@ -50,7 +50,10 @@ services:
                 - name: 'admin_page_template_grid'
                   section_name: 'admin.sections.page_template'
                   link_id: 'admin_page_template_grid_id'
-    
+                - name: 'admin_block_type_grid'
+                  section_name: 'admin.sections.block_type'
+                  link_id: 'link_admin_block_type_grid_id'
+
     App\Decorator\Fos\UserBundle\Command\PromoteUserCommand:
         decorates:
             'fos_user.command.promote_user'
