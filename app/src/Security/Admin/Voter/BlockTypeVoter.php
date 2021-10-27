@@ -1,9 +1,9 @@
 <?php
 
 /**
- * File that defines the PageTemplateVoter class.
+ * File that defines BlockTypeVoter class.
  *
- * @author    Damien DE SOUSA
+ * @author Damien DE SOUSA
  * @copyright 2021
  */
 
@@ -11,27 +11,27 @@ declare(strict_types=1);
 
 namespace App\Security\Admin\Voter;
 
+use App\Entity\Structure\BlockType;
 use App\Entity\User;
 use App\Security\UserRoles;
-use ClosedGeneratorException;
-use App\Entity\Structure\PageTemplate;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Security;
 
 /**
- * This class tells if a user can access CRUD template page.
+ * class used to give or not access to crud operation on block type.
  */
-class PageTemplateVoter extends Voter
+class BlockTypeVoter extends Voter
 {
-    public const PAGE_TEMPLATE_CREATE = 'page_template_create';
+    public const BLOCK_TYPE_CREATE = 'page_template_create';
 
-    public const PAGE_TEMPLATE_READ = 'page_template_read';
+    public const BLOCK_TYPE_READ = 'page_template_read';
 
-    public const PAGE_TEMPLATE_UPDATE = 'page_template_update';
+    public const BLOCK_TYPE_UPDATE = 'page_template_update';
 
-    public const PAGE_TEMPLATE_DELETE = 'page_template_delete';
+    public const BLOCK_TYPE_DELETE = 'page_template_delete';
 
+    /** @var Security */
     private $security;
 
     public function __construct(Security $security)
@@ -42,16 +42,16 @@ class PageTemplateVoter extends Voter
     protected function supports($attribute, $subject)
     {
         $pageTemplateCrud = [
-            self::PAGE_TEMPLATE_CREATE,
-            self::PAGE_TEMPLATE_READ,
-            self::PAGE_TEMPLATE_UPDATE,
-            self::PAGE_TEMPLATE_DELETE,
+            self::BLOCK_TYPE_CREATE,
+            self::BLOCK_TYPE_READ,
+            self::BLOCK_TYPE_UPDATE,
+            self::BLOCK_TYPE_DELETE,
         ];
         $isSupported = false;
 
         if (
             in_array($attribute, $pageTemplateCrud) &&
-            (($subject instanceof PageTemplate) || ($this->checkArray($subject)))
+            (($subject instanceof BlockType) || ($this->checkArray($subject)))
         ) {
             $isSupported = true;
         }
@@ -65,7 +65,7 @@ class PageTemplateVoter extends Voter
         if (is_array($subject)) {
             $isSupported = true;
             foreach ($subject as $element) {
-                if (!$element instanceof PageTemplate) {
+                if (!$element instanceof BlockType) {
                     $isSupported = false;
                     break;
                 }
@@ -84,11 +84,11 @@ class PageTemplateVoter extends Voter
         }
 
         switch ($attribute) {
-            case self::PAGE_TEMPLATE_UPDATE:
-            case self::PAGE_TEMPLATE_DELETE:
-            case self::PAGE_TEMPLATE_CREATE:
+            case self::BLOCK_TYPE_UPDATE:
+            case self::BLOCK_TYPE_DELETE:
+            case self::BLOCK_TYPE_CREATE:
                 return $this->security->isGranted(UserRoles::ROLE_SUPER_ADMIN);
-            case self::PAGE_TEMPLATE_READ:
+            case self::BLOCK_TYPE_READ:
                 return $this->security->isGranted(UserRoles::ROLE_ADMIN);
         }
 

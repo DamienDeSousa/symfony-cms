@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace App\Repository\Structure;
 
-use App\Entity\BlockType;
+use App\Entity\Structure\BlockType;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 

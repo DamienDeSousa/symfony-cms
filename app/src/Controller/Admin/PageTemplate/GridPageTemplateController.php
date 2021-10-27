@@ -66,7 +66,6 @@ class GridPageTemplateController extends AbstractController
             [
                 'page_template_header' => $pageTemplatesHeader,
                 'page_templates' => $formattedPageTemplates,
-                'page_template_meta_data' => []
             ]
         );
     }

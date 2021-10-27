@@ -1,18 +1,18 @@
 <?php
 
 /**
- * File that defines the GridPageTemplateTest class.
+ * File that defines the GridBlockTypeControllerTest class.
  *
- * @author    Damien DE SOUSA
+ * @author Damien DE SOUSA
  * @copyright 2021
  */
 
 declare(strict_types=1);
 
-namespace App\Tests\Controller\Admin\PageTemplate;
+namespace App\Tests\Controller\Admin\BlockType;
 
-use App\Entity\User;
 use App\Controller\Admin\Index;
+use App\Entity\User;
 use App\Fixture\FixtureAttachedTrait;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
@@ -20,9 +20,9 @@ use Symfony\Component\Panther\Client;
 use Symfony\Component\Panther\PantherTestCase;
 
 /**
- * This class is used to test the page template data grid.
+ * Class used to test the block type grid controller.
  */
-class GridPageTemplateTest extends PantherTestCase
+class GridBlockTypeControllerTest extends PantherTestCase
 {
     use FixtureAttachedTrait {
         setUp as setUpTrait;
@@ -46,12 +46,11 @@ class GridPageTemplateTest extends PantherTestCase
 
     public function testDataGridDisplay()
     {
-        //Navigate to create PageTemplate page.
         $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
         $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
         //wait 1 seconde to display the menu (stop being toggled)
         usleep(1000000);
-        $linkGeneralParameters = $crawler->filter('#admin_page_template_grid_id')->link();
+        $linkGeneralParameters = $crawler->filter('#link_admin_block_type_grid_id')->link();
         $crawler = $this->client->click($linkGeneralParameters);
         $numberOfLines = $crawler->filter('table > tbody')->children()->count();
 
