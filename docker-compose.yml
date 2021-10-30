@@ -39,7 +39,7 @@ services:
   
   node:
     image: node:16.3.0-buster
-    command: bash -c "ls -l && yarn install && yarn encore dev --watch"
+    command: bash -c "yarn install && yarn encore dev --watch"
     working_dir: /var/www
     ports:
       - 3000:3000

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * File that defines the DeletePageTemplateTest class.
+ * File that defines the CreateBlockTypeControllerTest class.
  *
- * @author Damien DE SOUSA
- * @copyright 2021
+ * @author    Damien DE SOUSA
+ * @copyright 2021 Damien DE SOUSA
  */
 
 declare(strict_types=1);
 
-namespace App\Tests\Controller\Admin\PageTemplate;
+namespace App\Tests\Controller\Admin\BlockType;
 
 use App\Entity\User;
 use App\Controller\Admin\Index;
@@ -20,9 +20,9 @@ use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
 
 /**
- * Class used to test the delete page template.
+ * This class is used to test the block type creation.
  */
-class DeletePageTemplateTest extends PantherTestCase
+class CreateBlockTypeControllerTest extends PantherTestCase
 {
     use FixtureAttachedTrait {
         setUp as setUpTrait;
@@ -32,8 +32,8 @@ class DeletePageTemplateTest extends PantherTestCase
 
     use AdminUriProvider;
 
-    /** @var null|Client  */
-    private $client = null;
+    /** @var Client */
+    private $client;
 
     protected function setUp(): void
     {
@@ -52,14 +52,16 @@ class DeletePageTemplateTest extends PantherTestCase
         $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
         //wait 1 seconde to display the menu (stop being toggled)
         usleep(1000000);
-        $linkGeneralParameters = $crawler->filter('#admin_page_template_grid_id')->link();
+        $linkGeneralParameters = $crawler->filter('#link_admin_block_type_grid_id')->link();
         $crawler = $this->client->click($linkGeneralParameters);
-        $this->client->executeScript("document.querySelector('.btn-outline-danger').click()");
-        $crawler = $this->client->waitFor('.modal');
-        $this->client->executeScript("document.querySelector('.btn-danger').click()");
-        $crawler = $this->client->refreshCrawler(); 
-        $nodeAlertSuccess = $crawler->filter('.alert-success');
-        $tableRows = $crawler->filter('table > tbody')->children()->count();
+        $this->client->executeScript("document.querySelector('#create-block-type-button').click()");
+        $crawler = $this->client->waitFor('.card');
+
+        $createForm = $crawler->selectButton('register_block_type')->form([
+            'create_block_type[type]' => 'Block Type Test',
+        ]);
+        $crawler = $this->client->submit($createForm);
+        $nodeAlertSuccess = $crawler->filter('.alert-success')->first();
 
         $this->assertTrue(
             is_string($nodeAlertSuccess->text()),
@@ -69,11 +71,6 @@ class DeletePageTemplateTest extends PantherTestCase
             0,
             strlen($nodeAlertSuccess->text()),
             'actual value is not greater than expected'
-        );
-        $this->assertEquals(
-            0,
-            $tableRows,
-            'Page template not deleted, expected 0 rows in table, got ' . $tableRows . ' rows'
         );
     }
 

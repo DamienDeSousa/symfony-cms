@@ -63,6 +63,15 @@ block-type:
     grid:
         id: ID
         type: Type
+        button:
+            create: Create
+    create:
+        type: Type
+        flash-message:
+            success: Block Type created successfully !
+        error: An error occured when trying to create the block type.
+        card-header: Create a new block type
+        submit: Create
 
 error:
     Forbidden:

@@ -13,6 +13,7 @@ namespace App\Entity\Structure;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\Structure\BlockTypeRepository;
 
 /**
@@ -21,6 +22,8 @@ use App\Repository\Structure\BlockTypeRepository;
 class BlockType
 {
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -28,7 +31,12 @@ class BlockType
     private $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=100)
+     *
+     * @Assert\NotBlank
+     * @Assert\Type("string")
      */
     private $type;
 
