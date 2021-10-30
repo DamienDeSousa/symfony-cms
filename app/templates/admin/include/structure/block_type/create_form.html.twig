@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+    {% if form.vars.errors.form.getErrors(true)|length %}
+        <div class="alert alert-danger">
+            <ul class="list-group">
+                {% for error in form.vars.errors.form.getErrors(true) %}
+                    <li class="d-flex justify-content-between align-items-center">{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <div class="form-group row">
+        {{ form_label(form.type, null, {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+        {{ form_widget(form.type, {'attr': {'class': 'form-control col-sm-10'}}) }}
+    </div>            
+    <input type="submit" class="btn btn-success" name="register_block_type" value="{{ submit_value|trans }}">
+{{ form_end(form) }}

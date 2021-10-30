@@ -1,4 +1,3 @@
-import '../../../css/admin/site/show_site.css'
 import $ from 'jquery';
 
 const Routing = require('../../route/routing.js');
