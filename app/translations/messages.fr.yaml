@@ -72,6 +72,12 @@ block-type:
         error: Une erreur est survenue lors de la création du type de block.
         card-header: Créer un nouveau type de block
         submit: Créer
+    update:
+        flash-message:
+            success: Type de block mis à jour avec succès !
+        error: Une erreur est survenue lors de la mise à jour du type de block.
+        card-header: Mettre à jour le type de block
+        submit: Mettre à jour
 
 error:
     forbidden:

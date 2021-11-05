@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin\BlockType;
 
-use App\Repository\Structure\BlockTypeRepository;
 use App\Security\Admin\Voter\BlockTypeVoter;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\Structure\BlockTypeRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * This class is used to render the block type grid.
@@ -53,7 +53,7 @@ class GridBlockTypeController extends AbstractController
                 'meta_data' => [
                     'id' => $blockType->getId(),
                     'route_name' => '',
-                    'route_name_update' => '',
+                    'route_name_update' => UpdateBlockTypeController::UPDATE_BLOCK_TYPE_ROUTE_NAME,
                     'route_name_delete' => '',
                 ],
             ];

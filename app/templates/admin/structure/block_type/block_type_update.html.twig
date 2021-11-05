@@ -1,0 +1,22 @@
+{% extends 'admin/admin_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card text-center mt-5">
+        <div class="card-header">
+            {% trans %}block-type.update.card-header{% endtrans %}
+        </div>
+        <div class="card-body">
+            {{ include('admin/include/structure/block_type/create_form.html.twig', {submit_value: 'block-type.update.submit'}) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

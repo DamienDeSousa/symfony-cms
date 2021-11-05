@@ -14,6 +14,7 @@ namespace App\Tests\Provider\Uri;
 
 use App\Controller\Admin\Index;
 use App\Controller\Admin\BlockType\CreateBlockTypeController;
+use App\Controller\Admin\BlockType\GridBlockTypeController;
 use App\Controller\Admin\PageTemplate\CreatePageTemplateController;
 use App\Controller\Admin\PageTemplate\GridPageTemplateController;
 use App\Controller\Admin\PageTemplate\ShowPageTemplateController;
@@ -58,8 +59,13 @@ trait AdminUriProvider
         return ShowPageTemplateController::SHOW_PAGE_TEMPLATE_ROUTE_URI;
     }
 
-    public function provideAdminPageBlockTypeCreateUri(): string
+    public function provideAdminBlockTypeCreateUri(): string
     {
         return CreateBlockTypeController::CREATE_PAGE_TEMPLATE_ROUTE_URI;
+    }
+
+    public function provideAdminGridBlockTypeGridUri(): string
+    {
+        return GridBlockTypeController::BLOCK_TYPE_ROUTE_URI;
     }
 }
