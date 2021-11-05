@@ -87,6 +87,7 @@ yarn-update: ## yarn update
 
 expose-js-routes: ## expose symfony routes to js
 	docker exec symfony-cms_php73_1 php bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json
+	docker exec -it symfony-cms_node_1 yarn encore dev
 
-install-phpunit:
-	docker-compose run composer-installer ./vendor/bin/simple-phpunit
+install-phpunit: ## install phpunit
+	docker-compose run composer-installer ./bin/phpunit

@@ -53,6 +53,7 @@ class AccessibilityAdminPageByAdminUserTest extends PantherTestCase
             [$this->provideAdminSiteShowUri()],
             [$this->provideAdminSiteUpdateUri()],
             [$this->provideAdminPageTemplateGridUri()],
+            [$this->provideAdminGridBlockTypeGridUri()],
         ];
     }
 
@@ -71,7 +72,8 @@ class AccessibilityAdminPageByAdminUserTest extends PantherTestCase
     {
         return [
             [$this->provideAdminPageTemplateCreateUri()],
-            [$this->provideAdminPageBlockTypeCreateUri()],
+            [$this->provideAdminBlockTypeCreateUri()],
+            [$this->provideAdminBlockTypeCreateUri()],
         ];
     }
 

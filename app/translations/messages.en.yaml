@@ -72,6 +72,12 @@ block-type:
         error: An error occured when trying to create the block type.
         card-header: Create a new block type
         submit: Create
+    update:
+        flash-message:
+            success: Block Type updated successfully !
+        error: An error occured when trying to update the block type.
+        card-header: Update the block type
+        submit: Update
 
 error:
     Forbidden:

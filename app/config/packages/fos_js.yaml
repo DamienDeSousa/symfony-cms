@@ -6,3 +6,4 @@ fos_js_routing:
         - admin_page_template_update
         - admin_page_template_delete
         - admin_block_type_create
+        - admin_block_type_update
