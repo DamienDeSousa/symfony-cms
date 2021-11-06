@@ -54,7 +54,7 @@ class GridBlockTypeController extends AbstractController
                     'id' => $blockType->getId(),
                     'route_name' => ShowBlockTypeController::SHOW_BLOCK_TYPE_ROUTE_NAME,
                     'route_name_update' => UpdateBlockTypeController::UPDATE_BLOCK_TYPE_ROUTE_NAME,
-                    'route_name_delete' => '',
+                    'route_name_delete' => DeleteBlockTypeController::DELETE_BLOCK_TYPE_ROUTE_NAME,
                 ],
             ];
         }
