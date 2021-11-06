@@ -78,6 +78,8 @@ block-type:
         error: Une erreur est survenue lors de la mise à jour du type de block.
         card-header: Mettre à jour le type de block
         submit: Mettre à jour
+    show:
+        card-header: Type de block
 
 error:
     forbidden:

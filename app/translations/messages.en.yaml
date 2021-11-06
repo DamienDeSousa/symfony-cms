@@ -78,6 +78,8 @@ block-type:
         error: An error occured when trying to update the block type.
         card-header: Update the block type
         submit: Update
+    show:
+        card-header: Block type
 
 error:
     Forbidden:
