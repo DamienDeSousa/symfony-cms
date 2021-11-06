@@ -43,7 +43,7 @@ class BlockType
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Structure\PageTemplateBlockType", mappedBy="pageTemplate")
+     * @ORM\OneToMany(targetEntity="App\Entity\Structure\PageTemplateBlockType", mappedBy="blockType")
      */
     private $pageTemplateBlockTypes;
 
@@ -88,5 +88,13 @@ class BlockType
         }
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'type' => $this->type,
+        ];
     }
 }

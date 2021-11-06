@@ -1,0 +1,37 @@
+{% extends 'admin/admin_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card text-center mt-5">
+        <div class="card-header">
+            {% trans %}block-type.show.card-header{% endtrans %}
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">Attribut</th>
+                    <th scope="col">Valeur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, attribute_value in page_template %}
+                    <tr>
+                        <th>{{ key|capitalize }}</th>
+                        <td>{{ attribute_value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+           </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
