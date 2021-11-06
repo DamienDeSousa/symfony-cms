@@ -8,3 +8,4 @@ fos_js_routing:
         - admin_block_type_create
         - admin_block_type_update
         - admin_block_type_show
+        - admin_block_type_delete

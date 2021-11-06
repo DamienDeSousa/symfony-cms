@@ -80,6 +80,9 @@ block-type:
         submit: Update
     show:
         card-header: Block type
+    delete:
+        flash-message:
+            success: Block type deleted successfully !
 
 error:
     Forbidden:
