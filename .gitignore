@@ -26,3 +26,7 @@ app/public/build/
 app/npm-debug.log
 app/yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> Custom <###
+app/public/uploads/
+###< Custom >###

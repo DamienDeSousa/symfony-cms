@@ -9,8 +9,8 @@
 
 namespace App\Repository\Structure;
 
-use App\Entity\PageTemplateBlockType;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Structure\PageTemplateBlockType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
