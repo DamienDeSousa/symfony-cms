@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Entity\Structure;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\Structure\PageTemplateRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -103,7 +104,7 @@ class PageTemplate
         ];
     }
 
-    public function getPageTemplateBlockTypes(): ArrayCollection
+    public function getPageTemplateBlockTypes(): Collection
     {
         return $this->pageTemplateBlockTypes;
     }

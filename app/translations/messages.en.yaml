@@ -10,6 +10,7 @@ admin:
         site: Global settings
         page_template: Page templates
         block_type: Block types
+        page_template_block_type: Page template block types
 
 cms:
     name: Symfony CMS
@@ -83,6 +84,15 @@ block-type:
     delete:
         flash-message:
             success: Block type deleted successfully !
+
+page-template-block-type:
+    grid:
+        id: ID
+        slug: Slug
+        page-template-name: Page template name
+        block-type-name: Block type name
+        button:
+            create: Créer
 
 error:
     Forbidden:

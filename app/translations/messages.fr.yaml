@@ -10,6 +10,7 @@ admin:
         site: Paramètres Généraux
         page_template: Templates de pages
         block_type: Types de blocks
+        page_template_block_type: Patron de pages type de blocks
 
 cms:
     name: Symfony CMS
@@ -83,6 +84,15 @@ block-type:
     delete:
         flash-message:
             success: Type de block supprimé avec succès !
+
+page-template-block-type:
+    grid:
+        id: ID
+        slug: Slug
+        page-template-name: Nom du patron de page
+        block-type-name: Nom du type de block
+        button:
+            create: Créer
 
 error:
     forbidden:
