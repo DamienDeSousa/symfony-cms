@@ -18,10 +18,15 @@ use App\Controller\Admin\BlockType\GridBlockTypeController;
 use App\Controller\Admin\PageTemplate\CreatePageTemplateController;
 use App\Controller\Admin\PageTemplate\GridPageTemplateController;
 use App\Controller\Admin\PageTemplate\ShowPageTemplateController;
+use App\Controller\Admin\PageTemplateBlockType\CreatePageTemplateBlockTypeController;
+use App\Controller\Admin\PageTemplateBlockType\GridPageTemplateBlockTypeController;
 use App\Controller\Admin\Security\Login;
 use App\Controller\Admin\Site\ShowSiteController;
 use App\Controller\Admin\Site\UpdateSiteController;
 
+/**
+ * Trait that provides uri for tests.
+ */
 trait AdminUriProvider
 {
     public function provideAdminLoginUri(): string
@@ -67,5 +72,15 @@ trait AdminUriProvider
     public function provideAdminGridBlockTypeGridUri(): string
     {
         return GridBlockTypeController::BLOCK_TYPE_ROUTE_URI;
+    }
+
+    public function provideAdminGridPageTemplateBlockTypeUri(): string
+    {
+        return GridPageTemplateBlockTypeController::GRID_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_URI;
+    }
+
+    public function provideAdminPageTemplateBlockTypeCreateUri(): string
+    {
+        return CreatePageTemplateBlockTypeController::CREATE_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_URI;
     }
 }

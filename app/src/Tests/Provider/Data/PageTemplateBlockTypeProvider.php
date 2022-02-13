@@ -20,6 +20,9 @@ trait PageTemplateBlockTypeProvider
 {
     public function providePageTemplateBlockType(): PageTemplateBlockType
     {
-        return new PageTemplateBlockType();
+        $pageTemplateBlockType = new PageTemplateBlockType();
+        $pageTemplateBlockType->setSlug('my_slug');
+
+        return $pageTemplateBlockType;
     }
 }

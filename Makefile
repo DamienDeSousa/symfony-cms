@@ -69,6 +69,9 @@ connection-php-container: ## connect to php container
 connection-db-container: ## connect to database
 	docker exec -it symfony-cms_mysql_1 mysql -uroot -proot symfony_cms
 
+connection-node-container: ## connect to node
+	docker exec -it symfony-cms_node_1 bash
+
 composer-install: ## composer install
 	docker-compose run composer-installer composer install
 

@@ -1,0 +1,23 @@
+site:
+    update:
+        icon:
+            error:
+                mimetypes: Veuillez sélectionner une image au format valide.
+
+page-template:
+    create:
+        error:
+            name: Le nom est déjà utilisé.
+            layout: Le layout est déjà utilisé.
+
+uniq_group_by: >-
+    {uniq_field_number, plural,
+        one {{grouped_by_field_number, plural,
+            one {La valeur du champ {uniq_fields} n'est pas unique quand elle est groupé par le champ {grouped_by_fields}.}
+            other {La valeur du champ {uniq_fields} n'est pas unique quand elle est groupé par les champs {grouped_by_fields}.}
+        }}
+        other {{grouped_by_field_number, plural,
+            one {Les valeurs des champs {uniq_fields} ne sont pas uniques quand elles sont groupées par le champ {grouped_by_fields}.}
+            other {Les valeurs des champs {uniq_fields} ne sont pas uniques quand elles sont groupées par les champs {grouped_by_fields}.}
+        }}
+    }

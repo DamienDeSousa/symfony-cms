@@ -93,6 +93,14 @@ page-template-block-type:
         block-type-name: Nom du type de block
         button:
             create: Créer
+    create:
+        card-header: Créer un nouveau patron de page type de block
+        slug: Slug
+        page-template: Patron de page
+        block-type: Type de block
+        submit: Créer
+        flash-message:
+            success: patron de page type de block créé avec succès !
 
 error:
     forbidden:

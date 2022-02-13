@@ -93,6 +93,14 @@ page-template-block-type:
         block-type-name: Block type name
         button:
             create: Créer
+    create:
+        card-header: Create a new Page template block type
+        slug: Slug
+        page-template: Page Template
+        block-type: Block type
+        submit: Create
+        flash-message:
+            success: Page template block type created successfully !
 
 error:
     Forbidden:

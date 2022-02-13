@@ -13,10 +13,17 @@ declare(strict_types=1);
 namespace App\Entity\Structure;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Validator\Classes as CmsAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\Structure\PageTemplateBlockTypeRepository;
 
 /**
  * @ORM\Entity(repositoryClass=PageTemplateBlockTypeRepository::class)
+ *
+ * @CmsAssert\UniqGroupedBy(
+ *     attributesGroupedBy={"pageTemplate", "blockType"},
+ *     uniqAttributes={"slug"}
+ * )
  */
 class PageTemplateBlockType
 {
@@ -33,6 +40,8 @@ class PageTemplateBlockType
      * @var string
      *
      * @ORM\Column(type="string", length=50)
+     *
+     * @Assert\NotBlank
      */
     private $slug;
 
@@ -41,6 +50,8 @@ class PageTemplateBlockType
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Structure\PageTemplate", inversedBy="pageTemplateBlockTypes")
      * @ORM\JoinColumn(name="page_template_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull
      */
     private $pageTemplate;
 
@@ -49,6 +60,8 @@ class PageTemplateBlockType
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Structure\BlockType", inversedBy="pageTemplateBlockTypes")
      * @ORM\JoinColumn(name="block_type_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull
      */
     private $blockType;
 
@@ -62,7 +75,7 @@ class PageTemplateBlockType
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
+    public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
 
