@@ -27,4 +27,17 @@ class BlockTypeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, BlockType::class);
     }
+
+    public function findAllBy(array $orderBy = null): array
+    {
+        $queryBuilder = $this->createQueryBuilder('bt');
+        if ($orderBy && !empty($orderBy)) {
+            foreach ($orderBy as $attribute => $order) {
+                $queryBuilder->orderBy('bt.' . $attribute, $order);
+            }
+        }
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

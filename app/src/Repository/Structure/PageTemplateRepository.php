@@ -29,4 +29,17 @@ class PageTemplateRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, PageTemplate::class);
     }
+
+    public function findAllBy(array $orderBy = null): array
+    {
+        $queryBuilder = $this->createQueryBuilder('pt');
+        if ($orderBy && !empty($orderBy)) {
+            foreach ($orderBy as $attribute => $order) {
+                $queryBuilder->orderBy('pt.' . $attribute, $order);
+            }
+        }
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

@@ -1,0 +1,23 @@
+site:
+    update:
+        icon:
+            error:
+                mimetypes: Please upload an image with a valid format.
+
+page-template:
+    create:
+        error:
+            name: Name is already taken.
+            layout: Twig layout is already used.
+
+uniq_group_by: >-
+    {uniq_field_number, plural,
+        one {{grouped_by_field_number, plural,
+            one {Value of field {uniq_fields} is not uniq grouped by {grouped_by_fields} field.}
+            other {Value of field {uniq_fields} is not uniq grouped by {grouped_by_fields} fields.}
+        }}
+        other {{grouped_by_field_number, plural,
+            one {Value of fields {uniq_fields} are not uniq grouped by {grouped_by_fields} field.}
+            other {Value of fields {uniq_fields} are not uniq grouped by {grouped_by_fields} fields.}
+        }}
+    }

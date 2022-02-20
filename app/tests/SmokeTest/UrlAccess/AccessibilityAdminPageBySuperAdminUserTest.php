@@ -51,6 +51,8 @@ class AccessibilityAdminPageBySuperAdminUserTest extends PantherTestCase
         return [
             [$this->provideAdminPageTemplateCreateUri()],
             [$this->provideAdminBlockTypeCreateUri()],
+            [$this->provideAdminPageTemplateBlockTypeCreateUri()],
+            [$this->provideAdminPageTemplateBlockTypeCreateUri()],
         ];
     }
 

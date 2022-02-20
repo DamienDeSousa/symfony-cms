@@ -12,7 +12,7 @@
                 {{ include('admin/include/flash_messages.html.twig') }}
             </div>
             <div class="col-sm-1">
-                <button class="btn btn-success" id="create-page-template-button">{% trans %}page-template-block-type.grid.button.create{% endtrans %}</button>
+                <button class="btn btn-success" id="create-page-template-block-type-button">{% trans %}page-template-block-type.grid.button.create{% endtrans %}</button>
             </div>
         </div>
         <div class="row mt-5">
@@ -26,4 +26,6 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {{ encore_entry_script_tags('admin_page_template_block_type_grid_page_template_block_type') }}
+    {{ encore_entry_script_tags('admin_include_data_grid') }}
 {% endblock %}

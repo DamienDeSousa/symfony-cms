@@ -52,7 +52,6 @@ class GridPageTemplateBlockTypeTest extends PantherTestCase
         usleep(1000000);
         $linkGeneralParameters = $crawler->filter('#link_admin_page_template_block_type_grid_id')->link();
         $crawler = $this->client->click($linkGeneralParameters);
-        $this->client->takeScreenshot('screen.png');
         $numberOfLines = $crawler->filter('table > tbody')->children()->count();
 
         $this->assertEquals(2, $numberOfLines, 'Expected 2 lines in the grid, got ' . $numberOfLines . '.');

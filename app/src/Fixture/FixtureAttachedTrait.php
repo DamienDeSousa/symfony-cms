@@ -23,13 +23,19 @@ trait FixtureAttachedTrait
     public function setUp(): void
     {
         if (!$this instanceof KernelTestCase) {
-            throw new LogicException('The "FixtureAttachedTrait" should only be used on objects extending the symfony/framework-bundle KernelTestCase.');
+            throw new LogicException(
+                'The "FixtureAttachedTrait" should only be used on objects extending the '
+                . 'symfony/framework-bundle KernelTestCase.'
+            );
         }
 
         self::bootKernel();
 
         if (!self::$container->has(ManagerRegistry::class)) {
-            throw new LogicException('No Doctrine ManagerRegistry service has been found in the service container. Please provide an implementation.');
+            throw new LogicException(
+                'No Doctrine ManagerRegistry service has been found in the service container. Please provide'
+                . 'an implementation.'
+            );
         }
 
         /** @var ManagerRegistry $registry */

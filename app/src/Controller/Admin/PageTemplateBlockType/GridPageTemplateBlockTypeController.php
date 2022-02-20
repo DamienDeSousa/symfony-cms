@@ -23,8 +23,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  *
  * @Route("/admin/page-template-block-type", name="admin_page_template_block_type_grid")
  */
-class GridPageTemplateBlockType extends AbstractController
+class GridPageTemplateBlockTypeController extends AbstractController
 {
+    public const GRID_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_URI = '/admin/page-template-block-type';
+
+    public const GRID_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_NAME = 'admin_page_template_block_type_grid';
+
     /** @var PageTemplateBlockTypeRepository */
     private $pageTemplateBlockTypeRepository;
 
