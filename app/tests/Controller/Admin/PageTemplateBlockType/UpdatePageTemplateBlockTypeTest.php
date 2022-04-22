@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File that defines the CreatePageTemplateBlockTypeTest test class.
+ * File that defines the UpdatePageTemplateBlockTypeTest test class.
  *
  * @author Damien DE SOUSA
  * @copyright 2022
@@ -22,12 +22,12 @@ use App\Tests\Provider\Uri\AdminUriProvider;
 use App\Tests\Provider\Url\AdminUrlProvider;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Entity\Structure\PageTemplateBlockType;
-use App\Controller\Admin\PageTemplateBlockType\CreatePageTemplateBlockTypeController;
+use App\Controller\Admin\PageTemplateBlockType\UpdatePageTemplateBlockTypeController;
 
 /**
- * Test the right behaviour of page template block type creation.
+ * Tests the right behaviour of page template block type updating.
  */
-class CreatePageTemplateBlockTypeTest extends PantherTestCase
+class UpdatePageTemplateBlockTypeTest extends PantherTestCase
 {
     use FixtureAttachedTrait {
         setUp as setUpTrait;
@@ -51,25 +51,24 @@ class CreatePageTemplateBlockTypeTest extends PantherTestCase
         $this->login($user, $this->provideAdminLoginUri(), $this->client);
     }
 
-    public function testCreatePageTemplateBlockTypeSuccessfully()
+    public function testUpdatePageTemplateBlockTypeSuccessfully()
     {
-        /** @var PageTemplate $pageTemplate */
-        $pageTemplate = $this->fixtureRepository->getReference('page_template');
-        /** @var BlockType $blockType */
-        $blockType = $this->fixtureRepository->getReference('block_type');
+        $newPageTemplate = $this->fixtureRepository->getReference('new_page_template');
+        $newBlockType = $this->fixtureRepository->getReference('new_block_type');
+
         $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
         $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
         //wait 1 seconde to display the menu (stop being toggled)
         usleep(1000000);
         $linkGeneralParameters = $crawler->filter('#link_admin_page_template_block_type_grid_id')->link();
         $crawler = $this->client->click($linkGeneralParameters);
-        $this->client->executeScript("document.querySelector('#create-page-template-block-type-button').click()");
+        $this->client->executeScript("document.querySelector('.btn-outline-warning').click()");
         $crawler = $this->client->waitFor('.card');
 
         $updateForm = $crawler->selectButton('register_page_template_block_type')->form([
             'create_page_template_block_type[slug]' => 'my_little_slug',
-            'create_page_template_block_type[pageTemplate]' => $pageTemplate->getId(),
-            'create_page_template_block_type[blockType]' => $blockType->getId(),
+            'create_page_template_block_type[pageTemplate]' => $newPageTemplate->getId(),
+            'create_page_template_block_type[blockType]' => $newBlockType->getId(),
         ]);
         $crawler = $this->client->submit($updateForm);
         $nodeAlertSuccess = $crawler->filter('.alert-success')->first();
@@ -91,13 +90,16 @@ class CreatePageTemplateBlockTypeTest extends PantherTestCase
         $pageTemplate = $this->fixtureRepository->getReference('page_template');
         /** @var BlockType $blockType */
         $blockType = $this->fixtureRepository->getReference('block_type');
+        /** @var PageTemplateBlockType $pageTemplateBlockType */
+        $pageTemplateBlockType = $this->fixtureRepository->getReference('page_template_block_type');
+
         $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
         $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
         //wait 1 seconde to display the menu (stop being toggled)
         usleep(1000000);
         $linkGeneralParameters = $crawler->filter('#link_admin_page_template_block_type_grid_id')->link();
         $crawler = $this->client->click($linkGeneralParameters);
-        $this->client->executeScript("document.querySelector('#create-page-template-block-type-button').click()");
+        $this->client->executeScript("document.querySelector('.btn-outline-warning').click()");
         $crawler = $this->client->waitFor('.card');
 
         $updateForm = $crawler->selectButton('register_page_template_block_type')->form([
@@ -106,8 +108,10 @@ class CreatePageTemplateBlockTypeTest extends PantherTestCase
             'create_page_template_block_type[blockType]' => $blockType->getId(),
         ]);
         $crawler = $this->client->submit($updateForm);
+
         $expectedUrl = $this->provideAdminBaseUrl()
-            . CreatePageTemplateBlockTypeController::CREATE_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_URI;
+            . UpdatePageTemplateBlockTypeController::UPDATE_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_URI
+            . $pageTemplateBlockType->getId();
 
         $this->assertEquals(
             $expectedUrl,
@@ -119,27 +123,29 @@ class CreatePageTemplateBlockTypeTest extends PantherTestCase
 
     public function testCreatePageTemplateBlockTypeWithAlreadyExistingSlugForPageTemplateAndBlockType()
     {
-        /** @var PageTemplate $pageTemplate */
-        $pageTemplate = $this->fixtureRepository->getReference('page_template');
+        /** @var PageTemplate $newPageTemplate */
+        $newPageTemplate = $this->fixtureRepository->getReference('new_page_template');
         /** @var BlockType $blockType */
         $blockType = $this->fixtureRepository->getReference('block_type');
         /** @var PageTemplateBlockType $pageTemplateBlockType */
         $pageTemplateBlockType = $this->fixtureRepository->getReference('page_template_block_type');
+
         $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
         $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
         //wait 1 seconde to display the menu (stop being toggled)
         usleep(1000000);
         $linkGeneralParameters = $crawler->filter('#link_admin_page_template_block_type_grid_id')->link();
         $crawler = $this->client->click($linkGeneralParameters);
-        $this->client->executeScript("document.querySelector('#create-page-template-block-type-button').click()");
+        $this->client->executeScript("document.querySelector('.btn-outline-warning').click()");
         $crawler = $this->client->waitFor('.card');
 
         $updateForm = $crawler->selectButton('register_page_template_block_type')->form([
             'create_page_template_block_type[slug]' => $pageTemplateBlockType->getSlug(),
-            'create_page_template_block_type[pageTemplate]' => $pageTemplate->getId(),
+            'create_page_template_block_type[pageTemplate]' => $newPageTemplate->getId(),
             'create_page_template_block_type[blockType]' => $blockType->getId(),
         ]);
         $crawler = $this->client->submit($updateForm);
+
         $alertDangerNode = $crawler->filter('.alert-danger')->first();
 
         $this->assertTrue(
