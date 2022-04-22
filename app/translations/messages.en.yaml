@@ -101,6 +101,13 @@ page-template-block-type:
         submit: Create
         flash-message:
             success: Page template block type created successfully !
+        error: An error occured when trying to create the page template block type.
+    update:
+        card-header: Update the Page template block type
+        submit: Update
+        flash-message:
+            success: Page template block type updated successfully !
+        error: An error occured when trying to update the page template block type.
 
 error:
     Forbidden:

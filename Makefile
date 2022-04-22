@@ -95,3 +95,6 @@ expose-js-routes: ## expose symfony routes to js
 
 install-phpunit: ## install phpunit
 	docker-compose run composer-installer ./bin/phpunit
+
+ps: ## ps docker-compose services
+	docker-compose ps
