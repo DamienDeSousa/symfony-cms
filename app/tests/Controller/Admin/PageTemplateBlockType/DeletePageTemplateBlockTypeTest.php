@@ -1,15 +1,15 @@
 <?php
 
 /**
- * File that defines the DeletePageTemplateTest class.
+ * File that defines the DeletePageTemplateBlockTypeTest test class.
  *
  * @author Damien DE SOUSA
- * @copyright 2021
+ * @copyright 2022
  */
 
 declare(strict_types=1);
 
-namespace App\Tests\Controller\Admin\PageTemplate;
+namespace App\Tests\Controller\Admin\PageTemplateBlockType;
 
 use App\Entity\User;
 use App\Controller\Admin\Index;
@@ -17,12 +17,13 @@ use App\Fixture\FixtureAttachedTrait;
 use Symfony\Component\Panther\Client;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
+use App\Tests\Provider\Url\AdminUrlProvider;
 use Symfony\Component\Panther\PantherTestCase;
 
 /**
- * Class used to test the delete page template.
+ * Test the right behaviour of page template block type deletion.
  */
-class DeletePageTemplateTest extends PantherTestCase
+class DeletePageTemplateBlockTypeTest extends PantherTestCase
 {
     use FixtureAttachedTrait {
         setUp as setUpTrait;
@@ -32,8 +33,10 @@ class DeletePageTemplateTest extends PantherTestCase
 
     use AdminUriProvider;
 
-    /** @var null|Client  */
-    private $client = null;
+    use AdminUrlProvider;
+
+    /** @var Client */
+    private $client;
 
     protected function setUp(): void
     {
@@ -44,15 +47,13 @@ class DeletePageTemplateTest extends PantherTestCase
         $this->login($user, $this->provideAdminLoginUri(), $this->client);
     }
 
-
-    public function testDeletePageTemplate()
+    public function testDeletePageTemplateBlockTypeSuccessfully()
     {
-        //Navigate to create PageTemplate page.
         $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
         $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
         //wait 1 seconde to display the menu (stop being toggled)
         usleep(1000000);
-        $linkGeneralParameters = $crawler->filter('#admin_page_template_grid_id')->link();
+        $linkGeneralParameters = $crawler->filter('#link_admin_page_template_block_type_grid_id')->link();
         $crawler = $this->client->click($linkGeneralParameters);
         $this->client->executeScript("document.querySelector('.btn-outline-danger').click()");
         $crawler = $this->client->waitFor('.modal');
@@ -73,7 +74,7 @@ class DeletePageTemplateTest extends PantherTestCase
         $this->assertEquals(
             0,
             $tableRows,
-            'Page template not deleted, expected 0 rows in table, got ' . $tableRows . ' rows'
+            'Page template block type not deleted, expected 0 rows in table, got ' . $tableRows . ' rows'
         );
     }
 

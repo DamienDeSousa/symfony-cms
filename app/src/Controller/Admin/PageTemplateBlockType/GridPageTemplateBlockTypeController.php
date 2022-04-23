@@ -63,7 +63,8 @@ class GridPageTemplateBlockTypeController extends AbstractController
                     'route_name' => '',
                     'route_name_update' =>
                         UpdatePageTemplateBlockTypeController::UPDATE_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_NAME,
-                    'route_name_delete' => '',
+                    'route_name_delete' =>
+                        DeletePageTemplateBlockTypeController::DELETE_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_NAME,
                 ],
             ];
         }

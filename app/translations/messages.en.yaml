@@ -108,6 +108,9 @@ page-template-block-type:
         flash-message:
             success: Page template block type updated successfully !
         error: An error occured when trying to update the page template block type.
+    delete:
+        flash-message:
+            success: Page template block type deleted successfully !
 
 error:
     Forbidden:
