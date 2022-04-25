@@ -105,4 +105,14 @@ class PageTemplateBlockType
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'pageTemplate' => $this->pageTemplate->getName(),
+            'blockType' => $this->blockType->getType(),
+        ];
+    }
 }

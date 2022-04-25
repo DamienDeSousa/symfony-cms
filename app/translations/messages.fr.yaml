@@ -51,6 +51,8 @@ page-template:
         error: Une erreur est survenue lors de la mise à jour du patron de page.
         flash-message:
             success: Patron de page mis à jour avec succès !
+    show:
+        card-header: Patron de page
     delete:
         flash-message:
             success: Patron de page supprimé avec succès !
@@ -108,6 +110,8 @@ page-template-block-type:
         flash-message:
             success: Patron de page type de block mis à jour avec succès !
         error: Une erreur est survenue lors de la mise à jour du patron de page type de block.
+    show:
+        card-header: Patron de page type de block
     delete:
         flash-message:
             success: Patron de page type de block supprimé avec succès !

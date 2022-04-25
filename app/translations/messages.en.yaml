@@ -51,6 +51,8 @@ page-template:
         error: An error occured when trying to update the page template.
         flash-message:
             success: Page Template updated successfully !
+    show:
+        card-header: Page template
     delete:
         flash-message:
             success: Page template deleted successfully !
@@ -108,6 +110,8 @@ page-template-block-type:
         flash-message:
             success: Page template block type updated successfully !
         error: An error occured when trying to update the page template block type.
+    show:
+        card-header: Page template block type
     delete:
         flash-message:
             success: Page template block type deleted successfully !

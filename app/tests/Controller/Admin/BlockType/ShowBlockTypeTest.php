@@ -45,7 +45,7 @@ class ShowBlockTypeTest extends PantherTestCase
         $this->login($user, $this->provideAdminLoginUri(), $this->client);
     }
 
-    public function testDataGridDisplay()
+    public function testShowBlockTypePage()
     {
         //Navigate to create PageTemplate page.
         $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
