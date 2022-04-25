@@ -60,7 +60,7 @@ class GridPageTemplateBlockTypeController extends AbstractController
                 'page-template-block-type.grid.block-type-name' => $pageTemplateBlockType->getBlockType()->getType(),
                 'meta_data' => [
                     'id' => $pageTemplateBlockType->getId(),
-                    'route_name' => '',
+                    'route_name' => ShowPageTemplateBlockTypeController::SHOW_PAGE_TEMPLATE_ROUTE_NAME,
                     'route_name_update' =>
                         UpdatePageTemplateBlockTypeController::UPDATE_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_NAME,
                     'route_name_delete' =>
