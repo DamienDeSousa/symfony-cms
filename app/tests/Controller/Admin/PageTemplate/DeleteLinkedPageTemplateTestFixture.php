@@ -21,7 +21,7 @@ use App\Tests\Provider\Data\PageTemplateBlockTypeProvider;
 /**
  * This class is used to load fixtures for the UpdatePageTemplateTest class.
  */
-class DeleteLinkedPageTemplateTest extends Fixture
+class DeleteLinkedPageTemplateTestFixture extends Fixture
 {
     use PageTemplateProvider;
 
