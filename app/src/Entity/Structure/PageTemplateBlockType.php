@@ -49,7 +49,7 @@ class PageTemplateBlockType
      * @var PageTemplate
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Structure\PageTemplate", inversedBy="pageTemplateBlockTypes")
-     * @ORM\JoinColumn(name="page_template_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="page_template_id", referencedColumnName="id", onDelete="CASCADE")
      *
      * @Assert\NotNull
      */

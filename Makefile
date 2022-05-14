@@ -98,3 +98,6 @@ install-phpunit: ## install phpunit
 
 ps: ## ps docker-compose services
 	docker-compose ps
+
+migration-diff: ## generate a migration by comparing your current database to your mapping information
+	docker-compose exec php73 php bin/console doctrine:migrations:diff

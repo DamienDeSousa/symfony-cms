@@ -57,7 +57,11 @@ class PageTemplate
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Structure\PageTemplateBlockType", mappedBy="pageTemplate")
+     * @ORM\OneToMany(
+     *  targetEntity="App\Entity\Structure\PageTemplateBlockType",
+     *  mappedBy="pageTemplate",
+     *  cascade={"remove"}
+     * )
      */
     private $pageTemplateBlockTypes;
 
