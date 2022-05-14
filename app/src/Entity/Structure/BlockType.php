@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\Structure\BlockTypeRepository;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=BlockTypeRepository::class)
@@ -69,7 +70,7 @@ class BlockType
         return $this;
     }
 
-    public function getPageTemplateBlockTypes(): ArrayCollection
+    public function getPageTemplateBlockTypes(): Collection
     {
         return $this->pageTemplateBlockTypes;
     }

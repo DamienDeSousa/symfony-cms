@@ -86,6 +86,8 @@ block-type:
     delete:
         flash-message:
             success: Block type deleted successfully !
+        exception:
+            linked-page-template: Block type "{blockTypeType}" cannot be deleted because it is linked to others page template.
 
 page-template-block-type:
     grid:

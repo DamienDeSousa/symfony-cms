@@ -86,6 +86,8 @@ block-type:
     delete:
         flash-message:
             success: Type de block supprimé avec succès !
+        exception:
+            linked-page-template: Impossible de supprimer le type de block "{blockTypeType}" car il est lié à d'autres patrons de pages.
 
 page-template-block-type:
     grid:

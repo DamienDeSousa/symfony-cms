@@ -11,11 +11,14 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin\BlockType;
 
+use Psr\Log\LoggerInterface;
 use App\Entity\Structure\BlockType;
 use App\Security\Admin\Voter\BlockTypeVoter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Exception\Entity\DeleteEntityException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Service\Structure\BlockType\BlockTypeDeleterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,16 +36,39 @@ class DeleteBlockTypeController extends AbstractController
     /** @var BlockTypeDeleterService */
     private $blockTypeDeleterService;
 
-    public function __construct(BlockTypeDeleterService $blockTypeDeleterService)
-    {
+    /** @var TranslatorInterface */
+    private $translator;
+
+    /** @var LoggerInterface */
+    private $logger;
+
+    public function __construct(
+        BlockTypeDeleterService $blockTypeDeleterService,
+        TranslatorInterface $translator,
+        LoggerInterface $logger
+    ) {
         $this->blockTypeDeleterService = $blockTypeDeleterService;
+        $this->translator = $translator;
+        $this->logger = $logger;
     }
 
     public function __invoke(Request $request, BlockType $blockType): Response
     {
         $this->denyAccessUnlessGranted(BlockTypeVoter::BLOCK_TYPE_DELETE, $blockType);
-        $this->blockTypeDeleterService->delete($blockType);
-        $this->addFlash('success', 'block-type.delete.flash-message.success');
+        $flashMessageType = 'success';
+        $flashMessage = 'block-type.delete.flash-message.success';
+        try {
+            $this->blockTypeDeleterService->delete($blockType);
+        } catch (DeleteEntityException $exception) {
+            $flashMessageType = 'danger';
+            $flashMessage = $exception->getTransMessage();
+            $flashMessage = $this->translator->trans(
+                $exception->getTransMessage(),
+                $exception->getTransMessageParams()
+            );
+            $this->logger->error($exception->getMessage());
+        }
+        $this->addFlash($flashMessageType, $flashMessage);
 
         return $this->redirectToRoute(GridBlockTypeController::BLOCK_TYPE_ROUTE_NAME);
     }

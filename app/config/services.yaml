@@ -38,6 +38,7 @@ services:
         arguments:
             $roles: '%security.role_hierarchy.roles%'
 
+    # Twig extensions
     App\Twig\Admin\SidebarSection:
         arguments:
             $routes:
@@ -57,6 +58,7 @@ services:
                   section_name: 'admin.sections.page_template_block_type'
                   link_id: 'link_admin_page_template_block_type_grid_id'
 
+    # Decorators
     App\Decorator\Fos\UserBundle\Command\PromoteUserCommand:
         decorates:
             'fos_user.command.promote_user'
@@ -75,6 +77,12 @@ services:
         arguments:
             $botDetectCaptcha: '@captcha'
 
+    # Controllers
     App\Controller\Admin\Security\Login:
         arguments:
             $botDetectCaptcha: '@captcha'
+
+    # Listeners
+    App\EventListener\BlockType\PreRemoveBlockTypeListener:
+        tags:
+            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', entity: 'App\Entity\Structure\BlockType' }
