@@ -14,9 +14,9 @@ namespace App\Tests\SmokeTest\UrlAccess;
 
 use App\Tests\Provider\Uri\AdminUriProvider;
 use App\Tests\Provider\Url\AdminUrlProvider;
-use Symfony\Component\Panther\PantherTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UnaccessAdminPageTest extends PantherTestCase
+class UnaccessAdminPageTest extends WebTestCase
 {
     use AdminUriProvider;
 
@@ -25,9 +25,13 @@ class UnaccessAdminPageTest extends PantherTestCase
     public function provideUrls()
     {
         return [
-            [$this->provideAdminLoginUri()],
             [$this->provideAdminHomePageUri()],
             [$this->provideAdminSiteShowUri()],
+            [$this->provideAdminPageTemplateGridUri()],
+            [$this->provideAdminBlockTypeCreateUri()],
+            [$this->provideAdminGridBlockTypeGridUri()],
+            [$this->provideAdminGridPageTemplateBlockTypeUri()],
+            [$this->provideAdminPageTemplateBlockTypeCreateUri()],
         ];
     }
 
@@ -36,9 +40,9 @@ class UnaccessAdminPageTest extends PantherTestCase
      */
     public function testPageIsUnaccessible($url)
     {
-        $client = static::createPantherClient();
+        $client = static::createClient();
         $crawler = $client->request('GET', $url);
 
-        $this->assertEquals($this->provideAdminBaseUrl() . $this->provideAdminLoginUri(), $client->getCurrentURL());
+        $this->assertResponseStatusCodeSame(404);
     }
 }

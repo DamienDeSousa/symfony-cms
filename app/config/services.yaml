@@ -76,6 +76,12 @@ services:
             'App\Security\Admin\LoginFormAuthenticator'
         arguments:
             $botDetectCaptcha: '@captcha'
+    
+    # the suffix 'admin' refers to the admin section in security.yaml
+    # for each new firewall on login page, there will be a new service named
+    # security.authentication.form_entry_point.<the name of your firewall>
+    App\Decorator\Security\EntryPoint\FormAuthenticationEntryPoint404:
+        decorates: 'security.authentication.form_entry_point.admin'
 
     # Controllers
     App\Controller\Admin\Security\Login:
