@@ -1,5 +1,9 @@
 # Documentation technique d'un Site
 
+Un Site est la représentation d'un site. Il contient des méta-données comme le titre ou l'icône du site.
+
+Certaines actions nécessitent des droits pour pouvoir être réalisées. Ces droits sont définis et gérés dans la classe [App\Security\Admin\Voter\SiteVoter](../../../app/src/Security/Admin/Voter/SiteVoter.php).
+
 ## Création
 
 Un Site peut être créé via la commande symfony `php bin/console cms:site:create <nom site>`. La classe [App\Command\Site\CreateSiteCommand](../../../app/src/Command/Site/CreateSiteCommand.php) est responsable de cette commande.
@@ -19,9 +23,13 @@ Le service [App\Service\Site\SiteReaderService](../../../app/src/Service/Site/Si
 
 ## Mise à jour
 
-Le controller [App\Controller\Admin\Site\UpdateSiteController](../../../app/src/Controller/Admin/Site/UpdateSiteController.php) est en charge de l'affichage et de la soumission du formulaire de mise à jour.  
+Le controller [App\Controller\Admin\Site\UpdateSiteController](../../../app/src/Controller/Admin/Site/UpdateSiteController.php) est en charge de l'affichage et de la soumission du formulaire de mise à jour.
+
 Le service [App\Service\Site\SiteUpdaterService](../../../app/src/Service/Site/SiteUpdaterService.php) met à jour un Site en base de données.  
-L'icône du Site correspond à la petite image présente dans l'onglet du navigateur. Celle-ci est facultative.  
+Il utilise le service [App\Service\File\FileUploaderService](../../../app/src/Service/File/FileUploaderService.php) pour uploader l'icône.
+
+L'icône du Site correspond à la petite image présente dans l'onglet du navigateur. Celle-ci est facultative.
+
 La classe [App\Form\Type\Admin\Site\UpdateSiteType](../../../app/src/Form/Type/Admin/Site/UpdateSiteType.php) est la représentation du formulaire. A noter qu'il y a une contrainte sur le type de fichier et sur la taille de l'icône. **jpeg, png ou x-icon pour le type de fichier**, et **1024ko maximum pour la taille**.
 
 ## Suppression

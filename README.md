@@ -9,6 +9,13 @@ Mettre en place les vérifications / logs
 Mettre en place un systeme de log via le logger  
 Rédiger de la doc !  
 
+## Evolutions
+
+passer sur php7.4  
+utiliser EasyAdminBundle pour créer le BO.  
+extraire le code dans un dossier à part (en faire un bundle à terme).  
+passer sur symfony 5.4  
+
 ## Installation
 
 Il faut dans un premier temps posséder une première version stable.
@@ -23,6 +30,11 @@ php bin/console fos:user:create
 
 Vous trouverez le lien vers la documentation développeur du site [ici](documentation/site/developer/README.md).  
 Vous trouverez le lien vers la documentation fonctionelle du site [ici](documentation/site/functional/README.md).
+
+### Page Template
+
+Vous trouverez le lien vers la documentation développeur du page template [ici](documentation/page_template/developer/README.md).  
+
 
 ## Notes techniques
 CMS
