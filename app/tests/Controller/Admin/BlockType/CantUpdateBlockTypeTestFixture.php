@@ -1,10 +1,9 @@
 <?php
 
 /**
- * File that defines the GridBlockTypeControllerTestFixture class.
+ * Defines the CantUpdateBlockTypeTestFixture class.
  *
  * @author Damien DE SOUSA
- * @copyright 2021
  */
 
 declare(strict_types=1);
@@ -17,9 +16,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use App\Tests\Provider\Data\BlockTypeProvider;
 
 /**
- * Class used to provide fixtures for GridBlockTypeControllerTest class.
+ * Provide data for CantUpdateBlockTypeTest tests.
  */
-class GridBlockTypeControllerTestFixture extends Fixture
+class CantUpdateBlockTypeTestFixture extends Fixture
 {
     use BlockTypeProvider;
 
@@ -36,9 +35,9 @@ class GridBlockTypeControllerTestFixture extends Fixture
             $this->referenceRepository->addReference('block_type_' . $i, $blockType);
         }
 
-        $user = $this->provideSuperAdminUser();
-        $manager->persist($user);
+        $superAdmin = $this->provideSuperAdminUser();
+        $manager->persist($superAdmin);
         $manager->flush();
-        $this->referenceRepository->addReference('user', $user);
+        $this->referenceRepository->addReference('user', $superAdmin);
     }
 }

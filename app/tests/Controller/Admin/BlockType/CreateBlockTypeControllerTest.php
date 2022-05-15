@@ -59,6 +59,7 @@ class CreateBlockTypeControllerTest extends PantherTestCase
 
         $createForm = $crawler->selectButton('register_block_type')->form([
             'create_block_type[type]' => 'Block Type Test',
+            'create_block_type[layout]' => 'path/to/layout.html.twig',
         ]);
         $crawler = $this->client->submit($createForm);
         $nodeAlertSuccess = $crawler->filter('.alert-success')->first();

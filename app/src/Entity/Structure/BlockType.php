@@ -16,9 +16,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\Structure\BlockTypeRepository;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=BlockTypeRepository::class)
+ *
+ * @UniqueEntity(fields="type", message="block-type.create.error.type")
+ * @UniqueEntity(fields="layout", message="block-type.create.error.layout")
  */
 class BlockType
 {
@@ -34,12 +38,22 @@ class BlockType
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true)
      *
      * @Assert\NotBlank
      * @Assert\Type("string")
      */
     private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, unique=true)
+     *
+     * @Assert\NotBlank
+     * @Assert\Type("string")
+     */
+    private $layout;
 
     /**
      * @var ArrayCollection
@@ -91,11 +105,24 @@ class BlockType
         return $this;
     }
 
+    public function getLayout(): ?string
+    {
+        return $this->layout;
+    }
+
+    public function setLayout(?string $layout): self
+    {
+        $this->layout = $layout;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         return [
             'id' => $this->id,
             'type' => $this->type,
+            'layout' => $this->layout,
         ];
     }
 }

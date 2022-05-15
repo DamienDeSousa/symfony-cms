@@ -39,6 +39,8 @@ class GridPageTemplateBlockTypeTestFixture extends Fixture
             $pageTemplate->setLayout($pageTemplate->getLayout() . '_' . $i);
 
             $blockType = $this->provideBlockType();
+            $blockType->setType($blockType->getType() . '_' . $i);
+            $blockType->setLayout($blockType->getLayout() . '_' . $i);
 
             $pageTemplateBlockType = $this->providePageTemplateBlockType();
             $pageTemplateBlockType->setBlockType($blockType);

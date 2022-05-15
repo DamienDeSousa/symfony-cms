@@ -66,6 +66,7 @@ block-type:
     grid:
         id: ID
         type: Type
+        layout: Disposition
         button:
             create: Créer
     create:
@@ -75,6 +76,7 @@ block-type:
         error: Une erreur est survenue lors de la création du type de block.
         card-header: Créer un nouveau type de block
         submit: Créer
+        layout: Disposition
     update:
         flash-message:
             success: Type de block mis à jour avec succès !

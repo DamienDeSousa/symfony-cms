@@ -33,6 +33,14 @@ class CreateBlockTypeType extends AbstractType
                     'label' => 'block-type.create.type',
                     'error_bubbling' => true
                 ]
+            )->add(
+                'layout',
+                TextType::class,
+                [
+                    'translation_domain' => 'messages',
+                    'label' => 'block-type.create.layout',
+                    'error_bubbling' => true
+                ]
             );
     }
 
