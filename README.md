@@ -6,10 +6,7 @@ Appliquer les PSR
 Documenter les manip à faire  
 
 Mettre en place les vérifications / logs  
-Mettre en place un systeme de log via le logger   
-S'assurer de la présence de la barre horizontale et latéral sur les pages admins  
-Cache HTTP  
-Cache applicatif  
+Mettre en place un systeme de log via le logger  
 Rédiger de la doc !  
 
 ## Installation
@@ -20,9 +17,12 @@ make install
 make connection-php-container  
 php bin/console fos:user:create  
 
-## Configuration
-
 ## Utilisation
+
+### Site
+
+Vous trouverez le lien vers la documentation développeur du site [ici](documentation/site/developer/README.md).  
+Vous trouverez le lien vers la documentation fonctionelle du site [ici](documentation/site/functional/README.md).
 
 ## Notes techniques
 CMS
