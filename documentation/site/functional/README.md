@@ -1,6 +1,6 @@
 # Documentation fonctionnelle d'un Site
 
-Pour toutes les parties listées ci-dessous, voue devez être connecté au Back office (BO).
+Pour toutes les parties listées ci-dessous, vous devez être connecté au Back office (BO).
 
 ## Création
 
@@ -13,7 +13,7 @@ L'affichage du Site se fait en ouvrant le menu de gauche puis cliquez sur Param�
 
 ## Mise à jour
 
-La modification d'un Site s'effectue en accédant à la page d'affichage d'un suite pui en cliquant sur la card (voir l'[affichage d'un site](#display)).
+La modification d'un Site s'effectue en accédant à la page d'affichage d'un Site puis en cliquant sur la card (voir l'[affichage d'un site](#display)).
 
 ![update Site](update_site.png)
 
