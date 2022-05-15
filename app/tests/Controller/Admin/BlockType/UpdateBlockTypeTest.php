@@ -59,6 +59,7 @@ class UpdateBlockTypeTest extends PantherTestCase
 
         $updateForm = $crawler->selectButton('register_block_type')->form([
             'create_block_type[type]' => 'body',
+            'create_block_type[layout]' => 'path/to/body/template.html.twig',
         ]);
         $crawler = $this->client->submit($updateForm);
         $nodeAlertSuccess = $crawler->filter('.alert-success')->first();

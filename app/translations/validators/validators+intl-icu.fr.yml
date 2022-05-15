@@ -21,3 +21,9 @@ uniq_group_by: >-
             other {Les valeurs des champs {uniq_fields} ne sont pas uniques quand elles sont groupées par les champs {grouped_by_fields}.}
         }}
     }
+
+block-type:
+    create:
+        error:
+            type: Le type est déjà utilisé.
+            layout: Le layout est déjà utilisé.

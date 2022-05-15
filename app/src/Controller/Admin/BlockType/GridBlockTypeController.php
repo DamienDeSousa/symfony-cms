@@ -44,12 +44,14 @@ class GridBlockTypeController extends AbstractController
         $blockTypeHeader = [
             'block-type.grid.id',
             'block-type.grid.type',
+            'block-type.grid.layout',
         ];
         $formattedBlockTypes = [];
         foreach ($blockTypes as $blockType) {
             $formattedBlockTypes[] = [
                 'block-type.grid.id' => $blockType->getId(),
                 'block-type.grid.type' => $blockType->getType(),
+                'block-type.grid.layout' => $blockType->getLayout(),
                 'meta_data' => [
                     'id' => $blockType->getId(),
                     'route_name' => ShowBlockTypeController::SHOW_BLOCK_TYPE_ROUTE_NAME,

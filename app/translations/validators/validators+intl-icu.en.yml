@@ -21,3 +21,9 @@ uniq_group_by: >-
             other {Value of fields {uniq_fields} are not uniq grouped by {grouped_by_fields} fields.}
         }}
     }
+
+block-type:
+    create:
+        error:
+            type: Type is already taken.
+            layout: Twig layout is already used.

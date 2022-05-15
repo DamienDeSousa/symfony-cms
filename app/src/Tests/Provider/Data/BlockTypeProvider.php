@@ -22,6 +22,7 @@ trait BlockTypeProvider
     {
         $blockType = new BlockType();
         $blockType->setType('header');
+        $blockType->setLayout('path/to/layout/header.html.twig');
 
         return $blockType;
     }

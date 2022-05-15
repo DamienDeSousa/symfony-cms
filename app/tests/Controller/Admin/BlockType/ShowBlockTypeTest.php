@@ -59,9 +59,9 @@ class ShowBlockTypeTest extends PantherTestCase
         $numberOflineInTable = $crawler->filter('table > tbody')->children()->count();
 
         $this->assertEquals(
-            2,
+            3,
             $numberOflineInTable,
-            'Expected 2 lines in the table, got ' . $numberOflineInTable . '.'
+            'Expected 3 lines in the table, got ' . $numberOflineInTable . '.'
         );
     }
 

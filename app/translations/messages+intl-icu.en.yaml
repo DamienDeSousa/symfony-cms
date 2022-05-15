@@ -66,6 +66,7 @@ block-type:
     grid:
         id: ID
         type: Type
+        layout: Layout
         button:
             create: Create
     create:
@@ -75,6 +76,7 @@ block-type:
         error: An error occured when trying to create the block type.
         card-header: Create a new block type
         submit: Create
+        layout: Layout
     update:
         flash-message:
             success: Block Type updated successfully !
