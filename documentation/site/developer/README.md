@@ -4,10 +4,10 @@
 
 Un Site peut être créé via la commande symfony `php bin/console cms:site:create <nom site>`. La classe [App\Command\Site\CreateSiteCommand](../../../app/src/Command/Site/CreateSiteCommand.php) est responsable de cette commande.
 
-Le nom du Site sera le nom affiché dans l'onglet du navigateur et dans le lien des moteurs de recherche.  
+Le nom du Site est le nom affiché dans l'onglet du navigateur et dans le lien des moteurs de recherche.  
 Le service [App\Service\Site\SiteCreatorHelper](../../../app/src/Service/Site/SiteCreatorHelper.php) est en charge de la création d'un Site.  
 **Il est important à noter qu'il ne peut y avoir qu'un seul Site.**  
-**La gestion des multi-site n'est pas gérée.**
+**La gestion des multi-sites n'est pas gérée.**
 
 La création d'un Site effectue une insertion en base de données.  
 La classe [App\Entity\Site](../../../app/src/Entity/Site.php) est la représentation d'un Site en base de données.
