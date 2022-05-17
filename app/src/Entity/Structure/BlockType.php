@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\Structure\BlockTypeRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Validator\Files\FileExists;
 
 /**
  * @ORM\Entity(repositoryClass=BlockTypeRepository::class)
@@ -61,6 +62,17 @@ class BlockType
      * @ORM\OneToMany(targetEntity="App\Entity\Structure\PageTemplateBlockType", mappedBy="blockType")
      */
     private $pageTemplateBlockTypes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Assert\NotBlank
+     * @Assert\Type("string")
+     * @FileExists
+     */
+    private $formType;
 
     public function __construct()
     {
@@ -113,6 +125,18 @@ class BlockType
     public function setLayout(?string $layout): self
     {
         $this->layout = $layout;
+
+        return $this;
+    }
+
+    public function getFormType(): ?string
+    {
+        return $this->formType;
+    }
+
+    public function setFormType(?string $formType): self
+    {
+        $this->formType = $formType;
 
         return $this;
     }
