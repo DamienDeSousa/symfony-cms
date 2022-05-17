@@ -27,3 +27,6 @@ block-type:
         error:
             type: Type is already taken.
             layout: Twig layout is already used.
+
+file_exists:
+    The file [{file}] does not exist. Please select a valid file.

@@ -27,3 +27,6 @@ block-type:
         error:
             type: Le type est déjà utilisé.
             layout: Le layout est déjà utilisé.
+
+file_exists:
+    Le fichier [{file}] n'existe pas. Veuillez renseigner un fichier valide.
