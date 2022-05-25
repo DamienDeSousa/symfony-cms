@@ -6,8 +6,10 @@ admin:
         password: Password
         submit: Submit
     sections:
+        dashboard: Dashboard
         home: Home
-        site: Global settings
+        general_parameter: Global settings
+        site: Site
         page_template: Page templates
         block_type: Block types
         page_template_block_type: Page template block types

@@ -22,8 +22,6 @@ use App\Controller\Admin\PageTemplate\ShowPageTemplateController;
 use App\Controller\Admin\PageTemplateBlockType\CreatePageTemplateBlockTypeController;
 use App\Controller\Admin\PageTemplateBlockType\GridPageTemplateBlockTypeController;
 use App\Controller\Admin\Security\Login;
-use App\Controller\Admin\Site\ShowSiteController;
-use App\Controller\Admin\Site\UpdateSiteController;
 
 /**
  * Trait that provides uri for tests.
@@ -38,16 +36,6 @@ trait AdminUriProvider
     public function provideAdminHomePageUri(): string
     {
         return Index::ADMIN_HOME_PAGE_URI;
-    }
-
-    public function provideAdminSiteShowUri(): string
-    {
-        return ShowSiteController::SITE_SHOW_URI;
-    }
-
-    public function provideAdminSiteUpdateUri(): string
-    {
-        return UpdateSiteController::SITE_UPDATE_URI;
     }
 
     public function provideAdminPageTemplateGridUri(): string

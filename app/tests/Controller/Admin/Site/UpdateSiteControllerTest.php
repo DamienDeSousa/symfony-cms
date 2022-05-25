@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\Site;
 
+use Exception;
 use LogicException;
 use App\Entity\Site;
 use App\Entity\User;
@@ -24,9 +25,12 @@ use App\Tests\Provider\Data\SiteProvider;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use App\Tests\Provider\Url\AdminUrlProvider;
 use Symfony\Component\Panther\PantherTestCase;
+use App\Tests\Provider\Actions\NavigationAction;
+use App\Controller\Admin\Site\SiteCRUDController;
 use Symfony\Component\Panther\DomCrawler\Crawler;
 use Facebook\WebDriver\Exception\TimeoutException;
 use Facebook\WebDriver\Exception\NoSuchElementException;
+use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 
 /**
  * This class is used to test the update site feature.
@@ -45,98 +49,70 @@ class UpdateSiteControllerTest extends PantherTestCase
 
     use AdminUrlProvider;
 
+    use NavigationAction;
+
+    /** @var ?Client */
+    private $client;
+
     protected function setUp(): void
     {
-        $this->setUpTrait();
-        /** @var User $user */
-        $user = $this->fixtureRepository->getReference('user');
-        $client = static::createPantherClient();
-        $this->login($user, $this->provideAdminLoginUri(), $client);
-    }
-
-    /**
-     * This method IS NOT a test. It is just used to navigate to the update site form page.
-     *
-     * @param Client $client
-     *
-     * @return Crawler
-     *
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
-     * @throws LogicException
-     * @throws NoSuchElementException
-     * @throws TimeoutException
-     */
-    private function navigateToUpdateSitePage(Client $client): Crawler
-    {
-        $crawler = $client->request('GET', Index::ADMIN_HOME_PAGE_URI);
-        $client->executeScript("document.querySelector('#main-navbar-toggler').click()");
-        //wait 1 seconde to display the menu (stop being toggled)
-        usleep(1000000);
-        $linkGeneralParameters = $crawler->filter('#link_admin_site_show_id')->link();
-        $crawler = $client->click($linkGeneralParameters);
-        $client->executeScript("document.querySelector('.card-header').click()");
-
-        return $client->waitFor('.card');
+        $this->initUserConnection();
     }
 
     public function testUpdateWebSiteWithNewTitleAndNewValidImage()
     {
         /** @var Site $site */
         $site = $this->fixtureRepository->getReference('site');
-        $client = static::createPantherClient();
-        $crawler = $this->navigateToUpdateSitePage($client);
-        $updateForm = $crawler->selectButton('update_site[save]')->form([
-            'update_site[title]' => 'Star Wars',
+        $crawler = $this->navigateToActionPage($this->client, SiteCRUDController::class, $site->getId());
+        $updateForm = $crawler->filter('#edit-Site-form')->form([
+            'Site[title]' => 'Obiwan Kenobi'
         ]);
-        $updateForm['update_site[icon]']->upload(dirname(__FILE__) . '/../../../../tests-artifacts/starwars.ico');
-        $crawler = $client->submit($updateForm);
+        $updateForm['Site[icon][file]']->upload(dirname(__FILE__) . '/../../../../tests-artifacts/starwars.ico');
+
+        $crawler = $this->submitFormAndReturn($this->client);
+        $crawler = UtilsAdminSelector::findRowInDatagrid($crawler, $site->getId());
+        $siteTitle = $crawler->filter('td.text-left.field-text > span')->text();
+        $siteImage = $crawler->filter('td.text-center.field-image > a > img')->attr('src');
 
         $this->assertEquals(
-            $crawler->filter('ul > li:nth-child(1) > span.lead')->text(),
-            'Star Wars',
+            $siteTitle,
+            $site->getTitle(),
             'The displayed title on the admin site show page and the expected title are different.'
         );
         $this->assertEquals(
-            $client->getTitle(),
-            'Star Wars',
-            'The displayed title on the tab and the expected title are different.'
-        );
-        $this->assertEquals(
-            $crawler->filter('ul > li:nth-child(2) > img')->attr('src'),
+            $siteImage,
             $this->provideAdminBaseUrl() . '/uploads/icon/' . $site->getIcon(),
             'The displayed icon on the admin site show page and the expected icon are different.'
-        );
-        $this->assertEquals(
-            $crawler->filter('head > link:nth-child(5)')->attr('href'),
-            $this->provideAdminBaseUrl() . '/uploads/icon/' . $site->getIcon(),
-            'The displayed icon on the tab and the expected icon are different.'
         );
     }
 
     public function testUpdateSiteWithNewTitleAndEmptyImage()
     {
-        $client = static::createPantherClient();
-        $crawler = $this->navigateToUpdateSitePage($client);
-        $updateForm = $crawler->selectButton('update_site[save]')->form([
-            'update_site[title]' => 'Star Wars',
+        /** @var Site $site */
+        $site = $this->fixtureRepository->getReference('site');
+        $crawler = $this->navigateToActionPage($this->client, SiteCRUDController::class, $site->getId());
+        $crawler->filter('#edit-Site-form')->form([
+            'Site[title]' => 'Star Wars'
         ]);
-        $crawler = $client->submit($updateForm);
+
+        $crawler = $this->submitFormAndReturn($this->client);
+        $crawler = UtilsAdminSelector::findRowInDatagrid($crawler, $site->getId());
+        $siteTitle = $crawler->filter('td.text-left.field-text > span')->text();
+        try {
+            $siteImage = $crawler->filter('td.text-center.field-image > a > img')->attr('src');
+        } catch (Exception $exception) {
+            $siteImage = '';
+        }
 
         $this->assertEquals(
-            $crawler->filter('ul > li:nth-child(1) > span.lead')->text(),
-            'Star Wars',
+            $siteTitle,
+            $site->getTitle(),
             'The displayed title on the admin site show page and the expected title are different.'
         );
-        $this->assertEquals(
-            $client->getTitle(),
-            'Star Wars',
-            'The displayed title on the tab and the expected title are different.'
-        );
-        $this->assertEquals(
-            $crawler->filter('ul > li:nth-child(2) > img')->attr('src'),
-            $this->provideAdminBaseUrl() . '/uploads/icon/',
-            'No image must be present, seems that there is one.'
+        $this->assertNotEquals(
+            $siteImage,
+            $this->provideAdminBaseUrl() . '/uploads/icon/' . $site->getIcon(),
+            'The displayed icon on the admin site show page and the expected icon are different.'
         );
     }
 
@@ -144,23 +120,18 @@ class UpdateSiteControllerTest extends PantherTestCase
     {
         /** @var Site $site */
         $site = $this->fixtureRepository->getReference('site');
-        $client = static::createPantherClient();
-        $crawler = $this->navigateToUpdateSitePage($client);
-        $updateForm = $crawler->selectButton('update_site[save]')->form([]);
-        //upload wrong file
-        $updateForm['update_site[icon]']->upload(dirname(__FILE__) . '/../../../../tests-artifacts/starwars.pdf');
-        $crawler = $client->submit($updateForm);
+        $crawler = $this->navigateToActionPage($this->client, SiteCRUDController::class, $site->getId());
+        $updateForm = $crawler->filter('#edit-Site-form')->form([
+            'Site[title]' => ''
+        ]);
+        $editFormUrl = $this->client->getCurrentURL();
+        $crawler = $this->submitFormAndReturn($this->client);
 
         //assert error messages
         $this->assertEquals(
-            $client->getCurrentURL(),
-            $this->provideAdminBaseUrl() . $this->provideAdminSiteUpdateUri(),
+            $editFormUrl,
+            $this->client->getCurrentURL(),
             'Expected to display the admin site update page but another is displayed.'
-        );
-        $this->assertEquals(
-            $crawler->filter('div.alert.alert-danger')->count(),
-            1,
-            'Expected to display 1 alert error message, but 0 or more than 1 are presents.'
         );
     }
 
@@ -171,8 +142,6 @@ class UpdateSiteControllerTest extends PantherTestCase
         if (is_file(dirname(__FILE__) . '/../../../../public/uploads/icon/' . $site->getIcon())) {
             unlink(dirname(__FILE__) . '/../../../../public/uploads/icon/' . $site->getIcon());
         }
-        $client = static::createPantherClient();
-        $crawler = $client->request('GET', $this->provideAdminHomePageUri());
-        $crawler = $this->adminLogout($client, $crawler);
+        $this->adminLogout($this->client, $this->client->getCrawler());
     }
 }

@@ -6,8 +6,10 @@ admin:
         password: Mot de passe
         submit: Connexion
     sections:
+        dashboard: Tableau de bord
         home: Accueil
-        site: Paramètres Généraux
+        general_parameter: Paramètres Généraux
+        site: Site
         page_template: Templates de pages
         block_type: Types de blocks
         page_template_block_type: Patron de pages type de blocks
@@ -21,8 +23,8 @@ site:
             title: Le site n'existe pas !
             message: Site n'existe pas, vous devez le créer via la ligne de commande cms:site:create
         informations: Informations
-        title: "Titre du site :"
-        icon: "Icone du site :"
+        title: Titre du site
+        icon: Icone du site
     update:
         title: Titre
         icon: Icône

@@ -18,4 +18,5 @@ return [
     Captcha\Bundle\CaptchaBundle\CaptchaBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true, 'functional_test' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['dev' => true, 'test' => true],
+    EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
 ];

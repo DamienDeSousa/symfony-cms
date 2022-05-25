@@ -12,37 +12,54 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\Site;
 
+use App\Controller\Admin\Site\SiteCRUDController;
 use App\Entity\Site;
-use App\Entity\User;
 use App\Fixture\FixtureAttachedTrait;
 use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Css\Admin\AdminSiteCssProvider;
+use App\Tests\Provider\Actions\NavigationAction;
+use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
+use Symfony\Component\Panther\Client;
 
 class ShowSiteControllerTest extends PantherTestCase
 {
-    use FixtureAttachedTrait;
+    use FixtureAttachedTrait {
+        setUp as setUpTrait;
+    }
 
     use AdminUriProvider;
 
     use LogAction;
 
-    use AdminSiteCssProvider;
+    use NavigationAction;
+
+    private const ERROR_MESSAGE = 'Expected row with entity id %d, got %s';
+
+    /** @var Client */
+    private $client;
+
+    protected function setUp(): void
+    {
+        $this->initUserConnection();
+    }
 
     public function testDisplaySitePage()
     {
-        /** @var User $user */
-        $user = $this->fixtureRepository->getReference('user');
         /** @var Site $site */
         $site = $this->fixtureRepository->getReference('site');
+        $crawler = $this->navigateLeftMenuLink($this->client, SiteCRUDController::class);
+        $node = UtilsAdminSelector::findRowInDatagrid($crawler, $site->getId());
 
-        $client = static::createPantherClient();
-        $crawler = $this->login($user, $this->provideAdminLoginUri(), $client);
-        $crawler = $client->request('GET', $this->provideAdminSiteShowUri());
+        $this->assertEquals(
+            $site->getId(),
+            $node->attr('data-id'),
+            sprintf(self::ERROR_MESSAGE, $site->getId(), $node->attr('data-id'))
+        );
+    }
 
-        $this->assertSelectorTextSame($this->provideCardHeaderClass(), 'Informations');
-
-        $crawler = $this->adminLogout($client, $crawler);
+    protected function tearDown(): void
+    {
+        $this->adminLogout($this->client, $this->client->getCrawler());
     }
 }

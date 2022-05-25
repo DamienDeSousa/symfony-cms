@@ -19,12 +19,21 @@ passer sur symfony 5.4
 ## Installation
 
 Il faut dans un premier temps posséder une première version stable.
+```
 git clone https://github.com/DamienDeSousa/symfony-cms.git  
 make install  
 make connection-php-container  
-php bin/console fos:user:create  
-
+php bin/console fos:user:create #use this command to create an admin user  
+php bin/console php bin/console cms:site:create <nom site> #use this command to create a Site.  
+```
 ## Utilisation
+
+### Page d'accueil et tableau de bord
+
+Vous trouverez le lien vers la documentation développeur du site [ici](documentation/dashboard/developer/README.md).  
+Vous trouverez le lien vers la documentation fonctionelle du site [ici](documentation/dashboard/functional/README.md).
+
+### Gestion utilisateurs
 
 ### Site
 
