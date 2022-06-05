@@ -57,7 +57,7 @@ run-all-tests: ## run all automated tests
 	docker exec symfony-cms_php73_1 php bin/console doctrine:migrations:migrate --no-interaction --env=test
 	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Command
 #	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/BlockType
-#	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/PageTemplate
+	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/PageTemplate
 	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/Security
 	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/Site
 #	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/PageTemplateBlockType

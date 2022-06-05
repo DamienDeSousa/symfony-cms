@@ -61,9 +61,7 @@ class DeleteLinkedBlockTypeControllerTest extends PantherTestCase
         );
         $crawler = $this->client->waitFor('.modal');
         $this->client->executeScript("document.querySelector('.btn-danger').click()");
-        // $this->client->takeScreenshot('screen.png');
         $crawler = $this->client->refreshCrawler();
-        // $this->client->takeScreenshot('screen.png');
         $nodeAlertError = $crawler->filter('.alert-danger');
         $tableRows = $crawler->filter('table > tbody')->children()->count();
 

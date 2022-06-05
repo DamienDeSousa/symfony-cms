@@ -38,7 +38,7 @@ trait LogAction
         $client->executeScript(
             sprintf("document.querySelector('%s').click()", UtilsAdminSelector::USER_DETAIL_SELECTOR)
         );
-
+        sleep(1);
         $link = $crawler->filter(UtilsAdminSelector::USER_LOGOUT_LINK_SELECTOR)->attr('href');
 
         return $client->request('GET', $link);

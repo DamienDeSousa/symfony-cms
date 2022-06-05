@@ -31,8 +31,13 @@ class UpdatePageTemplateTestFixture extends Fixture
         $manager->persist($pageTemplate);
         $user = $this->provideSuperAdminUser();
         $manager->persist($user);
+        $pageTemplate2 = $this->providePageTemplate();
+        $pageTemplate2->setName('new name');
+        $pageTemplate2->setLayout('my/new/layout.html.twig');
+        $manager->persist($pageTemplate2);
         $manager->flush();
         $this->referenceRepository->addReference('user', $user);
         $this->referenceRepository->addReference('page_template', $pageTemplate);
+        $this->referenceRepository->addReference('page_template2', $pageTemplate2);
     }
 }

@@ -34,7 +34,7 @@ class ShowSiteControllerTest extends PantherTestCase
 
     use NavigationAction;
 
-    private const ERROR_MESSAGE = 'Expected row with entity id %d, got %s';
+    public const ERROR_MESSAGE = 'Expected row with entity id %d, got %s';
 
     /** @var Client */
     private $client;

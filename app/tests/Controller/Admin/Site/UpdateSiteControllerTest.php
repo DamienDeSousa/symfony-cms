@@ -63,7 +63,12 @@ class UpdateSiteControllerTest extends PantherTestCase
     {
         /** @var Site $site */
         $site = $this->fixtureRepository->getReference('site');
-        $crawler = $this->navigateToActionPage($this->client, SiteCRUDController::class, $site->getId());
+        $crawler = $this->navigateToActionPage(
+            $this->client,
+            SiteCRUDController::class,
+            $site->getId(),
+            UtilsAdminSelector::EDIT_BUTTON_REDIRECT_SELECTOR
+        );
         $updateForm = $crawler->filter('#edit-Site-form')->form([
             'Site[title]' => 'Obiwan Kenobi'
         ]);
@@ -90,7 +95,12 @@ class UpdateSiteControllerTest extends PantherTestCase
     {
         /** @var Site $site */
         $site = $this->fixtureRepository->getReference('site');
-        $crawler = $this->navigateToActionPage($this->client, SiteCRUDController::class, $site->getId());
+        $crawler = $this->navigateToActionPage(
+            $this->client,
+            SiteCRUDController::class,
+            $site->getId(),
+            UtilsAdminSelector::EDIT_BUTTON_REDIRECT_SELECTOR
+        );
         $crawler->filter('#edit-Site-form')->form([
             'Site[title]' => 'Star Wars'
         ]);
@@ -120,7 +130,12 @@ class UpdateSiteControllerTest extends PantherTestCase
     {
         /** @var Site $site */
         $site = $this->fixtureRepository->getReference('site');
-        $crawler = $this->navigateToActionPage($this->client, SiteCRUDController::class, $site->getId());
+        $crawler = $this->navigateToActionPage(
+            $this->client,
+            SiteCRUDController::class,
+            $site->getId(),
+            UtilsAdminSelector::EDIT_BUTTON_REDIRECT_SELECTOR
+        );
         $updateForm = $crawler->filter('#edit-Site-form')->form([
             'Site[title]' => ''
         ]);

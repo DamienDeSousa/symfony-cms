@@ -43,6 +43,7 @@ Vous trouverez le lien vers la documentation fonctionelle du site [ici](document
 ### Page Template
 
 Vous trouverez le lien vers la documentation développeur du page template [ici](documentation/page_template/developer/README.md).  
+Vous trouverez le lien vers la documentation fonctionnelle du page template [ici](documentation/page_template/functional/README.md).  
 
 
 ## Notes techniques

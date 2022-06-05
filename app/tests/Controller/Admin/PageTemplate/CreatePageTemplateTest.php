@@ -11,13 +11,15 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplate;
 
-use App\Entity\User;
-use App\Controller\Admin\Index;
 use App\Fixture\FixtureAttachedTrait;
 use Symfony\Component\Panther\Client;
+use App\Entity\Structure\PageTemplate;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
+use App\Tests\Provider\Actions\NavigationAction;
+use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
 
 /**
  * This class is used to test the page template creation.
@@ -32,52 +34,44 @@ class CreatePageTemplateTest extends PantherTestCase
 
     use AdminUriProvider;
 
+    use NavigationAction;
+
+    private const EXPECTED_GRID_LINES = 1;
+
     /** @var Client */
-    private $client;
+    private $client = null;
 
     protected function setUp(): void
     {
-        $this->setUpTrait();
-        /** @var User $user */
-        $user = $this->fixtureRepository->getReference('user');
-        $this->client = static::createPantherClient();
-        $this->login($user, $this->provideAdminLoginUri(), $this->client);
+        $this->initUserConnection();
     }
 
 
     public function testCreateNewPageTemplate()
     {
-        //Navigate to create PageTemplate page.
-        $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
-        $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
-        //wait 1 seconde to display the menu (stop being toggled)
-        usleep(1000000);
-        $linkGeneralParameters = $crawler->filter('#admin_page_template_grid_id')->link();
-        $crawler = $this->client->click($linkGeneralParameters);
-        $this->client->executeScript("document.querySelector('#create-page-template-button').click()");
-        $crawler = $this->client->waitFor('.card');
-
-        $updateForm = $crawler->selectButton('register_page_template')->form([
-            'create_page_template[name]' => 'Page Template Test',
-            'create_page_template[layout]' => 'a/random/path/to/layout.html.twig',
+        $crawler = $this->navigateToCreatePage($this->client, PageTemplateCRUDController::class);
+        $updateForm = $crawler->filter(
+            sprintf(
+                UtilsAdminSelector::ENTITY_FORM_SELECTOR,
+                UtilsAdminSelector::ENTITY_FORM_NEW,
+                UtilsAdminSelector::getShortClassName(PageTemplate::class)
+            )
+        )->form([
+            'PageTemplate[name]' => 'Star Wars',
+            'PageTemplate[layout]' => 'path/to/layout.html.twig',
         ]);
-        $crawler = $this->client->submit($updateForm);
-        $nodeAlertSuccess = $crawler->filter('.alert-success')->first();
+        $crawler = $this->submitFormAndReturn($this->client);
+        $dataGridLine = $crawler->filter(UtilsAdminSelector::DATAGRID_ROWS_SELECTOR)->count();
 
-        $this->assertTrue(
-            is_string($nodeAlertSuccess->text()),
-            'Got a ' . gettype($nodeAlertSuccess->text()) . ' instead of a string'
-        );
-        $this->assertGreaterThan(
-            0,
-            strlen($nodeAlertSuccess->text()),
-            'actual value is not greater than expected'
+        $this->assertEquals(
+            self::EXPECTED_GRID_LINES,
+            $dataGridLine,
+            sprintf('Expected %s line, got %s', self::EXPECTED_GRID_LINES, $dataGridLine)
         );
     }
 
     protected function tearDown(): void
     {
-        $crawler = $this->client->request('GET', $this->provideAdminHomePageUri());
-        $crawler = $this->adminLogout($this->client, $crawler);
+        $this->adminLogout($this->client, $this->client->refreshCrawler());
     }
 }

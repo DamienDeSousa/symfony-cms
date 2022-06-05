@@ -32,7 +32,7 @@ class ShowNoSiteControllerTest extends PantherTestCase
 
     use NavigationAction;
 
-    private const EXPECTED_NO_RESULT_MESSAGE = 1;
+    public const EXPECTED_NO_RESULT_MESSAGE = 1;
 
     /** @var Client */
     private $client;

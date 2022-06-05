@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Site;
+use App\Entity\Structure\PageTemplate;
 use App\Service\Site\SiteReaderService;
 use App\Security\Admin\Voter\HomePageVoter;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,11 +77,18 @@ class Index extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        return [
+        $menuItems = [
             MenuItem::linkToDashboard('admin.sections.dashboard', 'fa fa-home'),
 
             MenuItem::section('admin.sections.general_parameter'),
             MenuItem::linkToCrud('admin.sections.site', 'fa fa-gear', Site::class),
         ];
+
+        $menuItems[] = MenuItem::section('admin.sections.cms');
+        if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+            $menuItems[] = MenuItem::linkToCrud('admin.sections.page_template', 'fa fa-th-large', PageTemplate::class);
+        }
+
+        return $menuItems;
     }
 }

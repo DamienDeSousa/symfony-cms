@@ -42,15 +42,22 @@ trait NavigationAction
         return $client->request('GET', $itemLink);
     }
 
-    public function navigateToActionPage(Client $client, string $fullClassName, int $entityId): Crawler
-    {
+    public function navigateToActionPage(
+        Client $client,
+        string $fullClassName,
+        int $entityId,
+        string $actionSelector
+    ): Crawler {
         $crawler = $this->navigateLeftMenuLink($client, $fullClassName);
         $crawler = UtilsAdminSelector::findRowInDatagrid($crawler, $entityId);
-        $this->clickElement($client, '#main > table > tbody > tr > td.actions.actions-as-dropdown > div > a');
-        $this->clickElement($client, '#main > table > tbody > tr > td.actions.actions-as-dropdown > div > div > a');
-        $this->client->refreshCrawler();
+        $this->clickElement($client, UtilsAdminSelector::ENTITY_ACTIONS_DROPDOWN);
+        $this->clickElement(
+            $client,
+            sprintf('#main > table > tbody > tr > td.actions.actions-as-dropdown > div > div > %s', $actionSelector),
+        );
+        sleep(1);
 
-        return $this->client->getCrawler();
+        return $client->refreshCrawler();
     }
 
     public function submitFormAndReturn(Client $client): Crawler
@@ -61,7 +68,7 @@ trait NavigationAction
         return $this->client->getCrawler();
     }
 
-    public function clickElement(Client $client, string $elementCssSelector)
+    public function clickElement(Client $client, string $elementCssSelector): Crawler
     {
         $client->executeScript(
             sprintf(
@@ -69,5 +76,15 @@ trait NavigationAction
                 $elementCssSelector
             )
         );
+
+        return $client->refreshCrawler();
+    }
+
+    public function navigateToCreatePage(Client $client, string $fullClassName): Crawler
+    {
+        $this->navigateLeftMenuLink($client, $fullClassName);
+        $this->clickElement($client, UtilsAdminSelector::CREATE_BUTTON_SELECTOR);
+
+        return $client->refreshCrawler();
     }
 }

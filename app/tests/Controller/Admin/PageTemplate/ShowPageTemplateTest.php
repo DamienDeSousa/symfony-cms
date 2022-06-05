@@ -11,12 +11,15 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplate;
 
-use App\Entity\User;
-use App\Controller\Admin\Index;
 use App\Fixture\FixtureAttachedTrait;
+use App\Entity\Structure\PageTemplate;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
+use App\Tests\Provider\Actions\NavigationAction;
+use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use App\Tests\Controller\Admin\Site\ShowSiteControllerTest;
+use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
 
 /**
  * This class is used to test the page template data grid.
@@ -31,6 +34,8 @@ class ShowPageTemplateTest extends PantherTestCase
 
     use AdminUriProvider;
 
+    use NavigationAction;
+
     /**
      * @var \Symfony\Component\Panther\Client
      */
@@ -38,36 +43,25 @@ class ShowPageTemplateTest extends PantherTestCase
 
     protected function setUp(): void
     {
-        $this->setUpTrait();
-        /** @var User $user */
-        $user = $this->fixtureRepository->getReference('user');
-        $this->client = static::createPantherClient();
-        $this->login($user, $this->provideAdminLoginUri(), $this->client);
+        $this->initUserConnection();
     }
 
     public function testShowPageTemplatePage()
     {
-        //Navigate to create PageTemplate page.
-        $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
-        $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
-        //wait 1 seconde to display the menu (stop being toggled)
-        usleep(1000000);
-        $linkPageGrid = $crawler->filter('#admin_page_template_grid_id')->link();
-        $crawler = $this->client->click($linkPageGrid);
-        $this->client->executeScript("document.querySelector('.btn-outline-info').click()");
-        $crawler = $this->client->waitFor('table');
-        $numberOflineInTable = $crawler->filter('table > tbody')->children()->count();
+        /** @var PageTemplate $pageTemplate */
+        $pageTemplate = $this->fixtureRepository->getReference('page_template');
+        $crawler = $this->navigateLeftMenuLink($this->client, PageTemplateCRUDController::class);
+        $node = UtilsAdminSelector::findRowInDatagrid($crawler, $pageTemplate->getId());
 
         $this->assertEquals(
-            3,
-            $numberOflineInTable,
-            'Expected 2 lines in the table, got ' . $numberOflineInTable . '.'
+            $pageTemplate->getId(),
+            $node->attr('data-id'),
+            sprintf(ShowSiteControllerTest::ERROR_MESSAGE, $pageTemplate->getId(), $node->attr('data-id'))
         );
     }
 
     protected function tearDown(): void
     {
-        $crawler = $this->client->request('GET', $this->provideAdminHomePageUri());
-        $crawler = $this->adminLogout($this->client, $crawler);
+        $this->adminLogout($this->client, $this->client->refreshCrawler());
     }
 }

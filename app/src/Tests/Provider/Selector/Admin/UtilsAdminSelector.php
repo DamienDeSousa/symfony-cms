@@ -30,6 +30,46 @@ abstract class UtilsAdminSelector
 
     public const SAVE_AND_RETURN_BUTTON_SELECTOR = 'button.action-saveAndReturn';
 
+    public const CREATE_BUTTON_SELECTOR = 'a.action-new';
+
+    public const DELETE_ENTITY_BUTTON_SELECTOR = '#modal-delete-button';
+
+    public const ENTITY_ACTIONS_DROPDOWN = '#main > table > tbody > tr > td.actions.actions-as-dropdown > div > a';
+
+
+    // ----------------   Use it together   ---------------- //
+    /**
+     * First element is the kind of form (edit, new, ...).
+     * Second element is the short entity class name.
+     */
+    public const ENTITY_FORM_SELECTOR = '#%s-%s-form';
+
+    /**
+     * Constant to use inside the ENTITY_FORM_SELECTOR constant.
+     */
+    public const ENTITY_FORM_EDIT = 'edit';
+
+    /**
+     * Constant to use inside the ENTITY_FORM_SELECTOR constant.
+     */
+    public const ENTITY_FORM_NEW = 'new';
+    // ----------------------------------------------------- //
+
+
+    // ----------------   Use it together   ---------------- //
+    public const ENTITY_ACTION_DROPDOWN = '#main > table > tbody > tr > td.actions.actions-as-dropdown > div > a > %s';
+
+    /**
+     * Constant to use inside the ENTITY_ACTION_DROPDOWN constant.
+     */
+    public const DELETE_BUTTON_MODAL_SELECTOR = 'a.action-delete';
+
+    /**
+     * Constant to use inside the ENTITY_ACTION_DROPDOWN constant.
+     */
+    public const EDIT_BUTTON_REDIRECT_SELECTOR = 'a.action-edit';
+    // ----------------------------------------------------- //
+
     public static function getShortClassName(string $fullClassName): string
     {
         $reflectionClass = new ReflectionClass($fullClassName);

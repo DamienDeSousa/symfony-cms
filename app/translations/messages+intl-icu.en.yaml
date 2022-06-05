@@ -13,56 +13,21 @@ admin:
         page_template: Page templates
         block_type: Block types
         page_template_block_type: Page template block types
+        cms: CMS
 
 cms:
     name: Symfony CMS
 
 site:
     show:
-        unavailable:
-            title: The site does not exist !
-            message: The site does not exist, please run the following command to create it, cms:site:create
         informations: Informations
-        title: "Title of the site:"
-        icon: "Icon of the site:"
-    update:
-        title: Title
-        icon: Icon
-        save: Save
-        error: An error occured when trying to update the site.
-        icon_help: "Available extensions: ico, png, jpeg"
+        title: Title of the site
+        icon: Icon of the site
 
 page-template:
     grid:
-        id: ID
         name: Name
         layout: Layout
-        button:
-            create: Create
-    create:
-        error: An error occured when trying to create the page template.
-        card-header: Create new one
-        name: Name
-        layout: Layout
-        submit: Create
-        flash-message:
-            success: Page Template created successfully !
-    update:
-        submit: Update
-        card-header: Update page template
-        error: An error occured when trying to update the page template.
-        flash-message:
-            success: Page Template updated successfully !
-    show:
-        card-header: Page template
-    delete:
-        flash-message:
-            success: Page template deleted successfully !
-        modal:
-            cancel-button: Cancel
-            delete-button: Delete
-            header: Deletion
-            body: Are you sure you want to delete this page template?
 
 block-type:
     grid:
