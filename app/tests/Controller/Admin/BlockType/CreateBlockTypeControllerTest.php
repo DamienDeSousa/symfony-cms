@@ -17,6 +17,7 @@ use App\Fixture\FixtureAttachedTrait;
 use Symfony\Component\Panther\Client;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
+use App\Tests\Provider\AssertMessageProvider;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
@@ -46,8 +47,6 @@ class CreateBlockTypeControllerTest extends PantherTestCase
         $this->initUserConnection();
     }
 
-
-
     public function testCreateNewBlockType()
     {
         $crawler = $this->navigateToCreatePage($this->client, BlockType::class);
@@ -68,7 +67,7 @@ class CreateBlockTypeControllerTest extends PantherTestCase
         $this->assertEquals(
             self::EXPECTED_GRID_LINES,
             $dataGridLine,
-            sprintf('Expected %s line, got %s', self::EXPECTED_GRID_LINES, $dataGridLine)
+            sprintf(AssertMessageProvider::EXPECTED_ROWS_NUMBER_ERROR_MESSAGE, self::EXPECTED_GRID_LINES, $dataGridLine)
         );
     }
 

@@ -16,6 +16,7 @@ use Symfony\Component\Panther\Client;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use App\Tests\Provider\Url\AdminUrlProvider;
+use App\Tests\Provider\AssertMessageProvider;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
@@ -71,12 +72,16 @@ class CantUpdateBlockTypeTest extends PantherTestCase
             'BlockType[layout]' => $secondBlock->getLayout(),
         ]);
         $crawler = $this->submitFormAndReturn($this->client);
-        $alertDangerNodes = $crawler->filter('div.invalid-feedback')->count();
+        $alertDangerNodes = $crawler->filter(UtilsAdminSelector::ALERT_FORM_MESSAGE_SELECTOR)->count();
 
         $this->assertEquals(
             self::EXPECTED_ALERT_MESSAGES,
             $alertDangerNodes,
-            sprintf(CantCreatePageTemplateTest::ERROR_MESSAGE, self::EXPECTED_ALERT_MESSAGES, $alertDangerNodes)
+            sprintf(
+                AssertMessageProvider::EXPECTED_ERROR_ALERT_MESSAGE,
+                self::EXPECTED_ALERT_MESSAGES,
+                $alertDangerNodes
+            )
         );
     }
 
@@ -107,7 +112,7 @@ class CantUpdateBlockTypeTest extends PantherTestCase
         $this->assertEquals(
             $expectedPage,
             $actualPage,
-            sprintf('Expected to be on page %s, actual page is %s', $expectedPage, $actualPage)
+            sprintf(AssertMessageProvider::EXPECTED_ERROR_ON_PAGE_MESSAGE, $expectedPage, $actualPage)
         );
     }
 

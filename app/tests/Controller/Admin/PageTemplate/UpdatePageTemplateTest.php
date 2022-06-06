@@ -16,6 +16,7 @@ use Symfony\Component\Panther\Client;
 use App\Entity\Structure\PageTemplate;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
+use App\Tests\Provider\AssertMessageProvider;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
@@ -37,6 +38,8 @@ class UpdatePageTemplateTest extends PantherTestCase
     use NavigationAction;
 
     private const EXPECTED_ROWS_COUNT = 1;
+
+    private const EXPECTED_ALERT_MESSAGES = 2;
 
     /** @var null|Client  */
     private $client = null;
@@ -72,7 +75,7 @@ class UpdatePageTemplateTest extends PantherTestCase
         $this->assertEquals(
             self::EXPECTED_ROWS_COUNT,
             $datagridRow,
-            sprintf('Expected %d rows in datagrid, got %d', self::EXPECTED_ROWS_COUNT, $datagridRow)
+            sprintf(AssertMessageProvider::EXPECTED_ROWS_NUMBER_ERROR_MESSAGE, self::EXPECTED_ROWS_COUNT, $datagridRow)
         );
     }
 
@@ -99,14 +102,14 @@ class UpdatePageTemplateTest extends PantherTestCase
             'PageTemplate[layout]' => $pageTemplate2->getLayout(),
         ]);
         $crawler = $this->submitFormAndReturn($this->client);
-        $alertDangerNodes = $crawler->filter('div.invalid-feedback')->count();
+        $alertDangerNodes = $crawler->filter(UtilsAdminSelector::ALERT_FORM_MESSAGE_SELECTOR)->count();
 
         $this->assertEquals(
-            CantCreatePageTemplateTest::EXPECTED_ALERT_MESSAGES,
+            self::EXPECTED_ALERT_MESSAGES,
             $alertDangerNodes,
             sprintf(
                 'Expected %s alert messages, got %s',
-                CantCreatePageTemplateTest::EXPECTED_ALERT_MESSAGES,
+                self::EXPECTED_ALERT_MESSAGES,
                 $alertDangerNodes
             )
         );

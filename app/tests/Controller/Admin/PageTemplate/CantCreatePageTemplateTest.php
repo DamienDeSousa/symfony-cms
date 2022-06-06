@@ -16,6 +16,7 @@ use Symfony\Component\Panther\Client;
 use App\Entity\Structure\PageTemplate;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
+use App\Tests\Provider\AssertMessageProvider;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
@@ -38,8 +39,6 @@ class CantCreatePageTemplateTest extends PantherTestCase
 
     public const EXPECTED_ALERT_MESSAGES = 2;
 
-    public const ERROR_MESSAGE = 'Expected %s alert messages, got %s';
-
     /** @var Client */
     private $client;
 
@@ -47,7 +46,6 @@ class CantCreatePageTemplateTest extends PantherTestCase
     {
         $this->initUserConnection();
     }
-
 
     public function testCreateNewPageTemplateWithDataAlreadyUsed()
     {
@@ -70,7 +68,11 @@ class CantCreatePageTemplateTest extends PantherTestCase
         $this->assertEquals(
             self::EXPECTED_ALERT_MESSAGES,
             $alertDangerNodes,
-            sprintf(self::ERROR_MESSAGE, self::EXPECTED_ALERT_MESSAGES, $alertDangerNodes)
+            sprintf(
+                AssertMessageProvider::EXPECTED_ERROR_ALERT_MESSAGE,
+                self::EXPECTED_ALERT_MESSAGES,
+                $alertDangerNodes
+            )
         );
     }
 

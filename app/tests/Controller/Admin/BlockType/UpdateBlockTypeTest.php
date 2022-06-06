@@ -16,6 +16,7 @@ use App\Fixture\FixtureAttachedTrait;
 use Symfony\Component\Panther\Client;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
+use App\Tests\Provider\AssertMessageProvider;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
@@ -72,7 +73,7 @@ class UpdateBlockTypeTest extends PantherTestCase
         $this->assertEquals(
             self::EXPECTED_ROWS_COUNT,
             $datagridRow,
-            sprintf('Expected %d rows in datagrid, got %d', self::EXPECTED_ROWS_COUNT, $datagridRow)
+            sprintf(AssertMessageProvider::EXPECTED_ROWS_NUMBER_ERROR_MESSAGE, self::EXPECTED_ROWS_COUNT, $datagridRow)
         );
     }
 

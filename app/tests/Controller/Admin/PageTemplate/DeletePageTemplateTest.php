@@ -17,6 +17,7 @@ use Symfony\Component\Panther\Client;
 use App\Entity\Structure\PageTemplate;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
+use App\Tests\Provider\AssertMessageProvider;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
@@ -60,9 +61,9 @@ class DeletePageTemplateTest extends PantherTestCase
         $emptyResult = $crawler->filter(UtilsAdminSelector::NO_DATAGRID_RESULT_SELECTOR)->count();
 
         $this->assertEquals(
-            ShowNoSiteControllerTest::EXPECTED_NO_RESULT_MESSAGE,
+            AssertMessageProvider::COUNT_EXPECTED_NO_RESULT_MESSAGE,
             $emptyResult,
-            'Expected no result message but wasnt displayed'
+            AssertMessageProvider::EXPECTED_NO_RESULT_ERROR_MESSAGE
         );
     }
 

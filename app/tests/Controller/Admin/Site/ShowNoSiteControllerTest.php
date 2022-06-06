@@ -15,6 +15,7 @@ use App\Fixture\FixtureAttachedTrait;
 use App\Controller\Admin\Site\SiteCRUDController;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Actions\NavigationAction;
+use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
@@ -50,7 +51,7 @@ class ShowNoSiteControllerTest extends PantherTestCase
         $this->assertEquals(
             self::EXPECTED_NO_RESULT_MESSAGE,
             $emptyResult,
-            'Expected no result message but wasnt displayed'
+            AssertMessageProvider::EXPECTED_NO_RESULT_ERROR_MESSAGE
         );
     }
 

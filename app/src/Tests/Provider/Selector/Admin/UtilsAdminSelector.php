@@ -36,6 +36,10 @@ abstract class UtilsAdminSelector
 
     public const ENTITY_ACTIONS_DROPDOWN = '#main > table > tbody > tr > td.actions.actions-as-dropdown > div > a';
 
+    public const ALERT_FORM_MESSAGE_SELECTOR = 'div.invalid-feedback';
+
+    public const DATA_ID_ATTR_TAG_SELECTOR = 'data-id';
+
 
     // ----------------   Use it together   ---------------- //
     /**

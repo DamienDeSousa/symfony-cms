@@ -55,8 +55,12 @@ class ShowBlockTypeTest extends PantherTestCase
 
         $this->assertEquals(
             $blockType->getId(),
-            $node->attr('data-id'),
-            sprintf(ShowSiteControllerTest::ERROR_MESSAGE, $blockType->getId(), $node->attr('data-id'))
+            $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR),
+            sprintf(
+                ShowSiteControllerTest::ERROR_MESSAGE,
+                $blockType->getId(),
+                $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR)
+            )
         );
     }
 

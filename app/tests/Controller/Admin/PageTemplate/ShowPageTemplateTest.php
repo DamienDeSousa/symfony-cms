@@ -15,10 +15,10 @@ use App\Fixture\FixtureAttachedTrait;
 use App\Entity\Structure\PageTemplate;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Uri\AdminUriProvider;
+use App\Tests\Provider\AssertMessageProvider;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
-use App\Tests\Controller\Admin\Site\ShowSiteControllerTest;
 use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
 
 /**
@@ -55,8 +55,12 @@ class ShowPageTemplateTest extends PantherTestCase
 
         $this->assertEquals(
             $pageTemplate->getId(),
-            $node->attr('data-id'),
-            sprintf(ShowSiteControllerTest::ERROR_MESSAGE, $pageTemplate->getId(), $node->attr('data-id'))
+            $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR),
+            sprintf(
+                AssertMessageProvider::EXPECTED_ROW_ENTITY_ID_ERROR_MESSAGE,
+                $pageTemplate->getId(),
+                $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR)
+            )
         );
     }
 

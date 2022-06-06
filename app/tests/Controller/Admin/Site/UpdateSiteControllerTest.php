@@ -19,6 +19,7 @@ use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Data\SiteProvider;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use App\Tests\Provider\Url\AdminUrlProvider;
+use App\Tests\Provider\AssertMessageProvider;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Tests\Provider\Actions\NavigationAction;
 use App\Controller\Admin\Site\SiteCRUDController;
@@ -138,7 +139,11 @@ class UpdateSiteControllerTest extends PantherTestCase
         $this->assertEquals(
             $editFormUrl,
             $this->client->getCurrentURL(),
-            'Expected to display the admin site update page but another is displayed.'
+            sprintf(
+                AssertMessageProvider::EXPECTED_ERROR_ON_PAGE_MESSAGE,
+                $editFormUrl,
+                $this->client->getCurrentURL()
+            )
         );
     }
 

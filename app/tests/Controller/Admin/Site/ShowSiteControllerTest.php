@@ -17,6 +17,7 @@ use App\Entity\Site;
 use App\Fixture\FixtureAttachedTrait;
 use App\Tests\Provider\Actions\LogAction;
 use App\Tests\Provider\Actions\NavigationAction;
+use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Tests\Provider\Uri\AdminUriProvider;
 use Symfony\Component\Panther\PantherTestCase;
@@ -53,8 +54,12 @@ class ShowSiteControllerTest extends PantherTestCase
 
         $this->assertEquals(
             $site->getId(),
-            $node->attr('data-id'),
-            sprintf(self::ERROR_MESSAGE, $site->getId(), $node->attr('data-id'))
+            $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR),
+            sprintf(
+                AssertMessageProvider::EXPECTED_ROW_ENTITY_ID_ERROR_MESSAGE,
+                $site->getId(),
+                $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR)
+            )
         );
     }
 
