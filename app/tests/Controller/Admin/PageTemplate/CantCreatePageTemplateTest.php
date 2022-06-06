@@ -38,6 +38,8 @@ class CantCreatePageTemplateTest extends PantherTestCase
 
     public const EXPECTED_ALERT_MESSAGES = 2;
 
+    public const ERROR_MESSAGE = 'Expected %s alert messages, got %s';
+
     /** @var Client */
     private $client;
 
@@ -68,7 +70,7 @@ class CantCreatePageTemplateTest extends PantherTestCase
         $this->assertEquals(
             self::EXPECTED_ALERT_MESSAGES,
             $alertDangerNodes,
-            sprintf('Expected %s alert messages, got %s', self::EXPECTED_ALERT_MESSAGES, $alertDangerNodes)
+            sprintf(self::ERROR_MESSAGE, self::EXPECTED_ALERT_MESSAGES, $alertDangerNodes)
         );
     }
 

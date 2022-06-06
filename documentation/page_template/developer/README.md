@@ -8,7 +8,7 @@ Les droits pour manipuler un Page Template sont définis dans la classe [App\Con
 
 ## Création
 
-Le controller [App\Controller\Admin\PageTemplate\CreatePageTemplateController](../../../app/src/Controller/Admin/PageTemplate/CreatePageTemplateController.php) affiche et gère la soumission du formulaire de création d'un Page Template.  
+Le controller [App\Controller\Admin\PageTemplate\PageTemplateCRUDController](../../../app/src/Controller/Admin/PageTemplate/PageTemplateCRUDController.php) affiche et gère la soumission du formulaire de création d'un Page Template.  
 Le formType est définit dans la méthode `configureFields` de la classe [App\Controller\Admin\PageTemplate\PageTemplateCRUDController](../../../app/src/Controller/Admin/PageTemplate/PageTemplateCRUDController.php).  
 L'entité [App\Entity\Structure\PageTemplate](../../../app/src/Entity/Structure/PageTemplate.php) représente un Page Template en base de données. Il y a une contrainte d'unicité sur les champs name et layout. Un layout est le chemin complet vers le fichier twig contenant la structure globale d'une page.  
 

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Site;
+use App\Entity\Structure\BlockType;
 use App\Entity\Structure\PageTemplate;
 use App\Service\Site\SiteReaderService;
 use App\Security\Admin\Voter\HomePageVoter;
@@ -87,6 +88,7 @@ class Index extends AbstractDashboardController
         $menuItems[] = MenuItem::section('admin.sections.cms');
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
             $menuItems[] = MenuItem::linkToCrud('admin.sections.page_template', 'fa fa-th-large', PageTemplate::class);
+            $menuItems[] = MenuItem::linkToCrud('admin.sections.block_type', 'fa fa-square', BlockType::class);
         }
 
         return $menuItems;

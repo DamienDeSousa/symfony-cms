@@ -31,32 +31,9 @@ page-template:
 
 block-type:
     grid:
-        id: ID
         type: Type
         layout: Layout
-        button:
-            create: Create
-    create:
-        type: Type
-        flash-message:
-            success: Block Type created successfully !
-        error: An error occured when trying to create the block type.
-        card-header: Create a new block type
-        submit: Create
-        layout: Layout
-    update:
-        flash-message:
-            success: Block Type updated successfully !
-        error: An error occured when trying to update the block type.
-        card-header: Update the block type
-        submit: Update
-    show:
-        card-header: Block type
-    delete:
-        flash-message:
-            success: Block type deleted successfully !
-        exception:
-            linked-page-template: Block type "{blockTypeType}" cannot be deleted because it is linked to others page template.
+        form-type: Form type
 
 page-template-block-type:
     grid:

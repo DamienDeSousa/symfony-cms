@@ -18,7 +18,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 /**
- * Defines the CRUD actions for a Site entity.
+ * Defines the CRUD actions for a PageTemplate entity.
  */
 class PageTemplateCRUDController extends AbstractCrudController
 {
@@ -29,8 +29,7 @@ class PageTemplateCRUDController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        return $crud
-            ->renderContentMaximized();
+        return $crud->renderContentMaximized();
     }
 
     public function configureActions(Actions $actions): Actions

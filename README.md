@@ -45,6 +45,10 @@ Vous trouverez le lien vers la documentation fonctionelle du site [ici](document
 Vous trouverez le lien vers la documentation développeur du page template [ici](documentation/page_template/developer/README.md).  
 Vous trouverez le lien vers la documentation fonctionnelle du page template [ici](documentation/page_template/functional/README.md).  
 
+### Block Type
+
+Vous trouverez le lien vers la documentation développeur du block type [ici](documentation/block_type/developer/README.md).  
+Vous trouverez le lien vers la documentation fonctionnelle du block type [ici](documentation/block_type/functional/README.md).  
 
 ## Notes techniques
 CMS

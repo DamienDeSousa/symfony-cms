@@ -31,32 +31,9 @@ page-template:
 
 block-type:
     grid:
-        id: ID
         type: Type
         layout: Disposition
-        button:
-            create: Créer
-    create:
-        type: Type
-        flash-message:
-            success: Type de block créé avec succès !
-        error: Une erreur est survenue lors de la création du type de block.
-        card-header: Créer un nouveau type de block
-        submit: Créer
-        layout: Disposition
-    update:
-        flash-message:
-            success: Type de block mis à jour avec succès !
-        error: Une erreur est survenue lors de la mise à jour du type de block.
-        card-header: Mettre à jour le type de block
-        submit: Mettre à jour
-    show:
-        card-header: Type de block
-    delete:
-        flash-message:
-            success: Type de block supprimé avec succès !
-        exception:
-            linked-page-template: Impossible de supprimer le type de block "{blockTypeType}" car il est lié à d'autres patrons de pages.
+        form-type: Type de formulaire
 
 page-template-block-type:
     grid:

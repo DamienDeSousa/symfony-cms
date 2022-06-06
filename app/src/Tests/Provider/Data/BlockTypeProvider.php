@@ -23,7 +23,7 @@ trait BlockTypeProvider
         $blockType = new BlockType();
         $blockType->setType('header');
         $blockType->setLayout('path/to/layout/header.html.twig');
-        $blockType->setFormType('');
+        $blockType->setFormType('file-to-replace-by-real-form-types.php');
 
         return $blockType;
     }
