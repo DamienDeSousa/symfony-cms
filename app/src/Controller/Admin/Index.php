@@ -63,6 +63,9 @@ class Index extends AbstractDashboardController
         // return $this->render('admin/index.html.twig');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureDashboard(): Dashboard
     {
         $site = $this->siteReaderService->read();
@@ -76,6 +79,9 @@ class Index extends AbstractDashboardController
         return $dashboard;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureMenuItems(): iterable
     {
         $menuItems = [

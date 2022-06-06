@@ -15,8 +15,6 @@ use Doctrine\Persistence\ObjectManager;
 use App\Tests\Provider\Data\UserProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use App\Tests\Provider\Data\BlockTypeProvider;
-use App\Tests\Provider\Data\PageTemplateProvider;
-use App\Tests\Provider\Data\PageTemplateBlockTypeProvider;
 
 /**
  * This class is used to load fixtures for the DeleteBlockTypeTest class.

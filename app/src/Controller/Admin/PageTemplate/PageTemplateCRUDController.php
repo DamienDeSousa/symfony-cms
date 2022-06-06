@@ -22,16 +22,25 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
  */
 class PageTemplateCRUDController extends AbstractCrudController
 {
+    /**
+     * @inheritdoc
+     */
     public static function getEntityFqcn(): string
     {
         return PageTemplate::class;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureCrud(Crud $crud): Crud
     {
         return $crud->renderContentMaximized();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureActions(Actions $actions): Actions
     {
         return $actions
@@ -46,6 +55,9 @@ class PageTemplateCRUDController extends AbstractCrudController
             ->setPermission(Action::SAVE_AND_RETURN, 'ROLE_SUPER_ADMIN');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureFields(string $pageName): iterable
     {
         return [

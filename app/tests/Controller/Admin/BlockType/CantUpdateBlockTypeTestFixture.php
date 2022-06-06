@@ -10,12 +10,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\BlockType;
 
-use Symfony\Component\Finder\Finder;
 use Doctrine\Persistence\ObjectManager;
 use App\Tests\Provider\Data\UserProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use App\Tests\Provider\Data\BlockTypeProvider;
-use App\Controller\Admin\BlockType\BlockTypeCRUDController;
 
 /**
  * Provide data for CantUpdateBlockTypeTest tests.

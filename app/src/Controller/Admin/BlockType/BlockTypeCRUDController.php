@@ -54,6 +54,9 @@ class BlockTypeCRUDController extends AbstractCrudController
         return $crud->renderContentMaximized();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureActions(Actions $actions): Actions
     {
         return $actions
@@ -68,6 +71,9 @@ class BlockTypeCRUDController extends AbstractCrudController
             ->setPermission(Action::SAVE_AND_RETURN, 'ROLE_SUPER_ADMIN');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureFields(string $pageName): iterable
     {
         return [

@@ -31,17 +31,26 @@ class SiteCRUDController extends AbstractCrudController
         $this->iconDirectory = $iconDirectory;
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function getEntityFqcn(): string
     {
         return Site::class;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
             ->renderContentMaximized();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureActions(Actions $actions): Actions
     {
         return $actions
@@ -53,6 +62,9 @@ class SiteCRUDController extends AbstractCrudController
             ->setPermission(Action::SAVE_AND_RETURN, 'ROLE_ADMIN');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureFields(string $pageName): iterable
     {
         //todo: add this constraint when constraint on ImageField will be available

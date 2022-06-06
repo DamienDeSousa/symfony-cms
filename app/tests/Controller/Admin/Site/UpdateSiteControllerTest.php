@@ -12,12 +12,7 @@ declare(strict_types=1);
 namespace App\Tests\Controller\Admin\Site;
 
 use Exception;
-use LogicException;
 use App\Entity\Site;
-use App\Entity\User;
-use RuntimeException;
-use InvalidArgumentException;
-use App\Controller\Admin\Index;
 use App\Fixture\FixtureAttachedTrait;
 use Symfony\Component\Panther\Client;
 use App\Tests\Provider\Actions\LogAction;
@@ -27,9 +22,6 @@ use App\Tests\Provider\Url\AdminUrlProvider;
 use Symfony\Component\Panther\PantherTestCase;
 use App\Tests\Provider\Actions\NavigationAction;
 use App\Controller\Admin\Site\SiteCRUDController;
-use Symfony\Component\Panther\DomCrawler\Crawler;
-use Facebook\WebDriver\Exception\TimeoutException;
-use Facebook\WebDriver\Exception\NoSuchElementException;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 
 /**

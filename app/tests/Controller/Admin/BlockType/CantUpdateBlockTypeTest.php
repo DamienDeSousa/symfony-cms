@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\BlockType;
 
-use App\Controller\Admin\Index;
 use App\Entity\Structure\BlockType;
 use App\Fixture\FixtureAttachedTrait;
 use Symfony\Component\Panther\Client;
