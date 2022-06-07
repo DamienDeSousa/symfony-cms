@@ -12,40 +12,16 @@ declare(strict_types=1);
 namespace App\Tests\Controller\Admin\BlockType;
 
 use App\Entity\Structure\BlockType;
-use App\Fixture\FixtureAttachedTrait;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Uri\AdminUriProvider;
-use Symfony\Component\Panther\PantherTestCase;
-use App\Tests\Provider\Actions\NavigationAction;
+use App\Tests\LoginPantherTestCase;
+use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Controller\Admin\BlockType\BlockTypeCRUDController;
-use App\Tests\Controller\Admin\Site\ShowSiteControllerTest;
 
 /**
  * This class is used to test the page template data grid.
  */
-class ShowBlockTypeTest extends PantherTestCase
+class ShowBlockTypeTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
-
-    use LogAction;
-
-    use AdminUriProvider;
-
-    use NavigationAction;
-
-    /**
-     * @var \Symfony\Component\Panther\Client
-     */
-    private $client = null;
-
-    protected function setUp(): void
-    {
-        $this->initUserConnection();
-    }
-
     public function testShowBlockTypePage()
     {
         /** @var BlockType $blockType */
@@ -57,15 +33,10 @@ class ShowBlockTypeTest extends PantherTestCase
             $blockType->getId(),
             $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR),
             sprintf(
-                ShowSiteControllerTest::ERROR_MESSAGE,
+                AssertMessageProvider::EXPECTED_ROW_ENTITY_ID_ERROR_MESSAGE,
                 $blockType->getId(),
                 $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR)
             )
         );
-    }
-
-    protected function tearDown(): void
-    {
-        $this->adminLogout($this->client, $this->client->refreshCrawler());
     }
 }

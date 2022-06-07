@@ -11,26 +11,18 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\Security;
 
-use Symfony\Component\Panther\PantherTestCase;
 use App\Entity\User;
-use App\Fixture\FixtureAttachedTrait;
-use App\Tests\Provider\Uri\AdminUriProvider;
-use App\Tests\Provider\Uri\UriProvider;
-use App\Tests\Provider\Url\AdminUrlProvider;
+use App\Tests\FixturePantherTestCase;
 use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Css\Admin\AdminCssProvider;
 
-class LoginCheckTest extends PantherTestCase
+class LoginCheckTest extends FixturePantherTestCase
 {
-    use FixtureAttachedTrait;
-
-    use AdminUriProvider;
-
-    use UriProvider;
-
-    use AdminUrlProvider;
-
     use LogAction;
+
+    protected function setUp(): void
+    {
+        $this->setUpTrait();
+    }
 
     /**
      * Put this test in first to avoid session problems with connections failure.

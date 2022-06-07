@@ -11,43 +11,20 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplate;
 
-use App\Fixture\FixtureAttachedTrait;
-use Symfony\Component\Panther\Client;
+use App\Tests\LoginPantherTestCase;
 use App\Entity\Structure\PageTemplate;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Uri\AdminUriProvider;
 use App\Tests\Provider\AssertMessageProvider;
-use Symfony\Component\Panther\PantherTestCase;
-use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
 
 /**
  * Class used to test the update page template form.
  */
-class UpdatePageTemplateTest extends PantherTestCase
+class UpdatePageTemplateTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
-
-    use LogAction;
-
-    use AdminUriProvider;
-
-    use NavigationAction;
-
     private const EXPECTED_ROWS_COUNT = 1;
 
     private const EXPECTED_ALERT_MESSAGES = 2;
-
-    /** @var null|Client  */
-    private $client = null;
-
-    protected function setUp(): void
-    {
-        $this->initUserConnection();
-    }
 
     public function testUpdatePageTemplate()
     {
@@ -113,10 +90,5 @@ class UpdatePageTemplateTest extends PantherTestCase
                 $alertDangerNodes
             )
         );
-    }
-
-    protected function tearDown(): void
-    {
-        $this->adminLogout($this->client, $this->client->refreshCrawler());
     }
 }

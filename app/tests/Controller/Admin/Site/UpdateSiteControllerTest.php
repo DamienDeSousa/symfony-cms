@@ -13,45 +13,16 @@ namespace App\Tests\Controller\Admin\Site;
 
 use Exception;
 use App\Entity\Site;
-use App\Fixture\FixtureAttachedTrait;
-use Symfony\Component\Panther\Client;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Data\SiteProvider;
-use App\Tests\Provider\Uri\AdminUriProvider;
-use App\Tests\Provider\Url\AdminUrlProvider;
+use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
-use Symfony\Component\Panther\PantherTestCase;
-use App\Tests\Provider\Actions\NavigationAction;
 use App\Controller\Admin\Site\SiteCRUDController;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 
 /**
  * This class is used to test the update site feature.
  */
-class UpdateSiteControllerTest extends PantherTestCase
+class UpdateSiteControllerTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
-
-    use AdminUriProvider;
-
-    use LogAction;
-
-    use SiteProvider;
-
-    use AdminUrlProvider;
-
-    use NavigationAction;
-
-    /** @var ?Client */
-    private $client;
-
-    protected function setUp(): void
-    {
-        $this->initUserConnection();
-    }
-
     public function testUpdateWebSiteWithNewTitleAndNewValidImage()
     {
         /** @var Site $site */
@@ -154,6 +125,6 @@ class UpdateSiteControllerTest extends PantherTestCase
         if (is_file(dirname(__FILE__) . '/../../../../public/uploads/icon/' . $site->getIcon())) {
             unlink(dirname(__FILE__) . '/../../../../public/uploads/icon/' . $site->getIcon());
         }
-        $this->adminLogout($this->client, $this->client->getCrawler());
+        $this->adminLogout($this->client, $this->client->refreshCrawler());
     }
 }

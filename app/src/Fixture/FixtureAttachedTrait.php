@@ -20,7 +20,7 @@ trait FixtureAttachedTrait
 {
     use FixtureLoaderTrait;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         if (!$this instanceof KernelTestCase) {
             throw new LogicException(

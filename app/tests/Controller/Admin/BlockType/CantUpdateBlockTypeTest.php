@@ -11,43 +11,16 @@ declare(strict_types=1);
 namespace App\Tests\Controller\Admin\BlockType;
 
 use App\Entity\Structure\BlockType;
-use App\Fixture\FixtureAttachedTrait;
-use Symfony\Component\Panther\Client;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Uri\AdminUriProvider;
-use App\Tests\Provider\Url\AdminUrlProvider;
+use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
-use Symfony\Component\Panther\PantherTestCase;
-use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
-use App\Tests\Controller\Admin\PageTemplate\CantCreatePageTemplateTest;
 
 /**
  * Tests the behaviour when wrong data are set.
  */
-class CantUpdateBlockTypeTest extends PantherTestCase
+class CantUpdateBlockTypeTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
-
-    use LogAction;
-
-    use AdminUriProvider;
-
-    use AdminUrlProvider;
-
-    use NavigationAction;
-
     private const EXPECTED_ALERT_MESSAGES = 2;
-
-    /** @var null|Client  */
-    private $client = null;
-
-    protected function setUp(): void
-    {
-        $this->initUserConnection();
-    }
 
     public function testUpdateBlockTypeWithAlreadyUsedTypeAndLayout()
     {
@@ -114,10 +87,5 @@ class CantUpdateBlockTypeTest extends PantherTestCase
             $actualPage,
             sprintf(AssertMessageProvider::EXPECTED_ERROR_ON_PAGE_MESSAGE, $expectedPage, $actualPage)
         );
-    }
-
-    protected function tearDown(): void
-    {
-        $this->adminLogout($this->client, $this->client->refreshCrawler());
     }
 }

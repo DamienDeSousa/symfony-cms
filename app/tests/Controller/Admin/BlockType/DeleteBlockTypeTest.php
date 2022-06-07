@@ -12,40 +12,15 @@ declare(strict_types=1);
 namespace App\Tests\Controller\Admin\BlockType;
 
 use App\Entity\Structure\BlockType;
-use App\Fixture\FixtureAttachedTrait;
-use Symfony\Component\Panther\Client;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Uri\AdminUriProvider;
+use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
-use Symfony\Component\Panther\PantherTestCase;
-use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
-use App\Tests\Controller\Admin\Site\ShowNoSiteControllerTest;
 
 /**
  * Class used to test the delete block type.
  */
-class DeleteBlockTypeTest extends PantherTestCase
+class DeleteBlockTypeTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
-
-    use LogAction;
-
-    use AdminUriProvider;
-
-    use NavigationAction;
-
-    /** @var null|Client  */
-    private $client = null;
-
-    protected function setUp(): void
-    {
-        $this->initUserConnection();
-    }
-
-
     public function testDeleteBlockType()
     {
         /** @var BlockType $blockType */
@@ -64,10 +39,5 @@ class DeleteBlockTypeTest extends PantherTestCase
             $emptyResult,
             AssertMessageProvider::EXPECTED_NO_RESULT_ERROR_MESSAGE
         );
-    }
-
-    protected function tearDown(): void
-    {
-        $this->adminLogout($this->client, $this->client->refreshCrawler());
     }
 }

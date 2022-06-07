@@ -11,41 +11,17 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplate;
 
-use App\Fixture\FixtureAttachedTrait;
+use App\Tests\LoginPantherTestCase;
 use App\Entity\Structure\PageTemplate;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Uri\AdminUriProvider;
 use App\Tests\Provider\AssertMessageProvider;
-use Symfony\Component\Panther\PantherTestCase;
-use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
 
 /**
  * This class is used to test the page template data grid.
  */
-class ShowPageTemplateTest extends PantherTestCase
+class ShowPageTemplateTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
-
-    use LogAction;
-
-    use AdminUriProvider;
-
-    use NavigationAction;
-
-    /**
-     * @var \Symfony\Component\Panther\Client
-     */
-    private $client = null;
-
-    protected function setUp(): void
-    {
-        $this->initUserConnection();
-    }
-
     public function testShowPageTemplatePage()
     {
         /** @var PageTemplate $pageTemplate */
@@ -62,10 +38,5 @@ class ShowPageTemplateTest extends PantherTestCase
                 $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR)
             )
         );
-    }
-
-    protected function tearDown(): void
-    {
-        $this->adminLogout($this->client, $this->client->refreshCrawler());
     }
 }

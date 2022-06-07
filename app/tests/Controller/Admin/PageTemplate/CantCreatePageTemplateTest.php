@@ -11,41 +11,18 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplate;
 
-use App\Fixture\FixtureAttachedTrait;
-use Symfony\Component\Panther\Client;
+use App\Tests\LoginPantherTestCase;
 use App\Entity\Structure\PageTemplate;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Uri\AdminUriProvider;
 use App\Tests\Provider\AssertMessageProvider;
-use Symfony\Component\Panther\PantherTestCase;
-use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
 
 /**
  * This class is used to test the impossibility to create a new page template.
  */
-class CantCreatePageTemplateTest extends PantherTestCase
+class CantCreatePageTemplateTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
-
-    use LogAction;
-
-    use AdminUriProvider;
-
-    use NavigationAction;
-
-    public const EXPECTED_ALERT_MESSAGES = 2;
-
-    /** @var Client */
-    private $client;
-
-    protected function setUp(): void
-    {
-        $this->initUserConnection();
-    }
+    private const EXPECTED_ALERT_MESSAGES = 2;
 
     public function testCreateNewPageTemplateWithDataAlreadyUsed()
     {
@@ -74,10 +51,5 @@ class CantCreatePageTemplateTest extends PantherTestCase
                 $alertDangerNodes
             )
         );
-    }
-
-    protected function tearDown(): void
-    {
-        $this->adminLogout($this->client, $this->client->refreshCrawler());
     }
 }

@@ -11,41 +11,17 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\BlockType;
 
-use App\Entity\User;
 use App\Entity\Structure\BlockType;
-use App\Fixture\FixtureAttachedTrait;
-use Symfony\Component\Panther\Client;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Uri\AdminUriProvider;
+use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
-use Symfony\Component\Panther\PantherTestCase;
-use App\Tests\Provider\Actions\NavigationAction;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 
 /**
  * This class is used to test the block type creation.
  */
-class CreateBlockTypeControllerTest extends PantherTestCase
+class CreateBlockTypeControllerTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
-
-    use LogAction;
-
-    use AdminUriProvider;
-
-    use NavigationAction;
-
     private const EXPECTED_GRID_LINES = 1;
-
-    /** @var Client */
-    private $client;
-
-    protected function setUp(): void
-    {
-        $this->initUserConnection();
-    }
 
     public function testCreateNewBlockType()
     {
@@ -69,10 +45,5 @@ class CreateBlockTypeControllerTest extends PantherTestCase
             $dataGridLine,
             sprintf(AssertMessageProvider::EXPECTED_ROWS_NUMBER_ERROR_MESSAGE, self::EXPECTED_GRID_LINES, $dataGridLine)
         );
-    }
-
-    protected function tearDown(): void
-    {
-        $this->adminLogout($this->client, $this->client->refreshCrawler());
     }
 }

@@ -14,37 +14,12 @@ namespace App\Tests\Controller\Admin\Site;
 
 use App\Controller\Admin\Site\SiteCRUDController;
 use App\Entity\Site;
-use App\Fixture\FixtureAttachedTrait;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Actions\NavigationAction;
+use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
-use App\Tests\Provider\Uri\AdminUriProvider;
-use Symfony\Component\Panther\PantherTestCase;
-use Symfony\Component\Panther\Client;
 
-class ShowSiteControllerTest extends PantherTestCase
+class ShowSiteControllerTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
-
-    use AdminUriProvider;
-
-    use LogAction;
-
-    use NavigationAction;
-
-    public const ERROR_MESSAGE = 'Expected row with entity id %d, got %s';
-
-    /** @var Client */
-    private $client;
-
-    protected function setUp(): void
-    {
-        $this->initUserConnection();
-    }
-
     public function testDisplaySitePage()
     {
         /** @var Site $site */
@@ -61,10 +36,5 @@ class ShowSiteControllerTest extends PantherTestCase
                 $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR)
             )
         );
-    }
-
-    protected function tearDown(): void
-    {
-        $this->adminLogout($this->client, $this->client->getCrawler());
     }
 }
