@@ -6,88 +6,35 @@ admin:
         password: Mot de passe
         submit: Connexion
     sections:
+        dashboard: Tableau de bord
         home: Accueil
-        site: Paramètres Généraux
+        general_parameter: Paramètres Généraux
+        site: Site
         page_template: Templates de pages
         block_type: Types de blocks
         page_template_block_type: Patron de pages type de blocks
+        cms: CMS
 
 cms:
     name: Symfony CMS
 
 site:
     show:
-        unavailable:
-            title: Le site n'existe pas !
-            message: Site n'existe pas, vous devez le créer via la ligne de commande cms:site:create
         informations: Informations
-        title: "Titre du site :"
-        icon: "Icone du site :"
-    update:
-        title: Titre
-        icon: Icône
-        save: Enregistrer
-        error: Une erreur est survenue lors de la mise à jour du site.
-        icon_help: "Extensions possible: ico, png, jpeg"
+        title: Titre du site
+        icon: Icone du site
 
 page-template:
     grid:
-        id: ID
         name: Nom
-        layout: Disposition
-        button:
-            create: Créer
-    create:
-        error: Une erreur est survenue lors de la création du patron de page.
-        card-header: Créer un nouveau patron de page
-        name: Nom
-        layout: Disposition
-        submit: Créer
-        flash-message:
-            success: Patron de page créé avec succès !
-    update:
-        submit: Mettre à jour
-        card-header: Mettre à jour un patron de page
-        error: Une erreur est survenue lors de la mise à jour du patron de page.
-        flash-message:
-            success: Patron de page mis à jour avec succès !
-    show:
-        card-header: Patron de page
-    delete:
-        flash-message:
-            success: Patron de page supprimé avec succès !
-        modal:
-            cancel-button: Annuler
-            delete-button: Supprimer
-            header: Suppression
-            body: Etes-vous sûr de vouloir supprimer ce patron de page ?            
+        layout: Disposition         
 
 block-type:
     grid:
-        id: ID
         type: Type
         layout: Disposition
-        button:
-            create: Créer
-    create:
-        type: Type
-        flash-message:
-            success: Type de block créé avec succès !
-        error: Une erreur est survenue lors de la création du type de block.
-        card-header: Créer un nouveau type de block
-        submit: Créer
-        layout: Disposition
-    update:
-        flash-message:
-            success: Type de block mis à jour avec succès !
-        error: Une erreur est survenue lors de la mise à jour du type de block.
-        card-header: Mettre à jour le type de block
-        submit: Mettre à jour
-    show:
-        card-header: Type de block
+        form-type: Type de formulaire
     delete:
-        flash-message:
-            success: Type de block supprimé avec succès !
         exception:
             linked-page-template: Impossible de supprimer le type de block "{blockTypeType}" car il est lié à d'autres patrons de pages.
 
@@ -95,8 +42,8 @@ page-template-block-type:
     grid:
         id: ID
         slug: Slug
-        page-template-name: Nom du patron de page
-        block-type-name: Nom du type de block
+        page-template: Patron de page
+        block-type: Type de block
         button:
             create: Créer
     create:

@@ -11,88 +11,84 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplate;
 
-use App\Entity\User;
-use App\Controller\Admin\Index;
-use App\Fixture\FixtureAttachedTrait;
-use Symfony\Component\Panther\Client;
+use App\Tests\LoginPantherTestCase;
 use App\Entity\Structure\PageTemplate;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Uri\AdminUriProvider;
-use Symfony\Component\Panther\PantherTestCase;
+use App\Tests\Provider\AssertMessageProvider;
+use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
 
 /**
  * Class used to test the update page template form.
  */
-class UpdatePageTemplateTest extends PantherTestCase
+class UpdatePageTemplateTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
+    private const EXPECTED_ROWS_COUNT = 1;
 
-    use LogAction;
+    private const EXPECTED_ALERT_MESSAGES = 2;
 
-    use AdminUriProvider;
-
-    /** @var null|Client  */
-    private $client = null;
-
-    protected function setUp(): void
+    public function testUpdatePageTemplate()
     {
-        $this->setUpTrait();
-        /** @var User $user */
-        $user = $this->fixtureRepository->getReference('user');
-        $this->client = static::createPantherClient();
-        $this->login($user, $this->provideAdminLoginUri(), $this->client);
-    }
-
-
-    public function testCreateNewPageTemplate()
-    {
-        //Navigate to create PageTemplate page.
-        $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
-        $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
-        //wait 1 seconde to display the menu (stop being toggled)
-        usleep(1000000);
-        $linkGeneralParameters = $crawler->filter('#admin_page_template_grid_id')->link();
-        $crawler = $this->client->click($linkGeneralParameters);
-        $this->client->executeScript("document.querySelector('.btn-outline-warning').click()");
-        $crawler = $this->client->waitFor('.card');
-
-        $updateForm = $crawler->selectButton('register_page_template')->form([
-            'create_page_template[name]' => 'New Page Template Test',
-            'create_page_template[layout]' => 'new/random/path/to/layout.html.twig',
-        ]);
-        $crawler = $this->client->submit($updateForm);
-        $nodeAlertSuccess = $crawler->filter('.alert-success')->first();
         /** @var PageTemplate $pageTemplate */
         $pageTemplate = $this->fixtureRepository->getReference('page_template');
+        $crawler = $this->navigateToActionPage(
+            $this->client,
+            PageTemplateCRUDController::class,
+            $pageTemplate->getId(),
+            UtilsAdminSelector::EDIT_BUTTON_REDIRECT_SELECTOR
+        );
+        $updateForm = $crawler->filter(
+            sprintf(
+                UtilsAdminSelector::ENTITY_FORM_SELECTOR,
+                UtilsAdminSelector::ENTITY_FORM_EDIT,
+                UtilsAdminSelector::getShortClassName(PageTemplate::class)
+            )
+        )->form([
+            'PageTemplate[name]' => 'Obiwan Kenobi',
+            'PageTemplate[layout]' => 'another/file/path/file.html.twig',
+        ]);
+        $crawler = $this->submitFormAndReturn($this->client);
+        $datagridRow = UtilsAdminSelector::findRowInDatagrid($crawler, $pageTemplate->getId())->count();
 
-        $this->assertTrue(
-            is_string($nodeAlertSuccess->text()),
-            'Got a ' . gettype($nodeAlertSuccess->text()) . ' instead of a string'
-        );
-        $this->assertGreaterThan(
-            0,
-            strlen($nodeAlertSuccess->text()),
-            'actual value is not greater than expected'
-        );
         $this->assertEquals(
-            'New Page Template Test',
-            $pageTemplate->getName(),
-            'page template name are not the same: expected "New Page Template Test", got "' . $pageTemplate->getName()
-                . '"'
-        );
-        $this->assertEquals(
-            'new/random/path/to/layout.html.twig',
-            $pageTemplate->getLayout(),
-            'page template layout are not the same: expected "new/random/path/to/layout.html.twig", got "'
-                . $pageTemplate->getName() . '"'
+            self::EXPECTED_ROWS_COUNT,
+            $datagridRow,
+            sprintf(AssertMessageProvider::EXPECTED_ROWS_NUMBER_ERROR_MESSAGE, self::EXPECTED_ROWS_COUNT, $datagridRow)
         );
     }
 
-    protected function tearDown(): void
+    public function testUpdatePageTemplateWithSameData()
     {
-        $crawler = $this->client->request('GET', $this->provideAdminHomePageUri());
-        $crawler = $this->adminLogout($this->client, $crawler);
+        /** @var PageTemplate $pageTemplate */
+        $pageTemplate = $this->fixtureRepository->getReference('page_template');
+        /** @var PageTemplate $pageTemplate2 */
+        $pageTemplate2 = $this->fixtureRepository->getReference('page_template2');
+        $crawler = $this->navigateToActionPage(
+            $this->client,
+            PageTemplateCRUDController::class,
+            $pageTemplate->getId(),
+            UtilsAdminSelector::EDIT_BUTTON_REDIRECT_SELECTOR
+        );
+        $updateForm = $crawler->filter(
+            sprintf(
+                UtilsAdminSelector::ENTITY_FORM_SELECTOR,
+                UtilsAdminSelector::ENTITY_FORM_EDIT,
+                UtilsAdminSelector::getShortClassName(PageTemplate::class)
+            )
+        )->form([
+            'PageTemplate[name]' => $pageTemplate2->getName(),
+            'PageTemplate[layout]' => $pageTemplate2->getLayout(),
+        ]);
+        $crawler = $this->submitFormAndReturn($this->client);
+        $alertDangerNodes = $crawler->filter(UtilsAdminSelector::ALERT_FORM_MESSAGE_SELECTOR)->count();
+
+        $this->assertEquals(
+            self::EXPECTED_ALERT_MESSAGES,
+            $alertDangerNodes,
+            sprintf(
+                'Expected %s alert messages, got %s',
+                self::EXPECTED_ALERT_MESSAGES,
+                $alertDangerNodes
+            )
+        );
     }
 }

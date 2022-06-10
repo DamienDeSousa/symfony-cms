@@ -18,6 +18,9 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
  */
 class PreRemoveBlockTypeListener
 {
+    /**
+     * @throws DeleteEntityException
+     */
     public function preRemove(BlockType $blockType, LifecycleEventArgs $lifecycleEventArgs): void
     {
         if (count($blockType->getPageTemplateBlockTypes()) !== 0) {

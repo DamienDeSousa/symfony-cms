@@ -6,7 +6,7 @@ Appliquer les PSR
 Documenter les manip à faire  
 
 Mettre en place les vérifications / logs  
-Mettre en place un systeme de log via le logger  
+Mettre en place un système de log via le logger  
 Rédiger de la doc !  
 
 ## Evolutions
@@ -19,12 +19,21 @@ passer sur symfony 5.4
 ## Installation
 
 Il faut dans un premier temps posséder une première version stable.
+```
 git clone https://github.com/DamienDeSousa/symfony-cms.git  
 make install  
 make connection-php-container  
-php bin/console fos:user:create  
-
+php bin/console fos:user:create #use this command to create an admin user  
+php bin/console php bin/console cms:site:create <nom site> #use this command to create a Site.  
+```
 ## Utilisation
+
+### Page d'accueil et tableau de bord
+
+Vous trouverez le lien vers la documentation développeur du site [ici](documentation/dashboard/developer/README.md).  
+Vous trouverez le lien vers la documentation fonctionelle du site [ici](documentation/dashboard/functional/README.md).
+
+### Gestion utilisateurs
 
 ### Site
 
@@ -34,7 +43,17 @@ Vous trouverez le lien vers la documentation fonctionelle du site [ici](document
 ### Page Template
 
 Vous trouverez le lien vers la documentation développeur du page template [ici](documentation/page_template/developer/README.md).  
+Vous trouverez le lien vers la documentation fonctionnelle du page template [ici](documentation/page_template/functional/README.md).  
 
+### Block Type
+
+Vous trouverez le lien vers la documentation développeur du block type [ici](documentation/block_type/developer/README.md).  
+Vous trouverez le lien vers la documentation fonctionnelle du block type [ici](documentation/block_type/functional/README.md).  
+
+### Page Template Block Type
+
+Vous trouverez le lien vers la documentation développeur du block type [ici](documentation/page_template_block_type/developer/README.md).  
+Vous trouverez le lien vers la documentation fonctionnelle du block type [ici](documentation/page_template_block_type/functional/README.md).
 
 ## Notes techniques
 CMS

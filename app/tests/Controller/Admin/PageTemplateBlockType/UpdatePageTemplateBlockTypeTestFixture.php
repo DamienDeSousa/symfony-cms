@@ -43,8 +43,8 @@ class UpdatePageTemplateBlockTypeTestFixture extends Fixture
         $newBlockType = $this->provideBlockType();
         $newBlockType->setType('footer');
         $newBlockType->setLayout('path/to/footer/layout.html.twig');
-        $newPageTemplateBlockType = $this->providePageTemplateBlockType();
-        $newPageTemplateBlockType->setBlockType($blockType);
+        $newPageTemplateBlockType = $this->providePageTemplateBlockType()->setSlug('my_new_slug');
+        $newPageTemplateBlockType->setBlockType($newBlockType);
         $newPageTemplateBlockType->setPageTemplate($newPageTemplate);
 
         $manager->persist($user);

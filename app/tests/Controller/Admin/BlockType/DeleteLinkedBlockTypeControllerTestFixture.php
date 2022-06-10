@@ -36,11 +36,14 @@ class DeleteLinkedBlockTypeControllerTestFixture extends Fixture
         $user = $this->provideSuperAdminUser();
         $manager->persist($user);
         $pageTemplateBlockType = $this->providePageTemplateBlockType();
+
         $linkedBlockType = $this->provideBlockType();
         $linkedBlockType->setType('linked-block-type');
         $linkedBlockType->addPageTemplateBlockType($pageTemplateBlockType);
+
         $pageTemplate = $this->providePageTemplate();
         $pageTemplate->addPageTemplateBlockType($pageTemplateBlockType);
+
         $pageTemplateBlockType->setPageTemplate($pageTemplate);
         $pageTemplateBlockType->setBlockType($linkedBlockType);
         $manager->persist($linkedBlockType);

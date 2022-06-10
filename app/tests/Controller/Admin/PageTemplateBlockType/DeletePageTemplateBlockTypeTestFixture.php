@@ -47,5 +47,6 @@ class DeletePageTemplateBlockTypeTestFixture extends Fixture
         $manager->flush();
 
         $this->referenceRepository->addReference('user', $user);
+        $this->referenceRepository->addReference('page_template_block_type', $pageTemplateBlockType);
     }
 }

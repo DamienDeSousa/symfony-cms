@@ -20,6 +20,7 @@ use App\Repository\GroupedByRepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use App\Form\Type\Admin\BlockType\CreateBlockTypeType;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Controller\Admin\BlockType\BlockTypeCRUDController;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
@@ -50,7 +51,7 @@ class FileExistsValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, FileExists::class);
         }
 
-        $file = $this->directoryPath . CreateBlockTypeType::FORM_TYPE_BLOCK_RELATIVE_PATH . '/' . $value;
+        $file = $this->directoryPath . BlockTypeCRUDController::FORM_TYPE_BLOCK_RELATIVE_PATH . '/' . $value;
         if (
             !$value
             || !$this->filesystem->exists(

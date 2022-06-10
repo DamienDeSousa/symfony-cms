@@ -11,81 +11,40 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\BlockType;
 
-use App\Entity\User;
-use App\Controller\Admin\Index;
+use App\Controller\Admin\BlockType\BlockTypeCRUDController;
 use App\Entity\Structure\BlockType;
-use App\Fixture\FixtureAttachedTrait;
-use Symfony\Component\Panther\Client;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Uri\AdminUriProvider;
-use Symfony\Component\Panther\PantherTestCase;
+use App\Tests\LoginPantherTestCase;
+use App\Tests\Provider\AssertMessageProvider;
+use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 
 /**
  * Class used to test the deletion to a linked block type.
  */
-class DeleteLinkedBlockTypeControllerTest extends PantherTestCase
+class DeleteLinkedBlockTypeControllerTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
-
-    use LogAction;
-
-    use AdminUriProvider;
-
-    /** @var null|Client  */
-    private $client = null;
-
-    protected function setUp(): void
-    {
-        $this->setUpTrait();
-        /** @var User $user */
-        $user = $this->fixtureRepository->getReference('user');
-        $this->client = static::createPantherClient();
-        $this->login($user, $this->provideAdminLoginUri(), $this->client);
-    }
-
+    private const EXPECTED_ONE_ALERT_MESSAGE = 1;
     public function testUnableToDeleteLinkedBlockType()
     {
-        $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
         /** @var BlockType $linkedBlockType */
         $linkedBlockType = $this->fixtureRepository->getReference('linked_block_type');
-        $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
-        //wait 1 seconde to display the menu (stop being toggled)
-        usleep(1000000);
-        $linkGeneralParameters = $crawler->filter('#link_admin_block_type_grid_id')->link();
-        $crawler = $this->client->click($linkGeneralParameters);
-        $firstButton = sprintf('#modal_delete_%d', $linkedBlockType->getId());
-        $this->client->executeScript(
-            "document.querySelector('.btn-outline-danger[data-target=\"$firstButton\"]').click()"
+        $crawler = $this->navigateToActionPage(
+            $this->client,
+            BlockTypeCRUDController::class,
+            $linkedBlockType->getId(),
+            UtilsAdminSelector::DELETE_BUTTON_MODAL_SELECTOR
         );
-        $crawler = $this->client->waitFor('.modal');
-        $this->client->executeScript("document.querySelector('.btn-danger').click()");
-        // $this->client->takeScreenshot('screen.png');
-        $crawler = $this->client->refreshCrawler();
-        // $this->client->takeScreenshot('screen.png');
-        $nodeAlertError = $crawler->filter('.alert-danger');
-        $tableRows = $crawler->filter('table > tbody')->children()->count();
 
-        $this->assertTrue(
-            is_string($nodeAlertError->text()),
-            'Got a ' . gettype($nodeAlertError->text()) . ' instead of a string'
-        );
-        $this->assertGreaterThan(
-            0,
-            strlen($nodeAlertError->text()),
-            'actual value is not greater than expected'
-        );
+        $crawler = $this->clickElement($this->client, UtilsAdminSelector::DELETE_ENTITY_BUTTON_SELECTOR);
+        $countDangerAlert = $crawler->filter(UtilsAdminSelector::DANGER_ALERT_SELECTOR)->count();
+
         $this->assertEquals(
-            1,
-            $tableRows,
-            'Page template not deleted, expected 1 rows in table, got ' . $tableRows . ' rows'
+            self::EXPECTED_ONE_ALERT_MESSAGE,
+            $countDangerAlert,
+            sprintf(
+                AssertMessageProvider::EXPECTED_ALERT_MESSAGE_MESSAGE,
+                self::EXPECTED_ONE_ALERT_MESSAGE,
+                $countDangerAlert
+            )
         );
-    }
-
-    protected function tearDown(): void
-    {
-        $crawler = $this->client->request('GET', $this->provideAdminHomePageUri());
-        $crawler = $this->adminLogout($this->client, $crawler);
     }
 }

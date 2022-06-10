@@ -12,37 +12,29 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\Site;
 
+use App\Controller\Admin\Site\SiteCRUDController;
 use App\Entity\Site;
-use App\Entity\User;
-use App\Fixture\FixtureAttachedTrait;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Css\Admin\AdminSiteCssProvider;
-use App\Tests\Provider\Uri\AdminUriProvider;
-use Symfony\Component\Panther\PantherTestCase;
+use App\Tests\LoginPantherTestCase;
+use App\Tests\Provider\AssertMessageProvider;
+use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 
-class ShowSiteControllerTest extends PantherTestCase
+class ShowSiteControllerTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait;
-
-    use AdminUriProvider;
-
-    use LogAction;
-
-    use AdminSiteCssProvider;
-
     public function testDisplaySitePage()
     {
-        /** @var User $user */
-        $user = $this->fixtureRepository->getReference('user');
         /** @var Site $site */
         $site = $this->fixtureRepository->getReference('site');
+        $crawler = $this->navigateLeftMenuLink($this->client, SiteCRUDController::class);
+        $node = UtilsAdminSelector::findRowInDatagrid($crawler, $site->getId());
 
-        $client = static::createPantherClient();
-        $crawler = $this->login($user, $this->provideAdminLoginUri(), $client);
-        $crawler = $client->request('GET', $this->provideAdminSiteShowUri());
-
-        $this->assertSelectorTextSame($this->provideCardHeaderClass(), 'Informations');
-
-        $crawler = $this->adminLogout($client, $crawler);
+        $this->assertEquals(
+            $site->getId(),
+            $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR),
+            sprintf(
+                AssertMessageProvider::EXPECTED_ROW_ENTITY_ID_ERROR_MESSAGE,
+                $site->getId(),
+                $node->attr(UtilsAdminSelector::DATA_ID_ATTR_TAG_SELECTOR)
+            )
+        );
     }
 }

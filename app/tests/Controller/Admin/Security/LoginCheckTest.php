@@ -11,38 +11,17 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\Security;
 
-use Symfony\Component\Panther\PantherTestCase;
 use App\Entity\User;
-use App\Fixture\FixtureAttachedTrait;
-use App\Tests\Provider\Uri\AdminUriProvider;
-use App\Tests\Provider\Uri\UriProvider;
-use App\Tests\Provider\Url\AdminUrlProvider;
+use App\Tests\FixturePantherTestCase;
 use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Css\Admin\AdminCssProvider;
 
-class LoginCheckTest extends PantherTestCase
+class LoginCheckTest extends FixturePantherTestCase
 {
-    use FixtureAttachedTrait;
-
-    use AdminUriProvider;
-
-    use UriProvider;
-
-    use AdminUrlProvider;
-
     use LogAction;
 
-    use AdminCssProvider;
-
-    public function testDisplayLoginAdminPage()
+    protected function setUp(): void
     {
-        $client = static::createPantherClient();
-        $crawler = $client->request('GET', $this->provideAdminLoginUri());
-        $usernameInput = $crawler->filter($this->provideUsernameLoginId())->count();
-        $passwordInput = $crawler->filter($this->providePasswdLoginId())->count();
-
-        $this->assertEquals(1, $usernameInput, 'Assert that user name input exists');
-        $this->assertEquals(1, $passwordInput, 'Assert that password input exists');
+        $this->setUpTrait();
     }
 
     /**
@@ -60,7 +39,7 @@ class LoginCheckTest extends PantherTestCase
 
         $this->assertEquals(
             $this->provideAdminBaseUrl() . $this->provideAdminHomePageUri(),
-            $crawler->getUri(),
+            $crawler->getUri() . '/',
             'Assert that authentification succeed and redirect to admin home page'
         );
 
@@ -79,12 +58,12 @@ class LoginCheckTest extends PantherTestCase
         $user = $this->fixtureRepository->getReference('user');
         $client = static::createPantherClient();
         $crawler = $client->request('GET', $this->provideAdminLoginUri());
-        $loginForm = $crawler->selectButton($this->provideSubmitLoginName())->form([
-            $this->provideUsernameLoginName() => $user->getUsername(),
-            $this->providePasswdLoginName() => 'wrong_password'
+        $loginForm = $crawler->selectButton('_submit')->form([
+            '_username' => $user->getUsername(),
+            '_password' => 'wrong_password'
         ]);
         $crawler = $client->submit($loginForm);
-        $errorMessage = $crawler->filter($this->provideErrorMsgClass())->count();
+        $errorMessage = $crawler->filter('.text-danger')->count();
 
         $this->assertEquals(1, $errorMessage, 'Assert that login failed and bad credential message is present');
     }

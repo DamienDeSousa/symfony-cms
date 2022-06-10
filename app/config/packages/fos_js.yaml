@@ -1,15 +1,1 @@
-fos_js_routing:
-    routes_to_expose:
-        - admin_site_update
-        - admin_page_template_create
-        - admin_page_template_show
-        - admin_page_template_update
-        - admin_page_template_delete
-        - admin_block_type_create
-        - admin_block_type_update
-        - admin_block_type_show
-        - admin_block_type_delete
-        - admin_page_template_block_type_create
-        - admin_page_template_block_type_update
-        - admin_page_template_block_type_delete
-        - admin_page_template_block_type_show
+fos_js_routing: ~

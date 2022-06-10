@@ -22,8 +22,6 @@ use App\Controller\Admin\PageTemplate\ShowPageTemplateController;
 use App\Controller\Admin\PageTemplateBlockType\CreatePageTemplateBlockTypeController;
 use App\Controller\Admin\PageTemplateBlockType\GridPageTemplateBlockTypeController;
 use App\Controller\Admin\Security\Login;
-use App\Controller\Admin\Site\ShowSiteController;
-use App\Controller\Admin\Site\UpdateSiteController;
 
 /**
  * Trait that provides uri for tests.
@@ -38,46 +36,6 @@ trait AdminUriProvider
     public function provideAdminHomePageUri(): string
     {
         return Index::ADMIN_HOME_PAGE_URI;
-    }
-
-    public function provideAdminSiteShowUri(): string
-    {
-        return ShowSiteController::SITE_SHOW_URI;
-    }
-
-    public function provideAdminSiteUpdateUri(): string
-    {
-        return UpdateSiteController::SITE_UPDATE_URI;
-    }
-
-    public function provideAdminPageTemplateGridUri(): string
-    {
-        return GridPageTemplateController::GRID_PAGE_TEMPLATE_ROUTE_URI;
-    }
-
-    public function provideAdminPageTemplateCreateUri(): string
-    {
-        return CreatePageTemplateController::CREATE_PAGE_TEMPLATE_ROUTE_URI;
-    }
-
-    public function provideAdminPageTemplateShowUri(): string
-    {
-        return ShowPageTemplateController::SHOW_PAGE_TEMPLATE_ROUTE_URI;
-    }
-
-    public function provideAdminBlockTypeCreateUri(): string
-    {
-        return CreateBlockTypeController::CREATE_PAGE_TEMPLATE_ROUTE_URI;
-    }
-
-    public function provideAdminBlockTypeUpdateUri(): string
-    {
-        return UpdateBlockTypeController::UPDATE_BLOCK_TYPE_ROUTE_URI;
-    }
-
-    public function provideAdminGridBlockTypeGridUri(): string
-    {
-        return GridBlockTypeController::BLOCK_TYPE_ROUTE_URI;
     }
 
     public function provideAdminGridPageTemplateBlockTypeUri(): string
