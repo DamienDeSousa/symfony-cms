@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace App\Entity\Structure;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Validator\Classes as CmsAssert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\Structure\PageTemplateBlockTypeRepository;
@@ -29,42 +28,34 @@ use App\Repository\Structure\PageTemplateBlockTypeRepository;
 class PageTemplateBlockType
 {
     /**
-     * @var int
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=50)
      *
      * @Assert\NotBlank
      */
-    private $slug;
+    private ?string $slug;
 
     /**
-     * @var PageTemplate
-     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Structure\PageTemplate", inversedBy="pageTemplateBlockTypes")
      * @ORM\JoinColumn(name="page_template_id", referencedColumnName="id", onDelete="CASCADE")
      *
      * @Assert\NotNull
      */
-    private $pageTemplate;
+    private ?PageTemplate $pageTemplate;
 
     /**
-     * @var BlockType
-     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Structure\BlockType", inversedBy="pageTemplateBlockTypes")
      * @ORM\JoinColumn(name="block_type_id", referencedColumnName="id")
      *
      * @Assert\NotNull
      */
-    private $blockType;
+    private ?BlockType $blockType;
 
     public function getId(): ?int
     {

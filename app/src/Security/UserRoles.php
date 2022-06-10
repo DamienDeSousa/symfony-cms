@@ -28,7 +28,7 @@ class UserRoles
     /**
      * @var array
      */
-    protected $roles;
+    protected array $roles;
 
     public function __construct(array $roles = [])
     {

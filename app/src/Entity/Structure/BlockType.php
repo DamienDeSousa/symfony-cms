@@ -28,51 +28,41 @@ use App\Validator\Files\FileExists;
 class BlockType
 {
     /**
-     * @var int
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=100, unique=true)
      *
      * @Assert\NotBlank
      * @Assert\Type("string")
      */
-    private $type;
+    private ?string $type;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=255, unique=true)
      *
      * @Assert\NotBlank
      * @Assert\Type("string")
      */
-    private $layout;
+    private ?string $layout;
 
     /**
-     * @var ArrayCollection
-     *
      * @ORM\OneToMany(targetEntity="App\Entity\Structure\PageTemplateBlockType", mappedBy="blockType")
      */
-    private $pageTemplateBlockTypes;
+    private Collection $pageTemplateBlockTypes;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=255, nullable=false)
      *
      * @Assert\NotBlank
      * @Assert\Type("string")
      * @FileExists
      */
-    private $formType;
+    private ?string $formType;
 
     public function __construct()
     {

@@ -39,26 +39,6 @@ services:
         arguments:
             $roles: '%security.role_hierarchy.roles%'
 
-    # Twig extensions
-    App\Twig\Admin\SidebarSection:
-        arguments:
-            $routes:
-                - name: 'admin_index'
-                  section_name: 'admin.sections.home'
-                  link_id: 'link_admin_index_id'
-                - name: 'admin_site_show'
-                  section_name: 'admin.sections.site'
-                  link_id: 'link_admin_site_show_id'
-                - name: 'admin_page_template_grid'
-                  section_name: 'admin.sections.page_template'
-                  link_id: 'admin_page_template_grid_id'
-                - name: 'admin_block_type_grid'
-                  section_name: 'admin.sections.block_type'
-                  link_id: 'link_admin_block_type_grid_id'
-                - name: 'admin_page_template_block_type_grid'
-                  section_name: 'admin.sections.page_template_block_type'
-                  link_id: 'link_admin_page_template_block_type_grid_id'
-
     # Decorators
     App\Decorator\Fos\UserBundle\Command\PromoteUserCommand:
         decorates:

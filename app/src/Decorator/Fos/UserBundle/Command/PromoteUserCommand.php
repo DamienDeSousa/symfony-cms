@@ -19,15 +19,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PromoteUserCommand extends FOSPromoteUserCommand
 {
-    /**
-     * @var UserRoles
-     */
-    protected $userRoles;
+    protected UserRoles $userRoles;
 
-    /**
-     * @var FOSPromoteUserCommand
-     */
-    protected $fosPromotedUserCommand;
+    protected FOSPromoteUserCommand $fosPromotedUserCommand;
 
     public function __construct(
         UserManipulator $manipulator,

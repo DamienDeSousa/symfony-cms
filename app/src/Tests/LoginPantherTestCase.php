@@ -20,15 +20,14 @@ abstract class LoginPantherTestCase extends FixturePantherTestCase
 {
     use LogAction;
 
-    /** @var null|Client  */
-    protected $client = null;
+    protected ?Client $client = null;
 
     /**
      * @inheritdoc
      */
     protected function setUp(): void
     {
-        $this->initUserConnection();
+        $this->client = $this->initUserConnection();
     }
 
     /**

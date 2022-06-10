@@ -44,13 +44,14 @@ trait LogAction
         return $client->request('GET', $link);
     }
 
-    public function initUserConnection(): Crawler
+    public function initUserConnection(): Client
     {
         $this->setUpTrait();
         /** @var User $user */
         $user = $this->fixtureRepository->getReference('user');
-        $this->client = static::createPantherClient();
+        $client = static::createPantherClient();
+        $this->login($user, $this->provideAdminLoginUri(), $client);
 
-        return $this->login($user, $this->provideAdminLoginUri(), $this->client);
+        return $client;
     }
 }

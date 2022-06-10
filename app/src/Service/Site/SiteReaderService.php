@@ -19,29 +19,11 @@ use Psr\Log\LoggerInterface;
 
 class SiteReaderService
 {
-    /**
-     * @var SiteRepository
-     */
-    private $siteRepository;
+    private SiteRepository $siteRepository;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(
-        SiteRepository $siteRepository,
-        EntityManagerInterface $entityManager,
-        LoggerInterface $logger
-    ) {
+    public function __construct(SiteRepository $siteRepository)
+    {
         $this->siteRepository = $siteRepository;
-        $this->entityManager = $entityManager;
-        $this->logger = $logger;
     }
 
     public function read(): ?Site

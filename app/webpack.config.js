@@ -25,8 +25,6 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('admin_admin_layout', './assets/js/admin/admin_layout.js')
-    .addEntry('admin_include_data_grid', './assets/js/admin/include/data_grid.js')
-    .addEntry('admin_page_template_block_type_grid_page_template_block_type', './assets/js/admin/page_template_block_type/grid_page_template_block_type.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

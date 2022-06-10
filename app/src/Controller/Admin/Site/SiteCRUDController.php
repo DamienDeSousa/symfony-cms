@@ -23,8 +23,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
  */
 class SiteCRUDController extends AbstractCrudController
 {
-    /** @var string */
-    private $iconDirectory;
+    private string $iconDirectory;
 
     public function __construct(string $iconDirectory)
     {

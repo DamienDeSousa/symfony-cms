@@ -20,10 +20,7 @@ use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface
  */
 class AuthSecurizer
 {
-    /**
-     * @var AccessDecisionManagerInterface
-     */
-    protected $accessDecisionManager;
+    protected AccessDecisionManagerInterface $accessDecisionManager;
 
     public function __construct(AccessDecisionManagerInterface $accessDecisionManager)
     {
