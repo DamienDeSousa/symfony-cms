@@ -30,30 +30,15 @@ class Login extends AbstractController
 
     public const LOGIN_PAGE_URI = '/admin-GC2NeDwu26y6pred';
 
-    /**
-     * @var CsrfTokenManagerInterface
-     */
-    protected $tokenManager;
+    protected CsrfTokenManagerInterface $tokenManager;
 
-    /**
-     * @var AuthError
-     */
-    protected $authError;
+    protected AuthError $authError;
 
-    /**
-     * @var LastUsername
-     */
-    protected $lastUsername;
+    protected LastUsername $lastUsername;
 
-    /**
-     * @var Captcha
-     */
-    protected $captcha;
+    protected Captcha $captcha;
 
-    /**
-     * @var BotDetectCaptcha
-     */
-    private $botDetectCaptcha;
+    private BotDetectCaptcha $botDetectCaptcha;
 
     public function __construct(
         CsrfTokenManagerInterface $tokenManager,

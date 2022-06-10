@@ -17,11 +17,9 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class SiteIcon implements RuntimeExtensionInterface
 {
-    /** @var SiteReaderService */
-    private $siteReaderService;
+    private SiteReaderService $siteReaderService;
 
-    /** @var string */
-    private $iconDirectory;
+    private string $iconDirectory;
 
     public function __construct(SiteReaderService $siteReaderService, string $iconDirectory)
     {

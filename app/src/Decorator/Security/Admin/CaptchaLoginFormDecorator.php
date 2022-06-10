@@ -17,6 +17,7 @@ use App\Security\Admin\LoginFormAuthenticator;
 use Captcha\Bundle\CaptchaBundle\Integration\BotDetectCaptcha;
 use Captcha\Bundle\CaptchaBundle\Security\Core\Exception\InvalidCaptchaException;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -27,30 +28,15 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class CaptchaLoginFormDecorator extends LoginFormAuthenticator
 {
-    /**
-     * @var LoginFormAuthenticator
-     */
-    private $loginFormAuthenticator;
+    private LoginFormAuthenticator $loginFormAuthenticator;
 
-    /**
-     * @var Captcha
-     */
-    private $captcha;
+    private Captcha $captcha;
 
-    /**
-     * @var bool
-     */
-    private $isCaptchaValid;
+    private bool $isCaptchaValid;
 
-    /**
-     * @var BotDetectCaptcha
-     */
-    private $botDetectCaptcha;
+    private BotDetectCaptcha $botDetectCaptcha;
 
-    /**
-     * @var Captcha
-     */
-    private $captchaEnabler;
+    private Captcha $captchaEnabler;
 
     public function __construct(
         Captcha $captchaEnabler,
@@ -75,7 +61,7 @@ class CaptchaLoginFormDecorator extends LoginFormAuthenticator
     /**
      * @inheritDoc
      */
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         $isSupportedRequest = $this->loginFormAuthenticator->supports($request);
         if ($isSupportedRequest) {
@@ -101,7 +87,7 @@ class CaptchaLoginFormDecorator extends LoginFormAuthenticator
     /**
      * @inheritDoc
      */
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         $isCredentialsValid = $this->loginFormAuthenticator->checkCredentials($credentials, $user);
 
@@ -118,7 +104,7 @@ class CaptchaLoginFormDecorator extends LoginFormAuthenticator
     /**
      * @inheritDoc
      */
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): RedirectResponse
     {
         if (!$this->isCaptchaValid) {
             $exception = new InvalidCaptchaException('CAPTCHA validation failed, try again.');

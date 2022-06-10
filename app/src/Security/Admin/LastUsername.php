@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Security\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Security;
 
 class LastUsername

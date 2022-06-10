@@ -30,17 +30,13 @@ class BlockTypeCRUDController extends AbstractCrudController
 {
     public const FORM_TYPE_BLOCK_RELATIVE_PATH = '/src/Form/Type/Block';
 
-    /** @var Finder */
-    private $finder;
+    private Finder $finder;
 
-    /** @var string */
-    private $directoryPath;
+    private string $directoryPath;
 
-    /** @var AdminUrlGenerator */
-    private $adminUrlGenerator;
+    private AdminUrlGenerator $adminUrlGenerator;
 
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     public function __construct(
         string $directoryPath,

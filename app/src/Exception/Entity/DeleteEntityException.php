@@ -19,6 +19,10 @@ class DeleteEntityException extends TranslateException
 {
     public const ERROR_CODE = 1501;
 
+    private string $transMessage;
+
+    private array $transMessageParams;
+
     public function __construct(
         string $transMessage,
         array $transMessageParams = [],

@@ -26,44 +26,36 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class PageTemplate
 {
     /**
-     * @var int
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=255, unique=true)
      *
      * @Assert\NotBlank
      * @Assert\Type("string")
      */
-    private $name;
+    private ?string $name;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=255, unique=true)
      *
      * @Assert\NotBlank
      * @Assert\Type("string")
      */
-    private $layout;
+    private ?string $layout;
 
     /**
-     * @var ArrayCollection
-     *
      * @ORM\OneToMany(
      *  targetEntity="App\Entity\Structure\PageTemplateBlockType",
      *  mappedBy="pageTemplate",
      *  cascade={"remove"}
      * )
      */
-    private $pageTemplateBlockTypes;
+    private Collection $pageTemplateBlockTypes;
 
     public function __construct()
     {

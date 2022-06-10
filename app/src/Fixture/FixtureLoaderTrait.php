@@ -17,8 +17,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 trait FixtureLoaderTrait
 {
-    /** @var ReferenceRepository */
-    protected $fixtureRepository;
+    protected ReferenceRepository $fixtureRepository;
 
     private function loadFixture(ObjectManager $manager, FixtureInterface ...$fixtures): void
     {

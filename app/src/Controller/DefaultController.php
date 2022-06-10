@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    protected $userRoles;
+    protected UserRoles $userRoles;
 
     public function __construct(UserRoles $userRoles)
     {
@@ -19,7 +19,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function number()
+    public function number(): Response
     {
         return new Response(
             '<html><body>' . print_r($this->userRoles->getDefinedRoles(), true) . '</body></html>'
@@ -29,7 +29,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/test", name="test")
      */
-    public function test()
+    public function test(): Response
     {
         return new Response(
             'Test page'

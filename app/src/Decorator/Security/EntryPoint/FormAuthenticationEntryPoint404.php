@@ -26,8 +26,7 @@ class FormAuthenticationEntryPoint404 implements AuthenticationEntryPointInterfa
 {
     private const ROOT_URI = '/admin';
 
-    /** @var FormAuthenticationEntryPoint */
-    private $formAuthenticationEntryPoint;
+    private FormAuthenticationEntryPoint $formAuthenticationEntryPoint;
 
     public function __construct(FormAuthenticationEntryPoint $formAuthenticationEntryPoint)
     {

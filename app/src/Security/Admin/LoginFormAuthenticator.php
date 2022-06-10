@@ -38,30 +38,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 {
     use TargetPathTrait;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $entityManager;
+    protected EntityManagerInterface $entityManager;
 
-    /**
-     * @var UrlGeneratorInterface
-     */
-    protected $urlGenerator;
+    protected UrlGeneratorInterface $urlGenerator;
 
-    /**
-     * @var CsrfTokenManagerInterface
-     */
-    protected $csrfTokenManager;
+    protected CsrfTokenManagerInterface $csrfTokenManager;
 
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    protected $passwordEncoder;
+    protected UserPasswordEncoderInterface $passwordEncoder;
 
-    /**
-     * @var AuthSecurizer
-     */
-    protected $authSecurizer;
+    protected \App\Security\Admin\AuthSecurizer $authSecurizer;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -80,7 +65,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     /**
      * @inheritDoc
      */
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return LoginCheck::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
@@ -127,7 +112,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     /**
      * @inheritDoc
      */
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         $isUserAdmin = false;
         if ($this->authSecurizer->isGranted($user, UserRoles::ROLE_ADMIN)) {

@@ -2,17 +2,11 @@
 
 ## ToDo
 
-Appliquer les PSR  
-Documenter les manip à faire  
-
-Mettre en place les vérifications / logs  
 Mettre en place un système de log via le logger  
-Rédiger de la doc !  
 
 ## Evolutions
 
 passer sur php7.4  
-utiliser EasyAdminBundle pour créer le BO.  
 extraire le code dans un dossier à part (en faire un bundle à terme).  
 passer sur symfony 5.4  
 
@@ -52,39 +46,8 @@ Vous trouverez le lien vers la documentation fonctionnelle du block type [ici](d
 
 ### Page Template Block Type
 
-Vous trouverez le lien vers la documentation développeur du block type [ici](documentation/page_template_block_type/developer/README.md).  
-Vous trouverez le lien vers la documentation fonctionnelle du block type [ici](documentation/page_template_block_type/functional/README.md).
-
-## Notes techniques
-CMS
-
-Un site est composé de plusieurs pages (OneToMany)
-Une page ne comporte qu’un seul layout qui l’architecte (OneToOne)
-Une page est composée de plusieurs blocs (ManyToMany)
-
-Site:
-- Title
-- favicon
-
-Page:
-- (Id)
-- Title
-- Name
-- layout
-- Liste de blocs
-- Route ? (Avec args ?)
-
-Layout:
-- Title
-- Twig
-- Type de layout ?
-- Page ?
-
-Bloc:
-- Title
-- Name
-- Type (footer, header , etc..)
-- Un twig  
+Vous trouverez le lien vers la documentation développeur du page template block type [ici](documentation/page_template_block_type/developer/README.md).  
+Vous trouverez le lien vers la documentation fonctionnelle du page template block type [ici](documentation/page_template_block_type/functional/README.md).
 
 ### Création nouvel environnement
 

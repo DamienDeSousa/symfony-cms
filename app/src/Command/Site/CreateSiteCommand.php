@@ -31,10 +31,7 @@ class CreateSiteCommand extends Command
      */
     protected static $defaultName = 'cms:site:create';
 
-    /**
-     * @var SiteCreatorHelper
-     */
-    private $siteCreator;
+    private SiteCreatorHelper $siteCreator;
 
     public function __construct(SiteCreatorHelper $siteCreator)
     {
@@ -49,7 +46,7 @@ class CreateSiteCommand extends Command
         $this->addArgument(self::ARGUMENT_TITLE_NAME, InputArgument::REQUIRED, 'The site title');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $title = $input->getArgument(self::ARGUMENT_TITLE_NAME);
         $site = $this->siteCreator->create($title);

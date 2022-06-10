@@ -19,15 +19,9 @@ use App\Security\UserRoles;
 
 class DemoteUserCommand extends FOSDemoteUserCommand
 {
-    /**
-     * @var UserRoles
-     */
-    protected $userRoles;
+    protected UserRoles $userRoles;
 
-    /**
-     * @var FOSDemoteUserCommand
-     */
-    protected $fosDemotedUserCommand;
+    protected FOSDemoteUserCommand $fosDemotedUserCommand;
 
     public function __construct(
         UserManipulator $manipulator,

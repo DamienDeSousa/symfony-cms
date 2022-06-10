@@ -24,7 +24,7 @@ class HomePageVoter extends Voter
 {
     public const HOMEPAGE = 'homepage';
 
-    private $security;
+    private Security $security;
 
     public function __construct(Security $security)
     {

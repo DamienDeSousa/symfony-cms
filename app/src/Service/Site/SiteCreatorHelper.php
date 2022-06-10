@@ -19,20 +19,11 @@ use Psr\Log\LoggerInterface;
 
 class SiteCreatorHelper
 {
-    /**
-     * @var SiteRepository
-     */
-    private $siteRepository;
+    private SiteRepository $siteRepository;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(
         LoggerInterface $logger,

@@ -15,11 +15,9 @@ use Symfony\Component\Validator\Constraint;
  */
 class FileExists extends Constraint
 {
-    /** @var string */
-    public $message = 'file_exists';
+    public string $message = 'file_exists';
 
-    /** @var string */
-    public $file;
+    public string $file;
 
     public function getTargets()
     {

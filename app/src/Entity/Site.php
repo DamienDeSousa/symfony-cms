@@ -24,7 +24,7 @@ class Site
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -32,14 +32,14 @@ class Site
      * @Assert\NotBlank
      * @Assert\Type("string")
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      *
      * @Assert\Type("string")
      */
-    private $icon;
+    private ?string $icon;
 
     public function getId(): ?int
     {

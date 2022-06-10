@@ -19,7 +19,7 @@ class AdminExtension extends AbstractExtension
     /**
      * @inheritDoc
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('sidebar_sections', [SidebarSection::class, 'getSections']),
