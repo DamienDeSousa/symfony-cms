@@ -14,6 +14,7 @@ namespace App\Controller\Admin;
 use App\Entity\Site;
 use App\Entity\Structure\BlockType;
 use App\Entity\Structure\PageTemplate;
+use App\Entity\Structure\PageTemplateBlockType;
 use App\Service\Site\SiteReaderService;
 use App\Security\Admin\Voter\HomePageVoter;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,9 +64,6 @@ class Index extends AbstractDashboardController
         // return $this->render('admin/index.html.twig');
     }
 
-    /**
-     * @inheritdoc
-     */
     public function configureDashboard(): Dashboard
     {
         $site = $this->siteReaderService->read();
@@ -95,6 +93,11 @@ class Index extends AbstractDashboardController
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
             $menuItems[] = MenuItem::linkToCrud('admin.sections.page_template', 'fa fa-th-large', PageTemplate::class);
             $menuItems[] = MenuItem::linkToCrud('admin.sections.block_type', 'fa fa-square', BlockType::class);
+            $menuItems[] = MenuItem::linkToCrud(
+                'admin.sections.page_template_block_type',
+                'fa fa-link',
+                PageTemplateBlockType::class
+            );
         }
 
         return $menuItems;

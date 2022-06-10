@@ -14,15 +14,16 @@ namespace App\Entity\Structure;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Validator\Classes as CmsAssert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\Structure\PageTemplateBlockTypeRepository;
 
 /**
  * @ORM\Entity(repositoryClass=PageTemplateBlockTypeRepository::class)
  *
- * @CmsAssert\UniqGroupedBy(
- *     attributesGroupedBy={"pageTemplate", "blockType"},
- *     uniqAttributes={"slug"}
+ * @UniqueEntity(
+ *     fields={"slug", "pageTemplate", "blockType"},
+ *     errorPath="slug"
  * )
  */
 class PageTemplateBlockType

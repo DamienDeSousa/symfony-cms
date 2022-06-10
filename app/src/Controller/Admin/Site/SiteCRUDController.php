@@ -31,26 +31,17 @@ class SiteCRUDController extends AbstractCrudController
         $this->iconDirectory = $iconDirectory;
     }
 
-    /**
-     * @inheritdoc
-     */
     public static function getEntityFqcn(): string
     {
         return Site::class;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
             ->renderContentMaximized();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function configureActions(Actions $actions): Actions
     {
         return $actions

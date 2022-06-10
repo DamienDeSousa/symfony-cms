@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\BlockType;
 
+use App\Controller\Admin\BlockType\BlockTypeCRUDController;
 use App\Entity\Structure\BlockType;
 use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
@@ -27,7 +28,7 @@ class DeleteBlockTypeTest extends LoginPantherTestCase
         $blockType = $this->fixtureRepository->getReference('block_type');
         $crawler = $this->navigateToActionPage(
             $this->client,
-            BlockType::class,
+            BlockTypeCRUDController::class,
             $blockType->getId(),
             UtilsAdminSelector::DELETE_BUTTON_MODAL_SELECTOR
         );

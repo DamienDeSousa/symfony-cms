@@ -34,13 +34,16 @@ block-type:
         type: Type
         layout: Disposition
         form-type: Type de formulaire
+    delete:
+        exception:
+            linked-page-template: Impossible de supprimer le type de block "{blockTypeType}" car il est lié à d'autres patrons de pages.
 
 page-template-block-type:
     grid:
         id: ID
         slug: Slug
-        page-template-name: Nom du patron de page
-        block-type-name: Nom du type de block
+        page-template: Patron de page
+        block-type: Type de block
         button:
             create: Créer
     create:

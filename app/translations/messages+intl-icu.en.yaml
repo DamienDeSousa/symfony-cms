@@ -34,13 +34,16 @@ block-type:
         type: Type
         layout: Layout
         form-type: Form type
+    delete:
+        exception:
+            linked-page-template: Block type "{blockTypeType}" cannot be deleted because it is linked to others page template.
 
 page-template-block-type:
     grid:
         id: ID
         slug: Slug
-        page-template-name: Page template name
-        block-type-name: Block type name
+        page-template: Page template
+        block-type: Block type
         button:
             create: Créer
     create:

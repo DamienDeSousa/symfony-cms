@@ -11,80 +11,58 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplateBlockType;
 
-use App\Entity\User;
-use App\Controller\Admin\Index;
+use App\Controller\Admin\PageTemplateBlockType\PageTemplateBlockTypeCRUDController;
 use App\Entity\Structure\BlockType;
-use App\Fixture\FixtureAttachedTrait;
-use Symfony\Component\Panther\Client;
+use App\Tests\LoginPantherTestCase;
 use App\Entity\Structure\PageTemplate;
-use App\Tests\Provider\Actions\LogAction;
-use App\Tests\Provider\Uri\AdminUriProvider;
-use App\Tests\Provider\Url\AdminUrlProvider;
-use Symfony\Component\Panther\PantherTestCase;
 use App\Entity\Structure\PageTemplateBlockType;
-use App\Controller\Admin\PageTemplateBlockType\UpdatePageTemplateBlockTypeController;
+use App\Tests\Provider\AssertMessageProvider;
+use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 
 /**
  * Tests the right behaviour of page template block type updating.
  */
-class UpdatePageTemplateBlockTypeTest extends PantherTestCase
+class UpdatePageTemplateBlockTypeTest extends LoginPantherTestCase
 {
-    use FixtureAttachedTrait {
-        setUp as setUpTrait;
-    }
+    private const EXPECTED_ROWS_COUNT = 1;
 
-    use LogAction;
-
-    use AdminUriProvider;
-
-    use AdminUrlProvider;
-
-    /** @var Client */
-    private $client;
-
-    protected function setUp(): void
-    {
-        $this->setUpTrait();
-        /** @var User $user */
-        $user = $this->fixtureRepository->getReference('user');
-        $this->client = static::createPantherClient();
-        $this->login($user, $this->provideAdminLoginUri(), $this->client);
-    }
+    private const EXPECTED_ALERT_MESSAGE_COUNT = 1;
 
     public function testUpdatePageTemplateBlockTypeSuccessfully()
     {
         $newPageTemplate = $this->fixtureRepository->getReference('new_page_template');
         $newBlockType = $this->fixtureRepository->getReference('new_block_type');
+        /** @var PageTemplateBlockType $newPageTemplateBlockType */
+        $newPageTemplateBlockType = $this->fixtureRepository->getReference('new_page_template_block_type');
 
-        $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
-        $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
-        //wait 1 seconde to display the menu (stop being toggled)
-        usleep(1000000);
-        $linkGeneralParameters = $crawler->filter('#link_admin_page_template_block_type_grid_id')->link();
-        $crawler = $this->client->click($linkGeneralParameters);
-        $this->client->executeScript("document.querySelector('.btn-outline-warning').click()");
-        $crawler = $this->client->waitFor('.card');
-
-        $updateForm = $crawler->selectButton('register_page_template_block_type')->form([
-            'create_page_template_block_type[slug]' => 'my_little_slug',
-            'create_page_template_block_type[pageTemplate]' => $newPageTemplate->getId(),
-            'create_page_template_block_type[blockType]' => $newBlockType->getId(),
-        ]);
-        $crawler = $this->client->submit($updateForm);
-        $nodeAlertSuccess = $crawler->filter('.alert-success')->first();
-
-        $this->assertTrue(
-            is_string($nodeAlertSuccess->text()),
-            'Got a ' . gettype($nodeAlertSuccess->text()) . ' instead of a string'
+        $crawler = $this->navigateToActionPage(
+            $this->client,
+            PageTemplateBlockTypeCRUDController::class,
+            $newPageTemplateBlockType->getId(),
+            UtilsAdminSelector::EDIT_BUTTON_REDIRECT_SELECTOR
         );
-        $this->assertGreaterThan(
-            0,
-            strlen($nodeAlertSuccess->text()),
-            'actual value is not greater than expected'
+        $crawler->filter(
+            sprintf(
+                UtilsAdminSelector::ENTITY_FORM_SELECTOR,
+                UtilsAdminSelector::ENTITY_FORM_EDIT,
+                UtilsAdminSelector::getShortClassName(PageTemplateBlockType::class)
+            )
+        )->form([
+            'PageTemplateBlockType[slug]' => 'header',
+            'PageTemplateBlockType[pageTemplate]' => $newPageTemplate->getId(),
+            'PageTemplateBlockType[blockType]' => $newBlockType->getId(),
+        ]);
+        $crawler = $this->submitFormAndReturn($this->client);
+        $datagridRow = UtilsAdminSelector::findRowInDatagrid($crawler, $newPageTemplateBlockType->getId())->count();
+
+        $this->assertEquals(
+            self::EXPECTED_ROWS_COUNT,
+            $datagridRow,
+            sprintf(AssertMessageProvider::EXPECTED_ROWS_NUMBER_ERROR_MESSAGE, self::EXPECTED_ROWS_COUNT, $datagridRow)
         );
     }
 
-    public function testCreatePageTemplateBlockTypeWithEmptySlug()
+    public function testUpdatePageTemplateBlockTypeWithEmptySlug()
     {
         /** @var PageTemplate $pageTemplate */
         $pageTemplate = $this->fixtureRepository->getReference('page_template');
@@ -92,76 +70,78 @@ class UpdatePageTemplateBlockTypeTest extends PantherTestCase
         $blockType = $this->fixtureRepository->getReference('block_type');
         /** @var PageTemplateBlockType $pageTemplateBlockType */
         $pageTemplateBlockType = $this->fixtureRepository->getReference('page_template_block_type');
+        /** @var PageTemplateBlockType $pageTemplateBlockType */
+        $pageTemplateBlockType = $this->fixtureRepository->getReference('new_page_template_block_type');
 
-        $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
-        $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
-        //wait 1 seconde to display the menu (stop being toggled)
-        usleep(1000000);
-        $linkGeneralParameters = $crawler->filter('#link_admin_page_template_block_type_grid_id')->link();
-        $crawler = $this->client->click($linkGeneralParameters);
-        $this->client->executeScript("document.querySelector('.btn-outline-warning').click()");
-        $crawler = $this->client->waitFor('.card');
-
-        $updateForm = $crawler->selectButton('register_page_template_block_type')->form([
-            'create_page_template_block_type[slug]' => '',
-            'create_page_template_block_type[pageTemplate]' => $pageTemplate->getId(),
-            'create_page_template_block_type[blockType]' => $blockType->getId(),
+        $crawler = $this->navigateToActionPage(
+            $this->client,
+            PageTemplateBlockTypeCRUDController::class,
+            $pageTemplateBlockType->getId(),
+            UtilsAdminSelector::EDIT_BUTTON_REDIRECT_SELECTOR
+        );
+        $crawler->filter(
+            sprintf(
+                UtilsAdminSelector::ENTITY_FORM_SELECTOR,
+                UtilsAdminSelector::ENTITY_FORM_EDIT,
+                UtilsAdminSelector::getShortClassName(PageTemplateBlockType::class)
+            )
+        )->form([
+                    'PageTemplateBlockType[slug]' => '',
+                    'PageTemplateBlockType[pageTemplate]' => $pageTemplate->getId(),
+                    'PageTemplateBlockType[blockType]' => $blockType->getId(),
         ]);
-        $crawler = $this->client->submit($updateForm);
-
-        $expectedUrl = $this->provideAdminBaseUrl()
-            . UpdatePageTemplateBlockTypeController::UPDATE_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_URI
-            . $pageTemplateBlockType->getId();
+        $expectedUrl = $this->client->getCurrentURL();
+        $this->submitFormAndReturn($this->client);
 
         $this->assertEquals(
             $expectedUrl,
             $this->client->getCurrentURL(),
-            'form cant be submitted with empty slug, expected url [' . $expectedUrl . '], current url ['
-                . $this->client->getCurrentURL() . ']'
+            sprintf(
+                AssertMessageProvider::EXPECTED_ERROR_ON_PAGE_MESSAGE,
+                $expectedUrl,
+                $this->client->getCurrentURL()
+            )
         );
     }
 
-    public function testCreatePageTemplateBlockTypeWithAlreadyExistingSlugForPageTemplateAndBlockType()
+    public function testUpdatePageTemplateBlockTypeWithAlreadyExistingSlugForPageTemplateAndBlockType()
     {
-        /** @var PageTemplate $newPageTemplate */
-        $newPageTemplate = $this->fixtureRepository->getReference('new_page_template');
+        /** @var PageTemplate $pageTemplate */
+        $pageTemplate = $this->fixtureRepository->getReference('page_template');
         /** @var BlockType $blockType */
         $blockType = $this->fixtureRepository->getReference('block_type');
         /** @var PageTemplateBlockType $pageTemplateBlockType */
         $pageTemplateBlockType = $this->fixtureRepository->getReference('page_template_block_type');
-
-        $crawler = $this->client->request('GET', Index::ADMIN_HOME_PAGE_URI);
-        $this->client->executeScript("document.querySelector('#main-navbar-toggler').click()");
-        //wait 1 seconde to display the menu (stop being toggled)
-        usleep(1000000);
-        $linkGeneralParameters = $crawler->filter('#link_admin_page_template_block_type_grid_id')->link();
-        $crawler = $this->client->click($linkGeneralParameters);
-        $this->client->executeScript("document.querySelector('.btn-outline-warning').click()");
-        $crawler = $this->client->waitFor('.card');
-
-        $updateForm = $crawler->selectButton('register_page_template_block_type')->form([
-            'create_page_template_block_type[slug]' => $pageTemplateBlockType->getSlug(),
-            'create_page_template_block_type[pageTemplate]' => $newPageTemplate->getId(),
-            'create_page_template_block_type[blockType]' => $blockType->getId(),
+        /** @var PageTemplateBlockType $newPageTemplateBlockType */
+        $newPageTemplateBlockType = $this->fixtureRepository->getReference('new_page_template_block_type');
+        $crawler = $this->navigateToActionPage(
+            $this->client,
+            PageTemplateBlockTypeCRUDController::class,
+            $newPageTemplateBlockType->getId(),
+            UtilsAdminSelector::EDIT_BUTTON_REDIRECT_SELECTOR
+        );
+        $crawler->filter(
+            sprintf(
+                UtilsAdminSelector::ENTITY_FORM_SELECTOR,
+                UtilsAdminSelector::ENTITY_FORM_EDIT,
+                UtilsAdminSelector::getShortClassName(PageTemplateBlockType::class)
+            )
+        )->form([
+            'PageTemplateBlockType[slug]' => $pageTemplateBlockType->getSlug(),
+            'PageTemplateBlockType[pageTemplate]' => $pageTemplate->getId(),
+            'PageTemplateBlockType[blockType]' => $blockType->getId(),
         ]);
-        $crawler = $this->client->submit($updateForm);
+        $crawler = $this->submitFormAndReturn($this->client);
+        $countAlertMessage = $crawler->filter(UtilsAdminSelector::ALERT_FORM_MESSAGE_SELECTOR)->count();
 
-        $alertDangerNode = $crawler->filter('.alert-danger')->first();
-
-        $this->assertTrue(
-            is_string($alertDangerNode->text()),
-            'Got a ' . gettype($alertDangerNode->text()) . ' instead of a string'
+        $this->assertEquals(
+            self::EXPECTED_ALERT_MESSAGE_COUNT,
+            $countAlertMessage,
+            sprintf(
+                AssertMessageProvider::EXPECTED_ALERT_MESSAGE_MESSAGE,
+                self::EXPECTED_ALERT_MESSAGE_COUNT,
+                $countAlertMessage
+            )
         );
-        $this->assertGreaterThan(
-            0,
-            strlen($alertDangerNode->text()),
-            'actual value is not greater than expected'
-        );
-    }
-
-    protected function tearDown(): void
-    {
-        $crawler = $this->client->request('GET', $this->provideAdminHomePageUri());
-        $crawler = $this->adminLogout($this->client, $crawler);
     }
 }

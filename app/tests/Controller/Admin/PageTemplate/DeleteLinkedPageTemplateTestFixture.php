@@ -50,8 +50,8 @@ class DeleteLinkedPageTemplateTestFixture extends Fixture
         $manager->flush();
 
         $this->referenceRepository->addReference('user', $user);
-        $this->referenceRepository->addReference('pageTemplate', $pageTemplate);
-        $this->referenceRepository->addReference('blockType', $blockType);
-        $this->referenceRepository->addReference('pageTemplateBlockType', $pageTemplateBlockType);
+        $this->referenceRepository->addReference('page_template', $pageTemplate);
+        $this->referenceRepository->addReference('block_type', $blockType);
+        $this->referenceRepository->addReference('page_template_block_type', $pageTemplateBlockType);
     }
 }

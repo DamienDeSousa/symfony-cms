@@ -6,7 +6,7 @@ Appliquer les PSR
 Documenter les manip à faire  
 
 Mettre en place les vérifications / logs  
-Mettre en place un systeme de log via le logger  
+Mettre en place un système de log via le logger  
 Rédiger de la doc !  
 
 ## Evolutions
@@ -49,6 +49,11 @@ Vous trouverez le lien vers la documentation fonctionnelle du page template [ici
 
 Vous trouverez le lien vers la documentation développeur du block type [ici](documentation/block_type/developer/README.md).  
 Vous trouverez le lien vers la documentation fonctionnelle du block type [ici](documentation/block_type/functional/README.md).  
+
+### Page Template Block Type
+
+Vous trouverez le lien vers la documentation développeur du block type [ici](documentation/page_template_block_type/developer/README.md).  
+Vous trouverez le lien vers la documentation fonctionnelle du block type [ici](documentation/page_template_block_type/functional/README.md).
 
 ## Notes techniques
 CMS

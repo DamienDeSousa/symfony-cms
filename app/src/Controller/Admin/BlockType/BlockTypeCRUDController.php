@@ -11,6 +11,9 @@ declare(strict_types=1);
 namespace App\Controller\Admin\BlockType;
 
 use App\Entity\Structure\BlockType;
+use App\Exception\Entity\DeleteEntityException;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\Finder\Finder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -18,6 +21,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Defines the CRUD actions for a block type.
@@ -32,31 +36,33 @@ class BlockTypeCRUDController extends AbstractCrudController
     /** @var string */
     private $directoryPath;
 
-    public function __construct(string $directoryPath)
-    {
+    /** @var AdminUrlGenerator */
+    private $adminUrlGenerator;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
+    public function __construct(
+        string $directoryPath,
+        AdminUrlGenerator $adminUrlGenerator,
+        TranslatorInterface $translator
+    ) {
         $this->finder = new Finder();
         $this->directoryPath = $directoryPath;
+        $this->adminUrlGenerator = $adminUrlGenerator;
+        $this->translator = $translator;
     }
 
-    /**
-     * @inheritdoc
-     */
     public static function getEntityFqcn(): string
     {
         return BlockType::class;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function configureCrud(Crud $crud): Crud
     {
         return $crud->renderContentMaximized();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function configureActions(Actions $actions): Actions
     {
         return $actions
@@ -95,5 +101,23 @@ class BlockTypeCRUDController extends AbstractCrudController
         }
 
         return $choices;
+    }
+
+    public function delete(AdminContext $context)
+    {
+        try {
+            return parent::delete($context);
+        } catch (DeleteEntityException $deleteEntityException) {
+            $this->addFlash(
+                'danger',
+                $this->translator->trans(
+                    $deleteEntityException->getTransMessage(),
+                    $deleteEntityException->getTransMessageParams()
+                )
+            );
+            $url = $this->adminUrlGenerator->setAction('index')->generateUrl();
+
+            return $this->redirect($url);
+        }
     }
 }

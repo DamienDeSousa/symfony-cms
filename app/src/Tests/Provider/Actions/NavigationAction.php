@@ -26,7 +26,7 @@ trait NavigationAction
         $crawler
             ->filter(UtilsAdminSelector::LEFT_MENU_LINKS_SELECTOR)
             ->each(function ($node) use (&$siteLink, $crudController) {
-                if (str_contains($node->attr('href'), $crudController)) {
+                if (str_contains($node->attr('href'), urlencode($crudController))) {
                     $siteLink = $node->attr('href');
                 }
             });
@@ -37,7 +37,7 @@ trait NavigationAction
     public function navigateLeftMenuLink(Client $client, string $fullClassName): Crawler
     {
         $crawler = $client->request('GET', Index::ADMIN_HOME_PAGE_URI);
-        $itemLink = $this->navigateLeftMenu($crawler, UtilsAdminSelector::getShortClassName($fullClassName));
+        $itemLink = $this->navigateLeftMenu($crawler, $fullClassName);
 
         return $client->request('GET', $itemLink);
     }
@@ -50,11 +50,13 @@ trait NavigationAction
     ): Crawler {
         $crawler = $this->navigateLeftMenuLink($client, $fullClassName);
         $crawler = UtilsAdminSelector::findRowInDatagrid($crawler, $entityId);
-        $this->clickElement($client, UtilsAdminSelector::ENTITY_ACTIONS_DROPDOWN);
-        $this->clickElement(
-            $client,
-            sprintf('#main > table > tbody > tr > td.actions.actions-as-dropdown > div > div > %s', $actionSelector),
-        );
+        $crawler->filter(UtilsAdminSelector::ENTITY_ACTIONS_DROPDOWN)->click();
+        $crawler->filter(
+            sprintf(
+                '#main > table > tbody > tr > td.actions.actions-as-dropdown > div > div > %s',
+                $actionSelector
+            )
+        )->click();
         sleep(1);
 
         return $client->refreshCrawler();

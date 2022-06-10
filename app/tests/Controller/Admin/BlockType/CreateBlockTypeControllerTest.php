@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\BlockType;
 
+use App\Controller\Admin\BlockType\BlockTypeCRUDController;
 use App\Entity\Structure\BlockType;
 use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
@@ -25,7 +26,7 @@ class CreateBlockTypeControllerTest extends LoginPantherTestCase
 
     public function testCreateNewBlockType()
     {
-        $crawler = $this->navigateToCreatePage($this->client, BlockType::class);
+        $crawler = $this->navigateToCreatePage($this->client, BlockTypeCRUDController::class);
         $updateForm = $crawler->filter(
             sprintf(
                 UtilsAdminSelector::ENTITY_FORM_SELECTOR,

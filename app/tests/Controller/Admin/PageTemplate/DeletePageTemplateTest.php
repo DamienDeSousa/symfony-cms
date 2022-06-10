@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplate;
 
+use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
 use App\Tests\LoginPantherTestCase;
 use App\Entity\Structure\PageTemplate;
 use App\Tests\Provider\AssertMessageProvider;
@@ -27,7 +28,7 @@ class DeletePageTemplateTest extends LoginPantherTestCase
         $pageTemplate = $this->fixtureRepository->getReference('page_template');
         $crawler = $this->navigateToActionPage(
             $this->client,
-            PageTemplate::class,
+            PageTemplateCRUDController::class,
             $pageTemplate->getId(),
             UtilsAdminSelector::DELETE_BUTTON_MODAL_SELECTOR
         );

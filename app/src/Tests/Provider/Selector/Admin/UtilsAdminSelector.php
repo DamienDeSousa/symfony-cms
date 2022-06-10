@@ -40,6 +40,8 @@ abstract class UtilsAdminSelector
 
     public const DATA_ID_ATTR_TAG_SELECTOR = 'data-id';
 
+    public const DANGER_ALERT_SELECTOR = 'div.alert-danger';
+
 
     // ----------------   Use it together   ---------------- //
     /**
@@ -93,5 +95,10 @@ abstract class UtilsAdminSelector
             });
 
         return $searchNode;
+    }
+
+    public static function countRowsInDataGrid(Crawler $crawler): int
+    {
+        return $crawler->filter(UtilsAdminSelector::DATAGRID_ROWS_SELECTOR)->count();
     }
 }

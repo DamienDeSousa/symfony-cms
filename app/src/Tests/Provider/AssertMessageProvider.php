@@ -26,4 +26,6 @@ abstract class AssertMessageProvider
     public const COUNT_EXPECTED_NO_RESULT_MESSAGE = 1;
 
     public const EXPECTED_ROW_ENTITY_ID_ERROR_MESSAGE = 'Expected row with entity id %d, got %s';
+
+    public const EXPECTED_ALERT_MESSAGE_MESSAGE = 'Expected %d alert messages, got %d';
 }

@@ -149,4 +149,9 @@ class BlockType
             'layout' => $this->layout,
         ];
     }
+
+    public function __toString(): string
+    {
+        return $this->type;
+    }
 }

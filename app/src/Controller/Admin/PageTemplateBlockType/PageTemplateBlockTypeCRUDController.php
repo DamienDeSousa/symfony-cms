@@ -1,30 +1,31 @@
 <?php
 
 /**
- * Defines the PageTemplateCRUDController class.
+ * Defines the PageTemplateBlockTypeCRUDController class.
  *
  * @author Damien DE SOUSA
  */
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\PageTemplate;
+namespace App\Controller\Admin\PageTemplateBlockType;
 
-use App\Entity\Structure\PageTemplate;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use App\Entity\Structure\PageTemplateBlockType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 /**
- * Defines the CRUD actions for a PageTemplate entity.
+ * Defines CRUD actions for PageTemplateBlockType entity.
  */
-class PageTemplateCRUDController extends AbstractCrudController
+class PageTemplateBlockTypeCRUDController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return PageTemplate::class;
+        return PageTemplateBlockType::class;
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -52,8 +53,9 @@ class PageTemplateCRUDController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name', 'page-template.grid.name'),
-            TextField::new('layout', 'page-template.grid.layout'),
+            TextField::new('slug', 'page-template-block-type.grid.slug'),
+            AssociationField::new('pageTemplate', 'page-template-block-type.grid.page-template'),
+            AssociationField::new('blockType', 'page-template-block-type.grid.block-type'),
         ];
     }
 }
