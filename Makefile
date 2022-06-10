@@ -60,7 +60,7 @@ run-all-tests: ## run all automated tests
 	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/PageTemplate
 	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/Security
 	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/Site
-#	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/PageTemplateBlockType
+	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/PageTemplateBlockType
 
 connection-php-container: ## connect to php container
 	docker exec -it symfony-cms_php73_1 bash
