@@ -47,7 +47,7 @@ trait FixtureAttachedTrait
         );
     }
 
-    private static function getFixtureNameForTestCase(string $testCaseName)
+    private static function getFixtureNameForTestCase(string $testCaseName): string
     {
         return $testCaseName . 'Fixture';
     }

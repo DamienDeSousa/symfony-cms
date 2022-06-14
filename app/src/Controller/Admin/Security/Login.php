@@ -17,9 +17,9 @@ use App\Security\Admin\Login\Captcha;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Captcha\Bundle\CaptchaBundle\Integration\BotDetectCaptcha;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Gregwar\CaptchaBundle\Generator\CaptchaGenerator;
 
 /**
  * @Route("/admin-GC2NeDwu26y6pred", name="admin_login")
@@ -38,20 +38,24 @@ class Login extends AbstractController
 
     protected Captcha $captcha;
 
-    private BotDetectCaptcha $botDetectCaptcha;
+    protected CaptchaGenerator $captchaGenerator;
+
+    private array $gregwarCaptchaOptions;
 
     public function __construct(
+        CaptchaGenerator $captchaGenerator,
         CsrfTokenManagerInterface $tokenManager,
         AuthError $authError,
         LastUsername $lastUsername,
         Captcha $captcha,
-        BotDetectCaptcha $botDetectCaptcha
+        array $gregwarCaptchaOptions
     ) {
         $this->tokenManager = $tokenManager;
         $this->authError = $authError;
         $this->lastUsername = $lastUsername;
         $this->captcha = $captcha;
-        $this->botDetectCaptcha = $botDetectCaptcha;
+        $this->captchaGenerator = $captchaGenerator;
+        $this->gregwarCaptchaOptions = $gregwarCaptchaOptions;
     }
 
     public function __invoke(Request $request): Response
@@ -62,20 +66,21 @@ class Login extends AbstractController
         $csrfToken = $this->tokenManager
             ? $this->tokenManager->getToken('authenticate')->getValue()
             : null;
-
-        $activateCaptcha = $this->captcha->activate($request);
-        $htmlCaptcha = '';
-        if ($activateCaptcha) {
-            $captcha = $this->botDetectCaptcha->setConfig('LoginCaptcha');
-            $htmlCaptcha = $captcha->Html();
-        }
-
-        return $this->render('admin/security/login.html.twig', [
+        $viewParameters = [
             'last_username' => $lastUsername,
             'error' => $error,
             'csrf_token' => $csrfToken,
-            'enable_captcha' => $activateCaptcha,
-            'captcha_html' => $htmlCaptcha,
-        ]);
+        ];
+
+        $activateCaptcha = $this->captcha->activate($request);
+        $viewParameters['enable_captcha'] = $activateCaptcha;
+        if ($activateCaptcha) {
+            $code = $this->captchaGenerator->getCaptchaCode($this->gregwarCaptchaOptions);
+            $viewParameters['code'] = $code;
+            $viewParameters['width'] = $this->gregwarCaptchaOptions['width'];
+            $viewParameters['height'] = $this->gregwarCaptchaOptions['height'];
+        }
+
+        return $this->render('admin/security/login.html.twig', $viewParameters);
     }
 }

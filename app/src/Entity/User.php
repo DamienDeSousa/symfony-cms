@@ -13,7 +13,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
-use Captcha\Bundle\CaptchaBundle\Validator\Constraints as CaptchaAssert;
 
 /**
  * User entity that represents users over all the application.
@@ -34,25 +33,8 @@ class User extends BaseUser
      */
     protected $id;
 
-    /**
-     * @CaptchaAssert\ValidCaptcha(
-     *      message = "CAPTCHA validation failed, try again."
-     * )
-     */
-    protected $captchaCode;
-
     public function __construct()
     {
         parent::__construct();
-    }
-
-    public function getCaptchaCode()
-    {
-        return $this->captchaCode;
-    }
-
-    public function setCaptchaCode($captchaCode)
-    {
-        $this->captchaCode = $captchaCode;
     }
 }
