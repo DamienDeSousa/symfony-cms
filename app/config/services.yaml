@@ -6,6 +6,7 @@
 parameters:
     icon_directory: 'uploads/icon/'
     full_icon_directory_path: '%kernel.project_dir%/public/%icon_directory%'
+    security.captcha.security_key: captcha
 
 services:
     # default configuration for services in *this* file
@@ -16,6 +17,9 @@ services:
             $fullIconDirectoryPath: '%full_icon_directory_path%'
             $iconDirectory: '%icon_directory%'
             $directoryPath: '%kernel.project_dir%'
+            $formFactory: '@form.factory'
+            $gregwarCaptchaOptions: '%gregwar_captcha.config%'
+            $captchaGenerator: '@gregwar_captcha.generator'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -39,6 +43,10 @@ services:
         arguments:
             $roles: '%security.role_hierarchy.roles%'
 
+    App\Security\Admin\Login\Captcha:
+        arguments:
+            $sessionKey: '%security.captcha.security_key%'
+
     # Decorators
     App\Decorator\Fos\UserBundle\Command\PromoteUserCommand:
         decorates:
@@ -55,21 +63,24 @@ services:
     App\Decorator\Security\Admin\CaptchaLoginFormDecorator:
         decorates:
             'App\Security\Admin\LoginFormAuthenticator'
-        arguments:
-            $botDetectCaptcha: '@captcha'
-    
+
     # the suffix 'admin' refers to the admin section in security.yaml
     # for each new firewall on login page, there will be a new service named
     # security.authentication.form_entry_point.<the name of your firewall>
     App\Decorator\Security\EntryPoint\FormAuthenticationEntryPoint404:
         decorates: 'security.authentication.form_entry_point.admin'
 
-    # Controllers
-    App\Controller\Admin\Security\Login:
-        arguments:
-            $botDetectCaptcha: '@captcha'
-
     # Listeners
     App\EventListener\BlockType\PreRemoveBlockTypeListener:
         tags:
             - { name: 'doctrine.orm.entity_listener', event: 'preRemove', entity: 'App\Entity\Structure\BlockType' }
+
+    # Rewrites
+    gregwar_captcha.generator:
+        class: App\Rewrite\Gregwar\CaptchaBundle\Generator\CaptchaGenerator
+        public: true
+        arguments:
+            $router: '@router'
+            $builder: '@gregwar_captcha.captcha_builder'
+            $phraseBuilder: '@gregwar_captcha.phrase_builder'
+            $imageFileHandler: '@gregwar_captcha.image_file_handler'

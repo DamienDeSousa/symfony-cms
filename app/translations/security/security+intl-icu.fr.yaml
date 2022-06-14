@@ -1,0 +1,4 @@
+security:
+    captcha:
+        error:
+            message: Code captcha invalide

@@ -32,8 +32,8 @@
                     </div>
                     {% if enable_captcha %}
                         <div class="form-group">
-                            {{ captcha_html | raw  }}
-                            <input type="text" id="captchaCode" name="captchaCode">
+                            <img class="captcha_image" src="{{ code }}" alt="" title="captcha" width="{{ width }}" height="{{ height }}" />
+                            <input type="text" class="form-control" id="captchaCode" name="captchaCode" required="required">
                         </div>
                     {% endif %}
                     <button type="submit" class="btn btn-success" id="_submit" name="_submit" value="{{ 'admin.login.submit'|trans }}">{{ 'admin.login.submit'|trans }}</button>

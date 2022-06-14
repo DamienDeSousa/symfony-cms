@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Security\Admin\Login;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Captcha
 {
@@ -24,6 +25,13 @@ class Captcha
      * Reach this limit will display the captcha on login admin page.
      */
     public const LIMIT_DISPLAY_CAPTCHA = 3;
+
+    private string $sessionKey;
+
+    public function __construct(string $sessionKey)
+    {
+        $this->sessionKey = $sessionKey;
+    }
 
     /**
      * Return true if the captcha must be activated.
@@ -76,5 +84,20 @@ class Captcha
     {
         $session = $request->getSession();
         $session->remove(static::LOGIN_PAGE_SUBMITTED);
+    }
+
+    public function setSessionCaptchaPhrase(SessionInterface $session, string $phrase): void
+    {
+        $session->set($this->sessionKey, $phrase);
+    }
+
+    public function removeSessionCaptchaPhrase(SessionInterface $session): void
+    {
+        $session->remove($this->sessionKey);
+    }
+
+    public function getSessionCaptchaPhrase(SessionInterface $session): ?string
+    {
+        return $session->get($this->sessionKey);
     }
 }

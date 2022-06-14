@@ -19,8 +19,8 @@ install: ## install CMS
 	$(MAKE) up
 	$(MAKE) composer-install
 	$(MAKE) cache-clear
-	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create --if-not-exists
-	docker exec symfony-cms_php73_1 php bin/console doctrine:database:create --if-not-exists --env=test
+	docker-compose exec php-fpm php bin/console doctrine:database:create --if-not-exists
+	docker-compose exec php-fpm php bin/console doctrine:database:create --if-not-exists --env=test
 	$(MAKE) migration-migrate
 	$(MAKE) setup-public-directory
 	$(MAKE) asset-install
@@ -38,65 +38,65 @@ reset-workspace-from-develop: ## clean workspace before starting new development
 	$(MAKE) setup-public-directory
 
 asset-install: ## install asset
-	docker exec symfony-cms_php73_1 php bin/console assets:install /var/www/public/
+	docker-compose exec php-fpm php bin/console assets:install /var/www/public/
 
 migration-migrate: ## run migrations
-	docker exec symfony-cms_php73_1 php bin/console doctrine:migrations:migrate --no-interaction
+	docker-compose exec php-fpm php bin/console doctrine:migrations:migrate --no-interaction
 
 cache-clear: ## clear cache
-	docker exec symfony-cms_php73_1 php bin/console cache:clear
+	docker-compose exec php-fpm php bin/console cache:clear
 
 run-tests: ## run automated tests, specify the PATH_TEST argument to run specific tests 
-	docker exec symfony-cms_php73_1 php bin/console cache:clear --env=test
-	docker exec symfony-cms_php73_1 php bin/console doctrine:migrations:migrate --no-interaction --env=test
-	docker exec symfony-cms_php73_1 ./bin/phpunit $$PATH_TEST
+	docker-compose exec php-fpm php bin/console cache:clear --env=test
+	docker-compose exec php-fpm php bin/console doctrine:migrations:migrate --no-interaction --env=test
+	docker-compose exec php-fpm ./bin/phpunit $$PATH_TEST
 
 #Tests are splited because there is a chromium issue when running too mush tests in the same time.
 run-all-tests: ## run all automated tests
-	docker exec symfony-cms_php73_1 php bin/console cache:clear --env=test
-	docker exec symfony-cms_php73_1 php bin/console doctrine:migrations:migrate --no-interaction --env=test
-	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Command
-	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/BlockType
-	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/PageTemplate
-	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/Security
-	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/Site
-	docker exec symfony-cms_php73_1 ./bin/phpunit tests/Controller/Admin/PageTemplateBlockType
+	docker-compose exec php-fpm php bin/console cache:clear --env=test
+	docker-compose exec php-fpm php bin/console doctrine:migrations:migrate --no-interaction --env=test
+	docker-compose exec php-fpm ./bin/phpunit tests/Command
+	docker-compose exec php-fpm ./bin/phpunit tests/Controller/Admin/BlockType
+	docker-compose exec php-fpm ./bin/phpunit tests/Controller/Admin/PageTemplate
+	docker-compose exec php-fpm ./bin/phpunit tests/Controller/Admin/Security
+	docker-compose exec php-fpm ./bin/phpunit tests/Controller/Admin/Site
+	docker-compose exec php-fpm ./bin/phpunit tests/Controller/Admin/PageTemplateBlockType
 
 connection-php-container: ## connect to php container
-	docker exec -it symfony-cms_php73_1 bash
+	docker-compose exec php-fpm bash
 
 connection-db-container: ## connect to database
-	docker exec -it symfony-cms_mysql_1 mysql -uroot -proot symfony_cms
+	docker-compose exec mysql mysql -uroot -proot symfony_cms
 
 connection-node-container: ## connect to node
-	docker exec -it symfony-cms_node_1 bash
+	docker-compose exec node bash
 
 composer-install: ## composer install
-	docker-compose run composer-installer composer install
+	docker-compose exec php-fpm composer install
 
 fix-permission: ## fix permission on project files
 	sudo chown ${CURRENT_UID}:${CURRENT_GID} -R .
-	docker exec -it symfony-cms_php73_1 chown www-data:www-data -R public/uploads
+	docker-compose exec php-fpm chown www-data:www-data -R public/uploads
 
 setup-public-directory: ## create icon directory not exists
 	@mkdir -p app/public/uploads/icon/
 
 composer-update: ## composer update
-	docker-compose run composer-installer composer update
-	docker-compose run composer-installer ./bin/phpunit
+	docker-compose exec php-fpm composer update
+	docker-compose exec php-fpm ./bin/phpunit
 
 yarn-update: ## yarn update
-	docker exec -it symfony-cms_node_1 yarn upgrade
+	docker-compose exec node yarn upgrade
 
 expose-js-routes: ## expose symfony routes to js
-	docker exec symfony-cms_php73_1 php bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json
-	docker exec -it symfony-cms_node_1 yarn encore dev
+	docker-compose exec php-fpm php bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json
+	docker-compose exec node yarn encore dev
 
 install-phpunit: ## install phpunit
-	docker-compose run composer-installer ./bin/phpunit
+	docker-compose exec php-fpm ./bin/phpunit
 
 ps: ## ps docker-compose services
 	docker-compose ps
 
 migration-diff: ## generate a migration by comparing your current database to your mapping information
-	docker-compose exec php73 php bin/console doctrine:migrations:diff
+	docker-compose exec php-fpm php bin/console doctrine:migrations:diff

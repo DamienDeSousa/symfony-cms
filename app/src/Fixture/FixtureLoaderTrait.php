@@ -13,13 +13,13 @@ namespace App\Fixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 trait FixtureLoaderTrait
 {
     protected ReferenceRepository $fixtureRepository;
 
-    private function loadFixture(ObjectManager $manager, FixtureInterface ...$fixtures): void
+    private function loadFixture(EntityManagerInterface $manager, FixtureInterface ...$fixtures): void
     {
         $executor = FixtureExecutorFactory::createManagerExecutor($manager);
         $this->fixtureRepository = $executor->getReferenceRepository();

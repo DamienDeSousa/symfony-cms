@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace App\Fixture;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -47,7 +47,7 @@ trait FixtureAttachedTrait
         );
     }
 
-    private static function getFixtureNameForTestCase(string $testCaseName)
+    private static function getFixtureNameForTestCase(string $testCaseName): string
     {
         return $testCaseName . 'Fixture';
     }

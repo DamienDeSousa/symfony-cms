@@ -5,3 +5,5 @@ fos_user:
     from_email:
         address: "dades@gmail.com"
         sender_name: "dades@gmail.com"
+    service:
+        mailer: 'fos_user.mailer.noop'
