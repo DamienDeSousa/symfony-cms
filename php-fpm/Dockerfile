@@ -10,6 +10,8 @@ RUN apt-get update \
 
 RUN docker-php-ext-install gd
 
+COPY --from=composer:2.2.14 /usr/bin/composer /usr/bin/composer
+
 # les locales, toujours utiles
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && \

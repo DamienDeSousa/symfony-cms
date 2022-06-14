@@ -10,39 +10,33 @@ services:
     volumes:
       - db-data:/var/lib/mysql
     ports: 
-      - 3307:3306
+      - "3307:3306"
 
   web:
     build: web
     ports: 
-      - 8080:80
+      - "8080:80"
     volumes: 
       - ./app:/var/www
     depends_on: 
       - mysql
-      - php73
+      - php-fpm
   
-  php73:
-    build: php73
+  php-fpm:
+    build: php-fpm
     expose:
       - 9000
     volumes:
         - ./app:/var/www
     depends_on: 
       - mysql
-
-  composer-installer:
-    image: composer:2.0
-    working_dir: /var/www
-    volumes:
-      - ./app:/var/www
   
   node:
     image: node:16.3.0-buster
     command: bash -c "yarn install && yarn encore dev --watch"
     working_dir: /var/www
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
       - ./app:/var/www
 

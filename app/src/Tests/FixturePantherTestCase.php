@@ -18,7 +18,7 @@ use Symfony\Component\Panther\PantherTestCase;
 use App\Tests\Provider\Actions\NavigationAction;
 
 /**
- * Defines setUp and tearsDown method and giving some usefull methods for tests.
+ * Defines setUp and tearsDown method and giving some useful methods for tests.
  */
 abstract class FixturePantherTestCase extends PantherTestCase
 {
