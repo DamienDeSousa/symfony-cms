@@ -29,17 +29,11 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
  */
 class FileExistsValidator extends ConstraintValidator
 {
-    private Filesystem $filesystem;
-
-    private TranslatorInterface $translator;
-
-    private string $directoryPath;
-
-    public function __construct(Filesystem $filesystem, TranslatorInterface $translator, string $directoryPath)
-    {
-        $this->translator = $translator;
-        $this->filesystem = $filesystem;
-        $this->directoryPath = $directoryPath;
+    public function __construct(
+        private Filesystem $filesystem,
+        private TranslatorInterface $translator,
+        private string $directoryPath
+    ) {
     }
 
     public function validate($value, Constraint $constraint)

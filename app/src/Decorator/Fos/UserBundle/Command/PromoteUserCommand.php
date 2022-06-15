@@ -19,19 +19,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PromoteUserCommand extends FOSPromoteUserCommand
 {
-    protected UserRoles $userRoles;
-
-    protected FOSPromoteUserCommand $fosPromotedUserCommand;
-
     public function __construct(
         UserManipulator $manipulator,
-        FOSPromoteUserCommand $fosPromotedUserCommand,
-        UserRoles $userRoles
+        private FOSPromoteUserCommand $fosPromotedUserCommand,
+        private UserRoles $userRoles
     ) {
         parent::__construct($manipulator);
-
-        $this->userRoles = $userRoles;
-        $this->fosPromotedUserCommand = $fosPromotedUserCommand;
     }
 
     /**

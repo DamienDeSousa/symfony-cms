@@ -1,5 +1,5 @@
 # image à utiliser
-FROM php:7.4-fpm-buster
+FROM php:8.1.7-fpm-bullseye
 
 # On envoie le nom du serveur à apache, c'est avec ça que l'on appelera nos pages
 # RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf

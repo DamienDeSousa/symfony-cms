@@ -16,6 +16,7 @@ use App\Entity\Structure\PageTemplate;
 use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
+use ReflectionException;
 
 /**
  * This class is used to test the page template creation.
@@ -24,6 +25,9 @@ class CreatePageTemplateTest extends LoginPantherTestCase
 {
     private const EXPECTED_GRID_LINES = 1;
 
+    /**
+     * @throws ReflectionException
+     */
     public function testCreateNewPageTemplate()
     {
         $crawler = $this->navigateToCreatePage($this->client, PageTemplateCRUDController::class);

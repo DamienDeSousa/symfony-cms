@@ -14,6 +14,7 @@ use App\Entity\Structure\BlockType;
 use App\Exception\Entity\DeleteEntityException;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Finder\Finder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -21,6 +22,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -32,21 +34,13 @@ class BlockTypeCRUDController extends AbstractCrudController
 
     private Finder $finder;
 
-    private string $directoryPath;
-
-    private AdminUrlGenerator $adminUrlGenerator;
-
-    private TranslatorInterface $translator;
-
+    #[Pure]
     public function __construct(
-        string $directoryPath,
-        AdminUrlGenerator $adminUrlGenerator,
-        TranslatorInterface $translator
+        private string $directoryPath,
+        private AdminUrlGenerator $adminUrlGenerator,
+        private TranslatorInterface $translator
     ) {
         $this->finder = new Finder();
-        $this->directoryPath = $directoryPath;
-        $this->adminUrlGenerator = $adminUrlGenerator;
-        $this->translator = $translator;
     }
 
     public static function getEntityFqcn(): string
@@ -99,7 +93,7 @@ class BlockTypeCRUDController extends AbstractCrudController
         return $choices;
     }
 
-    public function delete(AdminContext $context)
+    public function delete(AdminContext $context): RedirectResponse
     {
         try {
             return parent::delete($context);

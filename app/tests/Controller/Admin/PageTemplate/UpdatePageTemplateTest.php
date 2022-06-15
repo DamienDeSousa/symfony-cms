@@ -16,6 +16,7 @@ use App\Entity\Structure\PageTemplate;
 use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
+use ReflectionException;
 
 /**
  * Class used to test the update page template form.
@@ -26,6 +27,9 @@ class UpdatePageTemplateTest extends LoginPantherTestCase
 
     private const EXPECTED_ALERT_MESSAGES = 2;
 
+    /**
+     * @throws ReflectionException
+     */
     public function testUpdatePageTemplate()
     {
         /** @var PageTemplate $pageTemplate */
@@ -56,6 +60,9 @@ class UpdatePageTemplateTest extends LoginPantherTestCase
         );
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testUpdatePageTemplateWithSameData()
     {
         /** @var PageTemplate $pageTemplate */

@@ -18,6 +18,7 @@ use App\Entity\Structure\PageTemplate;
 use App\Entity\Structure\PageTemplateBlockType;
 use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use ReflectionException;
 
 /**
  * Test the right behaviour of page template block type creation.
@@ -28,6 +29,9 @@ class CreatePageTemplateBlockTypeTest extends LoginPantherTestCase
 
     private const EXPECTED_ALERT_MESSAGE_COUNT = 1;
 
+    /**
+     * @throws ReflectionException
+     */
     public function testCreatePageTemplateBlockTypeSuccessfully()
     {
         /** @var PageTemplate $pageTemplate */
@@ -62,6 +66,9 @@ class CreatePageTemplateBlockTypeTest extends LoginPantherTestCase
         );
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testCreatePageTemplateBlockTypeWithEmptySlug()
     {
         /** @var PageTemplate $pageTemplate */
@@ -95,6 +102,9 @@ class CreatePageTemplateBlockTypeTest extends LoginPantherTestCase
         );
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testCreatePageTemplateBlockTypeWithAlreadyExistingSlugForPageTemplateAndBlockType()
     {
         /** @var PageTemplate $pageTemplate */

@@ -14,6 +14,8 @@ namespace App\Tests\Controller\Admin\Security;
 use App\Entity\User;
 use App\Tests\FixturePantherTestCase;
 use App\Tests\Provider\Actions\LogAction;
+use Facebook\WebDriver\Exception\NoSuchElementException;
+use Facebook\WebDriver\Exception\TimeoutException;
 
 class LoginCheckTest extends FixturePantherTestCase
 {
@@ -25,10 +27,8 @@ class LoginCheckTest extends FixturePantherTestCase
     }
 
     /**
-     * Put this test in first to avoid session problems with connections failure.
-     * If you put this test after login tests failure, the captcha will be displayed on form.
-     *
-     * @return void
+     * @throws NoSuchElementException
+     * @throws TimeoutException
      */
     public function testAuthentificationSucceed()
     {

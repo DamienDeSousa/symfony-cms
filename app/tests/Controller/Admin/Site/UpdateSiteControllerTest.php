@@ -17,6 +17,8 @@ use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
 use App\Controller\Admin\Site\SiteCRUDController;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use Facebook\WebDriver\Exception\NoSuchElementException;
+use Facebook\WebDriver\Exception\TimeoutException;
 
 /**
  * This class is used to test the update site feature.
@@ -49,7 +51,7 @@ class UpdateSiteControllerTest extends LoginPantherTestCase
             'The displayed title on the admin site show page and the expected title are different.'
         );
         $this->assertEquals(
-            $siteImage,
+            $this->provideAdminBaseUrl() . $siteImage,
             $this->provideAdminBaseUrl() . '/uploads/icon/' . $site->getIcon(),
             'The displayed icon on the admin site show page and the expected icon are different.'
         );
@@ -118,6 +120,10 @@ class UpdateSiteControllerTest extends LoginPantherTestCase
         );
     }
 
+    /**
+     * @throws NoSuchElementException
+     * @throws TimeoutException
+     */
     protected function tearDown(): void
     {
         /** @var Site $site */

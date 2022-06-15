@@ -19,11 +19,8 @@ use Psr\Log\LoggerInterface;
 
 class SiteReaderService
 {
-    private SiteRepository $siteRepository;
-
-    public function __construct(SiteRepository $siteRepository)
+    public function __construct(private SiteRepository $siteRepository)
     {
-        $this->siteRepository = $siteRepository;
     }
 
     public function read(): ?Site

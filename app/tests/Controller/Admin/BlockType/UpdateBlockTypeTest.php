@@ -16,6 +16,7 @@ use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Controller\Admin\BlockType\BlockTypeCRUDController;
+use ReflectionException;
 
 /**
  * Class used to test the update page template form.
@@ -24,6 +25,9 @@ class UpdateBlockTypeTest extends LoginPantherTestCase
 {
     private const EXPECTED_ROWS_COUNT = 1;
 
+    /**
+     * @throws ReflectionException
+     */
     public function testUpdateBlockType()
     {
         /** @var BlockType $blockType */

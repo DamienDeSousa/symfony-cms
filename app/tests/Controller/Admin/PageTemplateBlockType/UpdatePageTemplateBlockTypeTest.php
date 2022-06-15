@@ -18,6 +18,7 @@ use App\Entity\Structure\PageTemplate;
 use App\Entity\Structure\PageTemplateBlockType;
 use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use ReflectionException;
 
 /**
  * Tests the right behaviour of page template block type updating.
@@ -28,6 +29,9 @@ class UpdatePageTemplateBlockTypeTest extends LoginPantherTestCase
 
     private const EXPECTED_ALERT_MESSAGE_COUNT = 1;
 
+    /**
+     * @throws ReflectionException
+     */
     public function testUpdatePageTemplateBlockTypeSuccessfully()
     {
         $newPageTemplate = $this->fixtureRepository->getReference('new_page_template');
@@ -62,6 +66,9 @@ class UpdatePageTemplateBlockTypeTest extends LoginPantherTestCase
         );
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testUpdatePageTemplateBlockTypeWithEmptySlug()
     {
         /** @var PageTemplate $pageTemplate */
@@ -104,6 +111,9 @@ class UpdatePageTemplateBlockTypeTest extends LoginPantherTestCase
         );
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testUpdatePageTemplateBlockTypeWithAlreadyExistingSlugForPageTemplateAndBlockType()
     {
         /** @var PageTemplate $pageTemplate */

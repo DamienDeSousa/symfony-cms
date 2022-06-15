@@ -37,14 +37,4 @@ trait AdminUriProvider
     {
         return Index::ADMIN_HOME_PAGE_URI;
     }
-
-    public function provideAdminGridPageTemplateBlockTypeUri(): string
-    {
-        return GridPageTemplateBlockTypeController::GRID_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_URI;
-    }
-
-    public function provideAdminPageTemplateBlockTypeCreateUri(): string
-    {
-        return CreatePageTemplateBlockTypeController::CREATE_PAGE_TEMPLATE_BLOCK_TYPE_ROUTE_URI;
-    }
 }

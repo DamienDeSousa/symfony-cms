@@ -31,13 +31,9 @@ class CreateSiteCommand extends Command
      */
     protected static $defaultName = 'cms:site:create';
 
-    private SiteCreatorHelper $siteCreator;
-
-    public function __construct(SiteCreatorHelper $siteCreator)
+    public function __construct(private SiteCreatorHelper $siteCreator)
     {
         parent::__construct();
-
-        $this->siteCreator = $siteCreator;
     }
 
     protected function configure()

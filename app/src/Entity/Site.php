@@ -13,32 +13,21 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\SiteRepository;
 
-/**
- * @ORM\Entity(repositoryClass=App\Repository\SiteRepository::class)
- */
+#[ORM\Entity(repositoryClass: SiteRepository::class)]
 class Site
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id, ORM\Column(type: "integer"), ORM\GeneratedValue]
     private ?int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank
-     * @Assert\Type("string")
-     */
+    #[ORM\Column(type: "string", length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Type("string")]
     private ?string $title;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     *
-     * @Assert\Type("string")
-     */
+    #[ORM\Column(type: "text", nullable: true)]
+    #[Assert\Type("string")]
     private ?string $icon;
 
     public function getId(): ?int

@@ -16,6 +16,7 @@ use App\Entity\Structure\BlockType;
 use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use ReflectionException;
 
 /**
  * This class is used to test the block type creation.
@@ -24,6 +25,9 @@ class CreateBlockTypeControllerTest extends LoginPantherTestCase
 {
     private const EXPECTED_GRID_LINES = 1;
 
+    /**
+     * @throws ReflectionException
+     */
     public function testCreateNewBlockType()
     {
         $crawler = $this->navigateToCreatePage($this->client, BlockTypeCRUDController::class);

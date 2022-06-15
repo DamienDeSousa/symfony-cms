@@ -26,11 +26,8 @@ class Captcha
      */
     public const LIMIT_DISPLAY_CAPTCHA = 3;
 
-    private string $sessionKey;
-
-    public function __construct(string $sessionKey)
+    public function __construct(private string $sessionKey)
     {
-        $this->sessionKey = $sessionKey;
     }
 
     /**

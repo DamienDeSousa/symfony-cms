@@ -17,44 +17,25 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\Structure\PageTemplateBlockTypeRepository;
 
-/**
- * @ORM\Entity(repositoryClass=PageTemplateBlockTypeRepository::class)
- *
- * @UniqueEntity(
- *     fields={"slug", "pageTemplate", "blockType"},
- *     errorPath="slug"
- * )
- */
+#[ORM\Entity(repositoryClass: PageTemplateBlockTypeRepository::class)]
+#[UniqueEntity(fields: ["slug", "pageTemplate", "blockType"], errorPath: "slug")]
 class PageTemplateBlockType
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id, ORM\Column(type: "integer"), ORM\GeneratedValue]
     private ?int $id;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     *
-     * @Assert\NotBlank
-     */
+    #[ORM\Column(type: "string", length: 50)]
+    #[Assert\NotBlank]
     private ?string $slug;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Structure\PageTemplate", inversedBy="pageTemplateBlockTypes")
-     * @ORM\JoinColumn(name="page_template_id", referencedColumnName="id", onDelete="CASCADE")
-     *
-     * @Assert\NotNull
-     */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\Structure\PageTemplate", inversedBy: "pageTemplateBlockTypes")]
+    #[ORM\JoinColumn(name: "page_template_id", referencedColumnName: "id", onDelete: "CASCADE")]
+    #[Assert\NotNull]
     private ?PageTemplate $pageTemplate;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Structure\BlockType", inversedBy="pageTemplateBlockTypes")
-     * @ORM\JoinColumn(name="block_type_id", referencedColumnName="id")
-     *
-     * @Assert\NotNull
-     */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\Structure\BlockType", inversedBy: "pageTemplateBlockTypes")]
+    #[ORM\JoinColumn(name: "block_type_id", referencedColumnName: "id")]
+    #[Assert\NotNull]
     private ?BlockType $blockType;
 
     public function getId(): ?int
@@ -96,15 +77,5 @@ class PageTemplateBlockType
         $this->blockType = $blockType;
 
         return $this;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id' => $this->id,
-            'slug' => $this->slug,
-            'pageTemplate' => $this->pageTemplate->getName(),
-            'blockType' => $this->blockType->getType(),
-        ];
     }
 }

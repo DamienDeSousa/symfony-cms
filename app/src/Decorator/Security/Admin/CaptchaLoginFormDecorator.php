@@ -16,8 +16,11 @@ use App\Security\Admin\Login\Captcha;
 use App\Security\Admin\LoginFormAuthenticator;
 use App\Validator\Captcha\CaptchaValidator;
 use Doctrine\ORM\EntityManagerInterface;
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -28,33 +31,22 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class CaptchaLoginFormDecorator extends LoginFormAuthenticator
 {
-    private LoginFormAuthenticator $loginFormAuthenticator;
-
-    private Captcha $captcha;
-
-    private Captcha $captchaEnabler;
-
-    private CaptchaValidator $captchaValidator;
-
     private bool $isCaptchaValid;
 
+    #[Pure]
     public function __construct(
-        CaptchaValidator $captchaValidator,
-        Captcha $captchaEnabler,
+        private CaptchaValidator $captchaValidator,
+        private Captcha $captchaEnabler,
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
         AuthSecurizer $authSecurizer,
-        LoginFormAuthenticator $loginFormAuthenticator,
-        Captcha $captcha
+        private LoginFormAuthenticator $loginFormAuthenticator,
+        private Captcha $captcha
     ) {
         parent::__construct($entityManager, $urlGenerator, $csrfTokenManager, $passwordEncoder, $authSecurizer);
 
-        $this->captchaEnabler = $captchaEnabler;
-        $this->loginFormAuthenticator = $loginFormAuthenticator;
-        $this->captcha = $captcha;
-        $this->captchaValidator = $captchaValidator;
         $this->isCaptchaValid = true;
     }
 
@@ -74,7 +66,13 @@ class CaptchaLoginFormDecorator extends LoginFormAuthenticator
     /**
      * @inheritDoc
      */
-    public function getCredentials(Request $request)
+    #[ArrayShape([
+        'username' => "string",
+        'password' => "string",
+        'csrf_token' => "string",
+        'captchaCode' => "string"
+    ])]
+    public function getCredentials(Request $request): array
     {
         $credentials = $this->loginFormAuthenticator->getCredentials($request);
         if ($this->captchaEnabler->isCaptchaDisplayed($request)) {
@@ -115,7 +113,7 @@ class CaptchaLoginFormDecorator extends LoginFormAuthenticator
     /**
      * @inheritDoc
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response
     {
         $this->captcha->unsetSessionPageDisplayed($request);
         $this->captcha->removeSessionCaptchaPhrase($request->getSession());

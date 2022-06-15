@@ -13,57 +13,41 @@ namespace App\Entity\Structure;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\Structure\BlockTypeRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Validator\Files\FileExists;
 
-/**
- * @ORM\Entity(repositoryClass=BlockTypeRepository::class)
- *
- * @UniqueEntity(fields="type", message="block-type.create.error.type")
- * @UniqueEntity(fields="layout", message="block-type.create.error.layout")
- */
+#[ORM\Entity(repositoryClass: BlockTypeRepository::class)]
+#[UniqueEntity(fields: "type", message: "block-type.create.error.type")]
+#[UniqueEntity(fields: "layout", message: "block-type.create.error.layout")]
 class BlockType
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id, ORM\Column(type: "integer"), ORM\GeneratedValue]
     private ?int $id;
 
-    /**
-     * @ORM\Column(type="string", length=100, unique=true)
-     *
-     * @Assert\NotBlank
-     * @Assert\Type("string")
-     */
+    #[ORM\Column(type: "string", length: 100, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Type("string")]
     private ?string $type;
 
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     *
-     * @Assert\NotBlank
-     * @Assert\Type("string")
-     */
+    #[ORM\Column(type: "string", length: 255, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Type("string")]
     private ?string $layout;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Structure\PageTemplateBlockType", mappedBy="blockType")
-     */
+    #[ORM\OneToMany(mappedBy: "blockType", targetEntity: "App\Entity\Structure\PageTemplateBlockType")]
     private Collection $pageTemplateBlockTypes;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     *
-     * @Assert\NotBlank
-     * @Assert\Type("string")
-     * @FileExists
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: false)]
+    #[Assert\NotBlank]
+    #[Assert\Type("string")]
+    #[FileExists]
     private ?string $formType;
 
+    #[Pure]
     public function __construct()
     {
         $this->pageTemplateBlockTypes = new ArrayCollection();

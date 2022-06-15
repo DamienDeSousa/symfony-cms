@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace App\Tests\Provider\Actions;
 
 use App\Entity\User;
+use Facebook\WebDriver\Exception\NoSuchElementException;
+use Facebook\WebDriver\Exception\TimeoutException;
 use Symfony\Component\Panther\Client;
 use Symfony\Component\Panther\DomCrawler\Crawler;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
@@ -32,6 +34,10 @@ trait LogAction
         return $client->submit($loginForm);
     }
 
+    /**
+     * @throws NoSuchElementException
+     * @throws TimeoutException
+     */
     public function adminLogout(Client $client, Crawler $crawler): Crawler
     {
         $client->waitFor(UtilsAdminSelector::USER_DETAIL_SELECTOR);

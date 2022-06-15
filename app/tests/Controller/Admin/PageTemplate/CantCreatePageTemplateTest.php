@@ -16,6 +16,7 @@ use App\Entity\Structure\PageTemplate;
 use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
+use ReflectionException;
 
 /**
  * This class is used to test the impossibility to create a new page template.
@@ -24,6 +25,9 @@ class CantCreatePageTemplateTest extends LoginPantherTestCase
 {
     private const EXPECTED_ALERT_MESSAGES = 2;
 
+    /**
+     * @throws ReflectionException
+     */
     public function testCreateNewPageTemplateWithDataAlreadyUsed()
     {
         /** @var PageTemplate $pageTemplate */

@@ -15,6 +15,7 @@ use Gregwar\Captcha\CaptchaBuilderInterface;
 use Gregwar\Captcha\PhraseBuilderInterface;
 use Gregwar\CaptchaBundle\Generator\CaptchaGenerator as BaseCaptchaGenerator;
 use Gregwar\CaptchaBundle\Generator\ImageFileHandler;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -23,21 +24,16 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class CaptchaGenerator extends BaseCaptchaGenerator
 {
-    private SessionInterface $session;
-
-    private Captcha $captcha;
-
+    #[Pure]
     public function __construct(
-        Captcha $captcha,
+        private Captcha $captcha,
         RouterInterface $router,
         CaptchaBuilderInterface $builder,
         PhraseBuilderInterface $phraseBuilder,
         ImageFileHandler $imageFileHandler,
-        SessionInterface $session
+        private SessionInterface $session
     ) {
         parent::__construct($router, $builder, $phraseBuilder, $imageFileHandler);
-        $this->session = $session;
-        $this->captcha = $captcha;
     }
 
     public function getCaptchaCode(array &$options): string

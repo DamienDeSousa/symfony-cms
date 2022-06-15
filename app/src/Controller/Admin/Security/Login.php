@@ -30,32 +30,14 @@ class Login extends AbstractController
 
     public const LOGIN_PAGE_URI = '/admin-GC2NeDwu26y6pred';
 
-    protected CsrfTokenManagerInterface $tokenManager;
-
-    protected AuthError $authError;
-
-    protected LastUsername $lastUsername;
-
-    protected Captcha $captcha;
-
-    protected CaptchaGenerator $captchaGenerator;
-
-    private array $gregwarCaptchaOptions;
-
     public function __construct(
-        CaptchaGenerator $captchaGenerator,
-        CsrfTokenManagerInterface $tokenManager,
-        AuthError $authError,
-        LastUsername $lastUsername,
-        Captcha $captcha,
-        array $gregwarCaptchaOptions
+        private CaptchaGenerator $captchaGenerator,
+        private CsrfTokenManagerInterface $tokenManager,
+        private AuthError $authError,
+        private LastUsername $lastUsername,
+        private Captcha $captcha,
+        private array $gregwarCaptchaOptions
     ) {
-        $this->tokenManager = $tokenManager;
-        $this->authError = $authError;
-        $this->lastUsername = $lastUsername;
-        $this->captcha = $captcha;
-        $this->captchaGenerator = $captchaGenerator;
-        $this->gregwarCaptchaOptions = $gregwarCaptchaOptions;
     }
 
     public function __invoke(Request $request): Response
@@ -63,9 +45,7 @@ class Login extends AbstractController
         //Add LoginUserType
         $error = $this->authError->getError($request);
         $lastUsername = $this->lastUsername->getLastUserName($request);
-        $csrfToken = $this->tokenManager
-            ? $this->tokenManager->getToken('authenticate')->getValue()
-            : null;
+        $csrfToken = $this->tokenManager?->getToken('authenticate')?->getValue();
         $viewParameters = [
             'last_username' => $lastUsername,
             'error' => $error,
