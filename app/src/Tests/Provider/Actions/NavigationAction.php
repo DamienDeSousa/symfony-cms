@@ -67,7 +67,7 @@ trait NavigationAction
         $this->clickElement($client, UtilsAdminSelector::SAVE_AND_RETURN_BUTTON_SELECTOR);
         $client->refreshCrawler();
 
-        return $this->client->getCrawler();
+        return $client->getCrawler();
     }
 
     public function clickElement(Client $client, string $elementCssSelector): Crawler

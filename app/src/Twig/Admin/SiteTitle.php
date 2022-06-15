@@ -19,11 +19,8 @@ class SiteTitle implements RuntimeExtensionInterface
 {
     private const DEFAULT_TITLE = 'Symfony CMS';
 
-    private SiteReaderService $siteReaderService;
-
-    public function __construct(SiteReaderService $siteReaderService)
+    public function __construct(private SiteReaderService $siteReaderService)
     {
-        $this->siteReaderService = $siteReaderService;
     }
 
     public function getTitle(): string

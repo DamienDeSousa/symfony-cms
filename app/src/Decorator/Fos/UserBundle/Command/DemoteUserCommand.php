@@ -19,19 +19,13 @@ use App\Security\UserRoles;
 
 class DemoteUserCommand extends FOSDemoteUserCommand
 {
-    protected UserRoles $userRoles;
-
-    protected FOSDemoteUserCommand $fosDemotedUserCommand;
 
     public function __construct(
         UserManipulator $manipulator,
-        FOSDemoteUserCommand $fosDemotedUserCommand,
-        UserRoles $userRoles
+        private FOSDemoteUserCommand $fosDemotedUserCommand,
+        private UserRoles $userRoles
     ) {
         parent::__construct($manipulator);
-
-        $this->userRoles = $userRoles;
-        $this->fosDemotedUserCommand = $fosDemotedUserCommand;
     }
 
     /**

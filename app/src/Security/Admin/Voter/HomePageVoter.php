@@ -24,11 +24,8 @@ class HomePageVoter extends Voter
 {
     public const HOMEPAGE = 'homepage';
 
-    private Security $security;
-
-    public function __construct(Security $security)
+    public function __construct(private Security $security)
     {
-        $this->security = $security;
     }
 
     protected function supports($attribute, $subject): bool

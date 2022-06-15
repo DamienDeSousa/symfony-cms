@@ -10,16 +10,14 @@ namespace App\Validator\Files;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @Annotation
- */
+#[\Attribute]
 class FileExists extends Constraint
 {
     public string $message = 'file_exists';
 
     public string $file;
 
-    public function getTargets()
+    public function getTargets(): array|string
     {
         return self::PROPERTY_CONSTRAINT;
     }

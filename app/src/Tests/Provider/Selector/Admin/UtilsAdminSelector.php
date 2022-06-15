@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Tests\Provider\Selector\Admin;
 
 use ReflectionClass;
+use ReflectionException;
 use Symfony\Component\Panther\DomCrawler\Crawler;
 
 /**
@@ -76,6 +77,9 @@ abstract class UtilsAdminSelector
     public const EDIT_BUTTON_REDIRECT_SELECTOR = 'a.action-edit';
     // ----------------------------------------------------- //
 
+    /**
+     * @throws ReflectionException
+     */
     public static function getShortClassName(string $fullClassName): string
     {
         $reflectionClass = new ReflectionClass($fullClassName);

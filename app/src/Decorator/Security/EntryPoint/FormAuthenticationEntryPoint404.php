@@ -35,7 +35,7 @@ class FormAuthenticationEntryPoint404 implements AuthenticationEntryPointInterfa
 
     public function start(Request $request, ?AuthenticationException $authException = null)
     {
-        if (strpos($request->getRequestUri(), self::ROOT_URI) === 0) {
+        if (str_starts_with($request->getRequestUri(), self::ROOT_URI)) {
             throw new NotFoundHttpException();
         }
 

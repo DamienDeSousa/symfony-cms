@@ -15,48 +15,36 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\Structure\PageTemplateRepository;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-/**
- * @ORM\Entity(repositoryClass=PageTemplateRepository::class)
- * @UniqueEntity(fields="name", message="page-template.create.error.name")
- * @UniqueEntity(fields="layout", message="page-template.create.error.layout")
- */
+#[ORM\Entity(repositoryClass: PageTemplateRepository::class)]
+#[UniqueEntity(fields: "name", message: "page-template.create.error.name")]
+#[UniqueEntity(fields: "layout", message: "page-template.create.error.layout")]
 class PageTemplate
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id, ORM\Column(type: "integer"), ORM\GeneratedValue]
     private ?int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     *
-     * @Assert\NotBlank
-     * @Assert\Type("string")
-     */
+    #[ORM\Column(type: "string", length: 255, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Type("string")]
     private ?string $name;
 
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     *
-     * @Assert\NotBlank
-     * @Assert\Type("string")
-     */
+    #[ORM\Column(type: "string", length: 255, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Type("string")]
     private ?string $layout;
 
-    /**
-     * @ORM\OneToMany(
-     *  targetEntity="App\Entity\Structure\PageTemplateBlockType",
-     *  mappedBy="pageTemplate",
-     *  cascade={"remove"}
-     * )
-     */
+    #[ORM\OneToMany(
+        mappedBy: "pageTemplate",
+        targetEntity: "App\Entity\Structure\PageTemplateBlockType",
+        cascade: ["remove"]
+    )]
     private Collection $pageTemplateBlockTypes;
 
+    #[Pure]
     public function __construct()
     {
         $this->pageTemplateBlockTypes = new ArrayCollection();
@@ -89,15 +77,6 @@ class PageTemplate
         $this->layout = $layout;
 
         return $this;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'layout' => $this->layout,
-        ];
     }
 
     public function getPageTemplateBlockTypes(): Collection

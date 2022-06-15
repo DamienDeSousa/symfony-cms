@@ -15,6 +15,7 @@ use App\Entity\Structure\BlockType;
 use App\Tests\LoginPantherTestCase;
 use App\Tests\Provider\AssertMessageProvider;
 use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use ReflectionException;
 
 /**
  * Tests the behaviour when wrong data are set.
@@ -23,6 +24,9 @@ class CantUpdateBlockTypeTest extends LoginPantherTestCase
 {
     private const EXPECTED_ALERT_MESSAGES = 2;
 
+    /**
+     * @throws ReflectionException
+     */
     public function testUpdateBlockTypeWithAlreadyUsedTypeAndLayout()
     {
         /** @var BlockType $firstBlock */
@@ -59,6 +63,9 @@ class CantUpdateBlockTypeTest extends LoginPantherTestCase
         );
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testUpdateWithEmptyValues()
     {
         /** @var BlockType $firstBlock */

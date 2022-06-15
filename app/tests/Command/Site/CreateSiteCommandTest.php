@@ -33,7 +33,7 @@ class CreateSiteCommandTest extends KernelTestCase
         ]);
         $output = $commandTester->getDisplay();
 
-        $this->assertContains('Site created successfully', $output);
+        $this->assertStringContainsString('Site created successfully', $output);
     }
 
     public function testCreateMoreSiteExecute()
@@ -55,6 +55,6 @@ class CreateSiteCommandTest extends KernelTestCase
         ]);
         $output = $commandTester->getDisplay();
 
-        $this->assertContains('Can\'t create site, a site should already exist', $output);
+        $this->assertStringContainsString('Can\'t create site, a site should already exist', $output);
     }
 }

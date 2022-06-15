@@ -9,6 +9,7 @@
 
 namespace App\Exception\Entity;
 
+use JetBrains\PhpStorm\Pure;
 use Throwable;
 use App\Exception\TranslateException;
 
@@ -23,6 +24,7 @@ class DeleteEntityException extends TranslateException
 
     private array $transMessageParams;
 
+    #[Pure]
     public function __construct(
         string $transMessage,
         array $transMessageParams = [],

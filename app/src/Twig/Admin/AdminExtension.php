@@ -22,7 +22,6 @@ class AdminExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('sidebar_sections', [SidebarSection::class, 'getSections']),
             new TwigFunction('get_title', [SiteTitle::class, 'getTitle']),
             new TwigFunction('get_icon', [SiteIcon::class, 'getIcon']),
         ];

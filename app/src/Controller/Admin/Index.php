@@ -33,20 +33,11 @@ class Index extends AbstractDashboardController
 
     public const ADMIN_HOME_PAGE_URI = '/admin/';
 
-    private TranslatorInterface $translator;
-
-    private SiteReaderService $siteReaderService;
-
-    private string $iconDirectory;
-
     public function __construct(
-        TranslatorInterface $translator,
-        SiteReaderService $siteReaderService,
-        string $iconDirectory
+        private TranslatorInterface $translator,
+        private SiteReaderService $siteReaderService,
+        private string $iconDirectory
     ) {
-        $this->translator = $translator;
-        $this->siteReaderService = $siteReaderService;
-        $this->iconDirectory = $iconDirectory;
     }
 
     /**

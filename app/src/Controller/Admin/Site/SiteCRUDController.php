@@ -23,11 +23,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
  */
 class SiteCRUDController extends AbstractCrudController
 {
-    private string $iconDirectory;
-
-    public function __construct(string $iconDirectory)
+    public function __construct(private string $iconDirectory)
     {
-        $this->iconDirectory = $iconDirectory;
     }
 
     public static function getEntityFqcn(): string

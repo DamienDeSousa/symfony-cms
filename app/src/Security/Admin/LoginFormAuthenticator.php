@@ -18,7 +18,9 @@ use App\Security\Admin\AuthSecurizer;
 use App\Controller\Admin\Security\Login;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Controller\Admin\Security\LoginCheck;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -74,7 +76,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     /**
      * @inheritDoc
      */
-    public function getCredentials(Request $request)
+    #[ArrayShape(['username' => "string", 'password' => "string", 'csrf_token' => "string"])]
+    public function getCredentials(Request $request): array
     {
         $credentials = [
             'username' => $request->request->get('_username'),
@@ -133,7 +136,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     /**
      * @inheritDoc
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response
     {
         $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
         if ($targetPath) {
