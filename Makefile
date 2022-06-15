@@ -49,12 +49,14 @@ cache-clear: ## clear cache
 run-tests: ## run automated tests, specify the PATH_TEST argument to run specific tests 
 	docker-compose exec php-fpm php bin/console cache:clear --env=test
 	docker-compose exec php-fpm php bin/console doctrine:migrations:migrate --no-interaction --env=test
+	$(MAKE) asset-install
 	docker-compose exec php-fpm ./bin/phpunit $$PATH_TEST
 
 #Tests are splited because there is a chromium issue when running too mush tests in the same time.
 run-all-tests: ## run all automated tests
 	docker-compose exec php-fpm php bin/console cache:clear --env=test
 	docker-compose exec php-fpm php bin/console doctrine:migrations:migrate --no-interaction --env=test
+	$(MAKE) asset-install
 	docker-compose exec php-fpm ./bin/phpunit tests/Command
 	docker-compose exec php-fpm ./bin/phpunit tests/Controller/Admin/BlockType
 	docker-compose exec php-fpm ./bin/phpunit tests/Controller/Admin/PageTemplate
