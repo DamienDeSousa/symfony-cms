@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f5c8c57714e6055009a88523c9888fb",
+    "content-hash": "98e69d60c96253b13d557ec1990b65ad",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -8848,42 +8848,42 @@
         },
         {
             "name": "symfony/panther",
-            "version": "v0.7.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/panther.git",
-                "reference": "7a8c5ba4eb9a0432ea0b3ca6fa59ec50f8d70072"
+                "reference": "8716dd7c1c26a592a4e0440047a7967c21ef71e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/panther/zipball/7a8c5ba4eb9a0432ea0b3ca6fa59ec50f8d70072",
-                "reference": "7a8c5ba4eb9a0432ea0b3ca6fa59ec50f8d70072",
+                "url": "https://api.github.com/repos/symfony/panther/zipball/8716dd7c1c26a592a4e0440047a7967c21ef71e5",
+                "reference": "8716dd7c1c26a592a4e0440047a7967c21ef71e5",
                 "shasum": ""
             },
             "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
                 "php": ">=7.1",
-                "php-webdriver/webdriver": "^1.8.1",
-                "symfony/browser-kit": "^4.3 || ^5.0",
-                "symfony/dom-crawler": "^4.3 || ^5.0",
-                "symfony/http-client": "^4.3 || ^5.0",
+                "php-webdriver/webdriver": "^1.8.2",
+                "symfony/browser-kit": "^4.4 || ^5.0",
+                "symfony/dependency-injection": "^4.4 || ^5.0",
+                "symfony/deprecation-contracts": "^2.4 || ^3.0",
+                "symfony/dom-crawler": "^4.4 || ^5.0",
+                "symfony/http-client": "^4.4.11 || ^5.2",
+                "symfony/http-kernel": "^4.4 || ^5.0",
                 "symfony/polyfill-php72": "^1.9",
-                "symfony/process": "^3.4 || ^4.0 || ^5.0"
-            },
-            "conflict": {
-                "symfony/framework-bundle": ">=4.3 <4.3.4"
+                "symfony/process": "^4.4 || ^5.0"
             },
             "require-dev": {
-                "fabpot/goutte": "^3.2.3",
-                "guzzlehttp/guzzle": "^6.3",
-                "symfony/css-selector": "^3.4 || ^4.0 || ^5.0",
-                "symfony/framework-bundle": "^3.4 || ^4.0 || ^5.0",
-                "symfony/mime": "^4.3 || ^5.0",
-                "symfony/phpunit-bridge": "^4.3.3 || ^5.0"
+                "symfony/css-selector": "^4.4 || ^5.0",
+                "symfony/framework-bundle": "^4.4 || ^5.0",
+                "symfony/mime": "^4.4 || ^5.0",
+                "symfony/phpunit-bridge": "^5.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-main": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -8918,15 +8918,23 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/panther/issues",
-                "source": "https://github.com/symfony/panther/tree/v0.7.1"
+                "source": "https://github.com/symfony/panther/tree/v1.1.2"
             },
             "funding": [
                 {
                     "url": "https://www.panthera.org/donate",
                     "type": "custom"
+                },
+                {
+                    "url": "https://github.com/dunglas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/panther",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2020-02-24T12:05:49+00:00"
+            "time": "2021-11-30T15:51:25+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
