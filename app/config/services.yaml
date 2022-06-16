@@ -4,8 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    icon_directory: 'uploads/icon/'
-    full_icon_directory_path: '%kernel.project_dir%/public/%icon_directory%'
+    full_icon_directory_path: '%kernel.project_dir%/public/%dades_cms.icon_directory%'
     security.captcha.security_key: captcha
 
 services:
@@ -15,7 +14,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:               # bind the following variables for all the project
             $fullIconDirectoryPath: '%full_icon_directory_path%'
-            $iconDirectory: '%icon_directory%'
+            $iconDirectory: '%dades_cms.icon_directory%'
             $directoryPath: '%kernel.project_dir%'
             $formFactory: '@form.factory'
             $gregwarCaptchaOptions: '%gregwar_captcha.config%'

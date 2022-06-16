@@ -9,25 +9,16 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace Dades\CmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Repository\SiteRepository;
 
-#[ORM\Entity(repositoryClass: SiteRepository::class)]
 class Site
 {
-    #[ORM\Id, ORM\Column(type: "integer"), ORM\GeneratedValue]
     private ?int $id;
 
-    #[ORM\Column(type: "string", length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Type("string")]
     private ?string $title;
 
-    #[ORM\Column(type: "text", nullable: true)]
-    #[Assert\Type("string")]
     private ?string $icon;
 
     public function getId(): ?int

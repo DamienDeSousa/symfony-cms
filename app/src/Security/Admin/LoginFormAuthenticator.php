@@ -13,7 +13,7 @@ namespace App\Security\Admin;
 
 use App\Entity\User;
 use App\Security\UserRoles;
-use App\Controller\Admin\Index;
+use Dades\CmsBundle\Controller\Admin\Index;
 use App\Security\Admin\AuthSecurizer;
 use App\Controller\Admin\Security\Login;
 use Doctrine\ORM\EntityManagerInterface;

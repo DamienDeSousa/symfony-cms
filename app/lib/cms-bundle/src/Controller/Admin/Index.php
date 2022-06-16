@@ -9,16 +9,15 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin;
+namespace Dades\CmsBundle\Controller\Admin;
 
-use App\Entity\Site;
 use App\Entity\Structure\BlockType;
 use App\Entity\Structure\PageTemplate;
 use App\Entity\Structure\PageTemplateBlockType;
-use App\Service\Site\SiteReaderService;
+use Dades\CmsBundle\Entity\Site;
+use Dades\CmsBundle\Service\Site\SiteReaderInterface;
 use App\Security\Admin\Voter\HomePageVoter;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -35,21 +34,17 @@ class Index extends AbstractDashboardController
 
     public function __construct(
         private TranslatorInterface $translator,
-        private SiteReaderService $siteReaderService,
-        private string $iconDirectory
+        private SiteReaderInterface $siteReaderService,
+        private string $iconDirectory,
     ) {
     }
 
-    /**
-     * @Route("/admin", name="admin_index")
-     */
     public function index(): Response
     {
+        //TODO: to remove
         $this->denyAccessUnlessGranted(HomePageVoter::HOMEPAGE);
 
         return parent::index();
-
-        // return $this->render('admin/index.html.twig');
     }
 
     public function configureDashboard(): Dashboard

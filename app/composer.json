@@ -67,7 +67,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "Dades\\CmsBundle\\": "lib/cms-bundle/src/"
         }
     },
     "autoload-dev": {

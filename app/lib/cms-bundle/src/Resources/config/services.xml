@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="dades_cms.icon_directory">uploads/icon/</parameter>
+    </parameters>
+
+    <services>
+        <!--    COMMANDS    -->
+        <service id="dades_cms.command_site_create_site" class="Dades\CmsBundle\Command\Site\CreateSiteCommand" public="false">
+            <argument type="service" id="dades_cms.service_site_site_creator" />
+            <tag name="console.command" />
+        </service>
+        <service id="Dades\CmsBundle\Command\Site\CreateSiteCommand" alias="dades_cms.command_site_create_site" public="false"/>
+
+
+
+        <!--    CREATORS    -->
+        <service id="dades_cms.service_site_site_creator" class="Dades\CmsBundle\Service\Site\SiteCreatorHelper" public="false">
+            <argument type="service" id="logger"/>
+            <argument type="service" id="Dades\CmsBundle\Repository\SiteRepository" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+        <service id="Dades\CmsBundle\Service\Site\SiteCreatorInterface" alias="dades_cms.service_site_site_creator" />
+
+
+
+        <!--    REPOSITORIES    -->
+        <service id="Dades\CmsBundle\Repository\SiteRepository" class="Dades\CmsBundle\Repository\SiteRepository" public="false">
+            <argument type="service" id="doctrine"/>
+            <tag name="doctrine.repository_service"/>
+        </service>
+
+
+
+        <!--    READERS    -->
+        <service id="dades_cms.service_site_site_reader" class="Dades\CmsBundle\Service\Site\SiteReaderService" public="false">
+            <argument type="service" id="Dades\CmsBundle\Repository\SiteRepository" />
+        </service>
+        <service id="Dades\CmsBundle\Service\Site\SiteReaderInterface" alias="dades_cms.service_site_site_reader" public="false"/>
+
+
+
+        <!--    CONTROLLERS    -->
+        <service id="Dades\CmsBundle\Controller\Admin\Index" class="Dades\CmsBundle\Controller\Admin\Index" public="true">
+            <argument type="service" id="translator"/>
+            <argument type="service" id="dades_cms.service_site_site_reader"/>
+            <argument>%dades_cms.icon_directory%</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+            <tag name="ea.dashboard_controller"/>
+            <tag name="container.service_subscriber"/>
+        </service>
+
+        <service id="Dades\CmsBundle\Controller\Admin\Site\SiteCRUDController" class="Dades\CmsBundle\Controller\Admin\Site\SiteCRUDController" public="true">
+            <argument>%dades_cms.icon_directory%</argument>
+            <call method="setContainer">
+                <argument type="service" id="Psr\Container\ContainerInterface"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+            <tag name="container.service_subscriber"/>
+            <tag name="ea.crud_controller"/>
+        </service>
+
+
+
+        <!--    TWIG EXTENSIONS    -->
+        <service id="cms_dades.twig_admin" class="Dades\CmsBundle\Twig\Admin\AdminExtension">
+            <argument type="service" id="dades_cms.service_site_site_reader"/>
+            <argument>%dades_cms.icon_directory%</argument>
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

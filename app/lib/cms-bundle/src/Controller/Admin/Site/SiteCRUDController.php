@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\Site;
+namespace Dades\CmsBundle\Controller\Admin\Site;
 
-use App\Entity\Site;
+use Dades\CmsBundle\Entity\Site;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;

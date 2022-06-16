@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace App\Command\Site;
+namespace Dades\CmsBundle\Command\Site;
 
-use App\Service\Site\SiteCreatorHelper;
+use Dades\CmsBundle\Service\Site\SiteCreatorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +31,7 @@ class CreateSiteCommand extends Command
      */
     protected static $defaultName = 'cms:site:create';
 
-    public function __construct(private SiteCreatorHelper $siteCreator)
+    public function __construct(private SiteCreatorInterface $siteCreator)
     {
         parent::__construct();
     }

@@ -10,14 +10,12 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Site;
+namespace Dades\CmsBundle\Service\Site;
 
-use App\Entity\Site;
-use App\Repository\SiteRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
+use Dades\CmsBundle\Entity\Site;
+use Dades\CmsBundle\Repository\SiteRepository;
 
-class SiteReaderService
+class SiteReaderService implements SiteReaderInterface
 {
     public function __construct(private SiteRepository $siteRepository)
     {

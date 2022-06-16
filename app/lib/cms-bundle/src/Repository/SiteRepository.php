@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace Dades\CmsBundle\Repository;
 
-use App\Entity\Site;
+use Dades\CmsBundle\Entity\Site;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
