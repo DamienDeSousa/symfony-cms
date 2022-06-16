@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Dades\CmsBundle\Entity;
 
-use App\Entity\Structure\PageTemplateBlockType;
 use Doctrine\Common\Collections\ArrayCollection;
 use JetBrains\PhpStorm\Pure;
 use Doctrine\Common\Collections\Collection;

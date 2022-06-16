@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\PageTemplateBlockType;
+namespace Dades\CmsBundle\Controller\Admin\PageTemplateBlockType;
 
-use App\Entity\Structure\PageTemplateBlockType;
+use Dades\CmsBundle\Entity\PageTemplateBlockType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;

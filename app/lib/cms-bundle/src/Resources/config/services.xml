@@ -28,12 +28,22 @@
 
 
         <!--    REPOSITORIES    -->
-        <service id="Dades\CmsBundle\Repository\SiteRepository" class="Dades\CmsBundle\Repository\SiteRepository" public="false">
+        <service id="Dades\CmsBundle\Repository\SiteRepository" public="false">
             <argument type="service" id="doctrine"/>
             <tag name="doctrine.repository_service"/>
         </service>
 
-        <service id="Dades\CmsBundle\Repository\Structure\BlockTypeRepository" class="Dades\CmsBundle\Repository\Structure\BlockTypeRepository" public="false">
+        <service id="Dades\CmsBundle\Repository\Structure\BlockTypeRepository" public="false">
+            <argument type="service" id="doctrine"/>
+            <tag name="doctrine.repository_service"/>
+        </service>
+
+        <service id="Dades\CmsBundle\Repository\Structure\PageTemplateBlockTypeRepository" public="false">
+            <argument type="service" id="doctrine"/>
+            <tag name="doctrine.repository_service"/>
+        </service>
+
+        <service id="Dades\CmsBundle\Repository\Structure\PageTemplateRepository" public="false">
             <argument type="service" id="doctrine"/>
             <tag name="doctrine.repository_service"/>
         </service>
@@ -83,6 +93,15 @@
         </service>
 
         <service id="Dades\CmsBundle\Controller\Admin\PageTemplate\PageTemplateCRUDController" class="Dades\CmsBundle\Controller\Admin\PageTemplate\PageTemplateCRUDController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="Psr\Container\ContainerInterface"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+            <tag name="container.service_subscriber"/>
+            <tag name="ea.crud_controller"/>
+        </service>
+
+        <service id="Dades\CmsBundle\Controller\Admin\PageTemplateBlockType\PageTemplateBlockTypeCRUDController" class="Dades\CmsBundle\Controller\Admin\PageTemplateBlockType\PageTemplateBlockTypeCRUDController" public="true">
             <call method="setContainer">
                 <argument type="service" id="Psr\Container\ContainerInterface"/>
             </call>

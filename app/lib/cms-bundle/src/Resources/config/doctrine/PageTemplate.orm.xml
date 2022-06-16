@@ -13,7 +13,7 @@
 
         <field name="layout" type="string" length="255" unique="true" />
 
-        <one-to-many field="pageTemplateBlockTypes" target-entity="App\Entity\Structure\PageTemplateBlockType" mapped-by="pageTemplate">
+        <one-to-many field="pageTemplateBlockTypes" target-entity="Dades\CmsBundle\Entity\PageTemplateBlockType" mapped-by="pageTemplate">
             <cascade>
                 <cascade-remove/>
             </cascade>

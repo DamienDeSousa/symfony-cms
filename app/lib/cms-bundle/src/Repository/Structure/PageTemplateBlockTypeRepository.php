@@ -7,10 +7,10 @@
  * @copyright 2021
  */
 
-namespace App\Repository\Structure;
+namespace Dades\CmsBundle\Repository\Structure;
 
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Structure\PageTemplateBlockType;
+use Dades\CmsBundle\Entity\PageTemplateBlockType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**

@@ -15,7 +15,7 @@
 
         <field name="formType" type="string" length="255" nullable="false" />
 
-        <one-to-many field="pageTemplateBlockTypes" target-entity="App\Entity\Structure\PageTemplateBlockType" mapped-by="blockType" />
+        <one-to-many field="pageTemplateBlockTypes" target-entity="Dades\CmsBundle\Entity\PageTemplateBlockType" mapped-by="blockType" />
     </entity>
 
 </doctrine-mapping>

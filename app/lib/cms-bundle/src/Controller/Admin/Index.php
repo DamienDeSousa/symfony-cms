@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Dades\CmsBundle\Controller\Admin;
 
 use Dades\CmsBundle\Entity\BlockType;
-use App\Entity\Structure\PageTemplateBlockType;
+use Dades\CmsBundle\Entity\PageTemplateBlockType;
 use Dades\CmsBundle\Entity\PageTemplate;
 use Dades\CmsBundle\Entity\Site;
 use Dades\CmsBundle\Service\Site\SiteReaderInterface;
