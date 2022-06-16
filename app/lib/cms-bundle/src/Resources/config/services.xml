@@ -82,6 +82,15 @@
             <tag name="ea.crud_controller"/>
         </service>
 
+        <service id="Dades\CmsBundle\Controller\Admin\PageTemplate\PageTemplateCRUDController" class="Dades\CmsBundle\Controller\Admin\PageTemplate\PageTemplateCRUDController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="Psr\Container\ContainerInterface"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+            <tag name="container.service_subscriber"/>
+            <tag name="ea.crud_controller"/>
+        </service>
+
 
 
         <!--    TWIG EXTENSIONS    -->
