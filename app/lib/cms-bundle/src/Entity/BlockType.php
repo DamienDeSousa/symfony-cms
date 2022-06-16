@@ -9,42 +9,23 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Structure;
+namespace Dades\CmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Structure\PageTemplateBlockType;
 use Doctrine\Common\Collections\ArrayCollection;
 use JetBrains\PhpStorm\Pure;
-use Symfony\Component\Validator\Constraints as Assert;
-use App\Repository\Structure\BlockTypeRepository;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use App\Validator\Files\FileExists;
 
-#[ORM\Entity(repositoryClass: BlockTypeRepository::class)]
-#[UniqueEntity(fields: "type", message: "block-type.create.error.type")]
-#[UniqueEntity(fields: "layout", message: "block-type.create.error.layout")]
 class BlockType
 {
-    #[ORM\Id, ORM\Column(type: "integer"), ORM\GeneratedValue]
     private ?int $id;
 
-    #[ORM\Column(type: "string", length: 100, unique: true)]
-    #[Assert\NotBlank]
-    #[Assert\Type("string")]
     private ?string $type;
 
-    #[ORM\Column(type: "string", length: 255, unique: true)]
-    #[Assert\NotBlank]
-    #[Assert\Type("string")]
     private ?string $layout;
 
-    #[ORM\OneToMany(mappedBy: "blockType", targetEntity: "App\Entity\Structure\PageTemplateBlockType")]
     private Collection $pageTemplateBlockTypes;
 
-    #[ORM\Column(type: "string", length: 255, nullable: false)]
-    #[Assert\NotBlank]
-    #[Assert\Type("string")]
-    #[FileExists]
     private ?string $formType;
 
     #[Pure]
@@ -113,15 +94,6 @@ class BlockType
         $this->formType = $formType;
 
         return $this;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id' => $this->id,
-            'type' => $this->type,
-            'layout' => $this->layout,
-        ];
     }
 
     public function __toString(): string

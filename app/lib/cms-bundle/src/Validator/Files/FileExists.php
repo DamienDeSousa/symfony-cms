@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace App\Validator\Files;
+namespace Dades\CmsBundle\Validator\Files;
 
 use Symfony\Component\Validator\Constraint;
 

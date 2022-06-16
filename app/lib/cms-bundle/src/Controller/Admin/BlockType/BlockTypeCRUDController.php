@@ -8,10 +8,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin\BlockType;
+namespace Dades\CmsBundle\Controller\Admin\BlockType;
 
-use App\Entity\Structure\BlockType;
-use App\Exception\Entity\DeleteEntityException;
+use Dades\CmsBundle\Entity\BlockType;
+use Dades\CmsBundle\Exception\Entity\DeleteEntityException;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use JetBrains\PhpStorm\Pure;
@@ -30,13 +30,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class BlockTypeCRUDController extends AbstractCrudController
 {
-    public const FORM_TYPE_BLOCK_RELATIVE_PATH = '/src/Form/Type/Block';
+    public const FORM_TYPE_BLOCK_RELATIVE_PATH = '/Form/Type/Block';
 
     private Finder $finder;
 
     #[Pure]
     public function __construct(
-        private string $directoryPath,
         private AdminUrlGenerator $adminUrlGenerator,
         private TranslatorInterface $translator
     ) {
@@ -84,7 +83,7 @@ class BlockTypeCRUDController extends AbstractCrudController
 
     private function getAvailableFormTypes(): array
     {
-        $files = $this->finder->files()->in($this->directoryPath . self::FORM_TYPE_BLOCK_RELATIVE_PATH);
+        $files = $this->finder->files()->in(__DIR__ . '/../../..' . self::FORM_TYPE_BLOCK_RELATIVE_PATH);
         $choices = [];
         foreach ($files as $file) {
             $choices[$file->getRelativePathname()] = $file->getRelativePathname();

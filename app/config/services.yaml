@@ -69,11 +69,6 @@ services:
     App\Decorator\Security\EntryPoint\FormAuthenticationEntryPoint404:
         decorates: 'security.authentication.form_entry_point.admin'
 
-    # Listeners
-    App\EventListener\BlockType\PreRemoveBlockTypeListener:
-        tags:
-            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', entity: 'App\Entity\Structure\BlockType' }
-
     # Rewrites
     gregwar_captcha.generator:
         class: App\Rewrite\Gregwar\CaptchaBundle\Generator\CaptchaGenerator

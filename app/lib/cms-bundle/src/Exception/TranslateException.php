@@ -7,7 +7,7 @@
  * @copyright 2022
  */
 
-namespace App\Exception;
+namespace Dades\CmsBundle\Exception;
 
 use Exception;
 use JetBrains\PhpStorm\Pure;

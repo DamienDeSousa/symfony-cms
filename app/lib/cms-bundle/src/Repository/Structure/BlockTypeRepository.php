@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Structure;
+namespace Dades\CmsBundle\Repository\Structure;
 
-use App\Entity\Structure\BlockType;
+use Dades\CmsBundle\Entity\BlockType;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -26,18 +26,5 @@ class BlockTypeRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, BlockType::class);
-    }
-
-    public function findAllBy(array $orderBy = null): array
-    {
-        $queryBuilder = $this->createQueryBuilder('bt');
-        if ($orderBy && !empty($orderBy)) {
-            foreach ($orderBy as $attribute => $order) {
-                $queryBuilder->orderBy('bt.' . $attribute, $order);
-            }
-        }
-        $query = $queryBuilder->getQuery();
-
-        return $query->getResult();
     }
 }

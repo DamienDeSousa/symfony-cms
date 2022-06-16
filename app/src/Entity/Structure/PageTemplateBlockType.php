@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Structure;
 
+use Dades\CmsBundle\Entity\BlockType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -33,7 +34,7 @@ class PageTemplateBlockType
     #[Assert\NotNull]
     private ?PageTemplate $pageTemplate;
 
-    #[ORM\ManyToOne(targetEntity: "App\Entity\Structure\BlockType", inversedBy: "pageTemplateBlockTypes")]
+    #[ORM\ManyToOne(targetEntity: "Dades\CmsBundle\Entity\BlockType", inversedBy: "pageTemplateBlockTypes")]
     #[ORM\JoinColumn(name: "block_type_id", referencedColumnName: "id")]
     #[Assert\NotNull]
     private ?BlockType $blockType;

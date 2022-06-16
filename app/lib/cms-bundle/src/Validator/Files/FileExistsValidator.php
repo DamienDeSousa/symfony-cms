@@ -9,20 +9,14 @@
 
 declare(strict_types=1);
 
-namespace App\Validator\Files;
+namespace Dades\CmsBundle\Validator\Files;
 
-use Doctrine\Persistence\ObjectManager;
-use Doctrine\Persistence\ManagerRegistry;
+use Dades\CmsBundle\Controller\Admin\BlockType\BlockTypeCRUDController;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Filesystem\Filesystem;
-use Doctrine\Persistence\Mapping\ClassMetadata;
-use App\Repository\GroupedByRepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidator;
-use App\Form\Type\Admin\BlockType\CreateBlockTypeType;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use App\Controller\Admin\BlockType\BlockTypeCRUDController;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
  * Class used to validate if a file exists.

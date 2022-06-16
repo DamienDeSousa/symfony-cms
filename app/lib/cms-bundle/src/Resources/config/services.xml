@@ -33,6 +33,11 @@
             <tag name="doctrine.repository_service"/>
         </service>
 
+        <service id="Dades\CmsBundle\Repository\Structure\BlockTypeRepository" class="Dades\CmsBundle\Repository\Structure\BlockTypeRepository" public="false">
+            <argument type="service" id="doctrine"/>
+            <tag name="doctrine.repository_service"/>
+        </service>
+
 
 
         <!--    READERS    -->
@@ -66,6 +71,17 @@
             <tag name="ea.crud_controller"/>
         </service>
 
+        <service id="Dades\CmsBundle\Controller\Admin\BlockType\BlockTypeCRUDController" class="Dades\CmsBundle\Controller\Admin\BlockType\BlockTypeCRUDController" public="true">
+            <argument type="service" id="EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator"/>
+            <argument type="service" id="translator"/>
+            <call method="setContainer">
+                <argument type="service" id="Psr\Container\ContainerInterface"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+            <tag name="container.service_subscriber"/>
+            <tag name="ea.crud_controller"/>
+        </service>
+
 
 
         <!--    TWIG EXTENSIONS    -->
@@ -73,6 +89,21 @@
             <argument type="service" id="dades_cms.service_site_site_reader"/>
             <argument>%dades_cms.icon_directory%</argument>
             <tag name="twig.extension"/>
+        </service>
+
+
+
+        <!--    LISTENERS    -->
+        <service id="cms_dades.listener_block_type" class="Dades\CmsBundle\EventListener\BlockType\PreRemoveBlockTypeListener">
+            <tag name="doctrine.orm.entity_listener" event="preRemove" entity="Dades\CmsBundle\Entity\BlockType"/>
+        </service>
+
+
+
+        <!--    CONSTRAINTS & VALIDATORS    -->
+        <service id="cms_dades.validator_files_file_exists" class="Dades\CmsBundle\Validator\Files\FileExists"/>
+        <service id="cms_dades.validator_files_file_exists_validator" class="Dades\CmsBundle\Validator\Files\FileExistsValidator">
+            <tag name="validator.constraint_validator"/>
         </service>
     </services>
 </container>

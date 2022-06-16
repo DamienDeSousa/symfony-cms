@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace Dades\CmsBundle\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 class Site
 {
     private ?int $id;

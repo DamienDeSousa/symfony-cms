@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Dades\CmsBundle\Controller\Admin;
 
-use App\Entity\Structure\BlockType;
+use Dades\CmsBundle\Entity\BlockType;
 use App\Entity\Structure\PageTemplate;
 use App\Entity\Structure\PageTemplateBlockType;
 use Dades\CmsBundle\Entity\Site;

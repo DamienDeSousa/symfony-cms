@@ -7,10 +7,10 @@
  * @copyright 2022
  */
 
-namespace App\EventListener\BlockType;
+namespace Dades\CmsBundle\EventListener\BlockType;
 
-use App\Entity\Structure\BlockType;
-use App\Exception\Entity\DeleteEntityException;
+use Dades\CmsBundle\Entity\BlockType;
+use Dades\CmsBundle\Exception\Entity\DeleteEntityException;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 /**

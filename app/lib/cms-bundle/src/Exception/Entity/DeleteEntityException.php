@@ -7,11 +7,11 @@
  * @copyright 2022
  */
 
-namespace App\Exception\Entity;
+namespace Dades\CmsBundle\Exception\Entity;
 
 use JetBrains\PhpStorm\Pure;
 use Throwable;
-use App\Exception\TranslateException;
+use Dades\CmsBundle\Exception\TranslateException;
 
 /**
  * Exception to throw when something wrong happens during the deletion of an entity.
