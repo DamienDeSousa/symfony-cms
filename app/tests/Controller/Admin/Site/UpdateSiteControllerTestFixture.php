@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\Site;
 
+use Dades\TestUtils\Provider\Data\SiteProvider;
+use Dades\TestUtils\Provider\Data\UserProvider;
 use Doctrine\Persistence\ObjectManager;
-use App\Tests\Provider\Data\SiteProvider;
-use App\Tests\Provider\Data\UserProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
 /**

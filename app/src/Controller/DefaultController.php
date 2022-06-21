@@ -2,18 +2,15 @@
 
 namespace App\Controller;
 
-use App\Security\UserRoles;
+use Dades\FosUserExtensionBundle\Security\UserRolesInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    protected UserRoles $userRoles;
-
-    public function __construct(UserRoles $userRoles)
+    public function __construct(private UserRolesInterface $userRoles)
     {
-        $this->userRoles = $userRoles;
     }
 
     /**

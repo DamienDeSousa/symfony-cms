@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\BlockType;
 
+use Dades\TestUtils\Provider\Data\BlockTypeProvider;
+use Dades\TestUtils\Provider\Data\UserProvider;
 use Doctrine\Persistence\ObjectManager;
-use App\Tests\Provider\Data\UserProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use App\Tests\Provider\Data\BlockTypeProvider;
 
 /**
  * This class is used to load fixtures for the DeleteBlockTypeTest class.

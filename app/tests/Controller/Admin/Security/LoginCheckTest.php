@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace App\Tests\Controller\Admin\Security;
 
 use App\Entity\User;
-use App\Tests\FixturePantherTestCase;
-use App\Tests\Provider\Actions\LogAction;
+use Dades\TestUtils\FixturePantherTestCase;
+use Dades\TestUtils\Provider\Actions\LogAction;
 use Facebook\WebDriver\Exception\NoSuchElementException;
 use Facebook\WebDriver\Exception\TimeoutException;
 

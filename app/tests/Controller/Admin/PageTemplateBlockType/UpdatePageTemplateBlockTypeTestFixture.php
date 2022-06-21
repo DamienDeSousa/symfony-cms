@@ -6,12 +6,12 @@
 
 namespace App\Tests\Controller\Admin\PageTemplateBlockType;
 
+use Dades\TestUtils\Provider\Data\BlockTypeProvider;
+use Dades\TestUtils\Provider\Data\PageTemplateBlockTypeProvider;
+use Dades\TestUtils\Provider\Data\PageTemplateProvider;
+use Dades\TestUtils\Provider\Data\UserProvider;
 use Doctrine\Persistence\ObjectManager;
-use App\Tests\Provider\Data\UserProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use App\Tests\Provider\Data\BlockTypeProvider;
-use App\Tests\Provider\Data\PageTemplateProvider;
-use App\Tests\Provider\Data\PageTemplateBlockTypeProvider;
 
 /**
  * Class that provides fixtures for UpdatePageTemplateBlockTypeTest.

@@ -11,13 +11,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplateBlockType;
 
-use App\Controller\Admin\PageTemplateBlockType\PageTemplateBlockTypeCRUDController;
-use App\Entity\Structure\BlockType;
-use App\Tests\LoginPantherTestCase;
-use App\Entity\Structure\PageTemplate;
-use App\Entity\Structure\PageTemplateBlockType;
-use App\Tests\Provider\AssertMessageProvider;
-use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use Dades\CmsBundle\Entity\BlockType;
+use Dades\CmsBundle\Entity\PageTemplate;
+use Dades\CmsBundle\Entity\PageTemplateBlockType;
+use Dades\EasyAdminExtensionBundle\Controller\Admin\PageTemplateBlockType\PageTemplateBlockTypeCRUDController;
+use Dades\TestUtils\LoginPantherTestCase;
+use Dades\TestUtils\Provider\AssertMessageProvider;
+use Dades\TestUtils\Provider\Selector\Admin\UtilsAdminSelector;
+use Exception;
 use ReflectionException;
 
 /**
@@ -31,6 +32,7 @@ class UpdatePageTemplateBlockTypeTest extends LoginPantherTestCase
 
     /**
      * @throws ReflectionException
+     * @throws Exception
      */
     public function testUpdatePageTemplateBlockTypeSuccessfully()
     {
@@ -68,6 +70,7 @@ class UpdatePageTemplateBlockTypeTest extends LoginPantherTestCase
 
     /**
      * @throws ReflectionException
+     * @throws Exception
      */
     public function testUpdatePageTemplateBlockTypeWithEmptySlug()
     {
@@ -113,6 +116,7 @@ class UpdatePageTemplateBlockTypeTest extends LoginPantherTestCase
 
     /**
      * @throws ReflectionException
+     * @throws Exception
      */
     public function testUpdatePageTemplateBlockTypeWithAlreadyExistingSlugForPageTemplateAndBlockType()
     {

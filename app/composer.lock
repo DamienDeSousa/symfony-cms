@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20ced9ff693a224ded419114ee5dda59",
+    "content-hash": "1dd75c917167e4097c21c275752218ad",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -78,6 +78,192 @@
                 }
             ],
             "time": "2022-01-17T14:14:24+00:00"
+        },
+        {
+            "name": "dades/cms-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../CmsBundle",
+                "reference": "46d7e789642bd8fe487b4121ea39ecee49e299b4"
+            },
+            "require": {
+                "php": "^8.1.7"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Dades\\CmsBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien DE SOUSA",
+                    "email": "desousadamien30@gmail.com"
+                }
+            ],
+            "description": "Symfony bundle to easily create a CMS",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "dades/easy-admin-extension-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../EasyAdminExtensionBundle",
+                "reference": "a77a1a61042ccd5b4c8d404e7c5c84432cdb8467"
+            },
+            "require": {
+                "php": "^8.1.7"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Dades\\EasyAdminExtensionBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien DE SOUSA",
+                    "email": "desousadamien30@gmail.com"
+                }
+            ],
+            "description": "Symfony bundles that integrates EasyAdminBundle to DadesCmsBundle",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "dades/fos-user-extension-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../FosUserExtensionBundle",
+                "reference": "febfaa8e5886620d3940f740f0aae23bdc2bb391"
+            },
+            "require": {
+                "php": "^8.1.7"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Dades\\FosUserExtensionBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien DE SOUSA",
+                    "email": "desousadamien30@gmail.com"
+                }
+            ],
+            "description": "Symfony bundle that integrates FosUserBundle into DadesCmsBundle",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "dades/gregwar-captcha-extension-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../GregwarCaptchaExtensionBundle",
+                "reference": "5278550f6f437a7640806494c28c2b9b0c771424"
+            },
+            "require": {
+                "php": "^8.1.7"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Dades\\GregwarCaptchaExtensionBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien DE SOUSA",
+                    "email": "desousadamien30@gmail.com"
+                }
+            ],
+            "description": "Symfony bundle that integrates GregwarCaptchaBundle into DadesCmsBundle",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "dades/test-fixtures",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../TestFixtures",
+                "reference": "9edfcac1bc991cc8eb2639608272239f4a69a1d7"
+            },
+            "require": {
+                "php": "^8.1.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dades\\TestFixtures\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien DE SOUSA",
+                    "email": "desousadamien30@gmail.com"
+                }
+            ],
+            "description": "Provides traits to easily execute tests with fixtures",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "dades/test-utils",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../TestUtils",
+                "reference": "aeb6983f775a2f7eb00485b4489d54336da27f6a"
+            },
+            "require": {
+                "php": "^8.1.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dades\\TestUtils\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien DE SOUSA",
+                    "email": "desousadamien30@gmail.com"
+                }
+            ],
+            "description": "Provides tests traits and classes to easily write tests for CmsBundle",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "doctrine/annotations",
@@ -9102,7 +9288,14 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "dades/cms-bundle": 20,
+        "dades/easy-admin-extension-bundle": 20,
+        "dades/fos-user-extension-bundle": 20,
+        "dades/gregwar-captcha-extension-bundle": 20,
+        "dades/test-fixtures": 20,
+        "dades/test-utils": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -9112,7 +9305,7 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "8.0.20"
+        "php": "8.1.7"
     },
     "plugin-api-version": "2.2.0"
 }

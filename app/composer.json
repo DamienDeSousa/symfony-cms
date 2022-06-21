@@ -6,6 +6,12 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "^1.11",
+        "dades/cms-bundle": "*@dev",
+        "dades/easy-admin-extension-bundle": "*@dev",
+        "dades/fos-user-extension-bundle": "*@dev",
+        "dades/gregwar-captcha-extension-bundle": "*@dev",
+        "dades/test-fixtures": "*@dev",
+        "dades/test-utils": "*@dev",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
@@ -62,13 +68,13 @@
             "php": "8.1.7"
         },
         "allow-plugins": {
-            "symfony/flex": true
+            "symfony/flex": true,
+            "composer/package-versions-deprecated": true
         }
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "Dades\\CmsBundle\\": "lib/cms-bundle/src/"
+            "App\\": "src/"
         }
     },
     "autoload-dev": {
@@ -92,5 +98,31 @@
             "allow-contrib": false,
             "require": "5.4.*"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../CmsBundle"
+        },
+        {
+            "type": "path",
+            "url": "../EasyAdminExtensionBundle"
+        },
+        {
+            "type": "path",
+            "url": "../FosUserExtensionBundle"
+        },
+        {
+            "type": "path",
+            "url": "../GregwarCaptchaExtensionBundle"
+        },
+        {
+            "type": "path",
+            "url": "../TestFixtures"
+        },
+        {
+            "type": "path",
+            "url": "../TestUtils"
+        }
+    ]
 }

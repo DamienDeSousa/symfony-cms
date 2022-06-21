@@ -29,4 +29,10 @@ app/yarn-error.log
 
 ###> Custom <###
 app/public/uploads/
+CmsBundle
+EasyAdminExtensionBundle
+FosUserExtensionBundle
+GregwarCaptchaExtensionBundle
+TestFixtures
+TestUtils
 ###< Custom >###

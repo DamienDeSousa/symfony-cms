@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplate;
 
+use Dades\TestUtils\Provider\Data\UserProvider;
 use Doctrine\Persistence\ObjectManager;
-use App\Tests\Provider\Data\UserProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
 /**

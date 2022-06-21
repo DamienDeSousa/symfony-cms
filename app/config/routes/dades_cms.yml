@@ -1,2 +1,0 @@
-dades_cms:
-    resource: '@DadesCmsBundle/Resources/config/routes.xml'

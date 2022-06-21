@@ -11,11 +11,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\BlockType;
 
-use App\Controller\Admin\BlockType\BlockTypeCRUDController;
-use App\Entity\Structure\BlockType;
-use App\Tests\LoginPantherTestCase;
-use App\Tests\Provider\AssertMessageProvider;
-use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use Dades\CmsBundle\Entity\BlockType;
+use Dades\EasyAdminExtensionBundle\Controller\Admin\BlockType\BlockTypeCRUDController;
+use Dades\TestUtils\LoginPantherTestCase;
+use Dades\TestUtils\Provider\AssertMessageProvider;
+use Dades\TestUtils\Provider\Selector\Admin\UtilsAdminSelector;
+use Exception;
 use ReflectionException;
 
 /**
@@ -27,6 +28,7 @@ class CreateBlockTypeControllerTest extends LoginPantherTestCase
 
     /**
      * @throws ReflectionException
+     * @throws Exception
      */
     public function testCreateNewBlockType()
     {

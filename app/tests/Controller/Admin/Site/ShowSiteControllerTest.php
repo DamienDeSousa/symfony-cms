@@ -12,11 +12,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\Site;
 
-use App\Controller\Admin\Site\SiteCRUDController;
-use App\Entity\Site;
-use App\Tests\LoginPantherTestCase;
-use App\Tests\Provider\AssertMessageProvider;
-use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use Dades\CmsBundle\Entity\Site;
+use Dades\EasyAdminExtensionBundle\Controller\Admin\Site\SiteCRUDController;
+use Dades\TestUtils\LoginPantherTestCase;
+use Dades\TestUtils\Provider\AssertMessageProvider;
+use Dades\TestUtils\Provider\Selector\Admin\UtilsAdminSelector;
 
 class ShowSiteControllerTest extends LoginPantherTestCase
 {
