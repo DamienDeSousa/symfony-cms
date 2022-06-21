@@ -1,0 +1,6 @@
+dades_easy_admin_extension:
+    resource: '@DadesEasyAdminExtensionBundle/Resources/config/routes.xml'
+
+## Always load this one after dades_easy_admin_extension because a controller route is rewrite in here
+dades_fos_user_extension:
+    resource: '@DadesFosUserExtensionBundle/Resources/config/routes.xml'

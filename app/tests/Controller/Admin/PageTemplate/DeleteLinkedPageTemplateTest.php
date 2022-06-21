@@ -11,18 +11,22 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplate;
 
-use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
-use App\Controller\Admin\PageTemplateBlockType\PageTemplateBlockTypeCRUDController;
-use App\Entity\Structure\PageTemplate;
-use App\Tests\LoginPantherTestCase;
-use App\Tests\Provider\AssertMessageProvider;
-use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use Dades\CmsBundle\Entity\PageTemplate;
+use Dades\EasyAdminExtensionBundle\Controller\Admin\PageTemplate\PageTemplateCRUDController;
+use Dades\EasyAdminExtensionBundle\Controller\Admin\PageTemplateBlockType\PageTemplateBlockTypeCRUDController;
+use Dades\TestUtils\LoginPantherTestCase;
+use Dades\TestUtils\Provider\AssertMessageProvider;
+use Dades\TestUtils\Provider\Selector\Admin\UtilsAdminSelector;
+use Exception;
 
 /**
  * This class is used to test the possibility to deleted a page template linked to a block type.
  */
 class DeleteLinkedPageTemplateTest extends LoginPantherTestCase
 {
+    /**
+     * @throws Exception
+     */
     public function testDeleteLinkedPageTemplate()
     {
         /** @var PageTemplate $pageTemplate */

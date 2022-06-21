@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\Site;
 
-use App\Entity\Site;
 use App\Entity\User;
+use Dades\CmsBundle\Entity\Site;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 

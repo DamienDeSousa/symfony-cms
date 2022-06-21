@@ -11,17 +11,21 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplateBlockType;
 
-use App\Controller\Admin\PageTemplateBlockType\PageTemplateBlockTypeCRUDController;
-use App\Entity\Structure\PageTemplateBlockType;
-use App\Tests\LoginPantherTestCase;
-use App\Tests\Provider\AssertMessageProvider;
-use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
+use Dades\CmsBundle\Entity\PageTemplateBlockType;
+use Dades\EasyAdminExtensionBundle\Controller\Admin\PageTemplateBlockType\PageTemplateBlockTypeCRUDController;
+use Dades\TestUtils\LoginPantherTestCase;
+use Dades\TestUtils\Provider\AssertMessageProvider;
+use Dades\TestUtils\Provider\Selector\Admin\UtilsAdminSelector;
+use Exception;
 
 /**
  * Test the right behaviour of page template block type deletion.
  */
 class DeletePageTemplateBlockTypeTest extends LoginPantherTestCase
 {
+    /**
+     * @throws Exception
+     */
     public function testDeletePageTemplateBlockTypeSuccessfully()
     {
         /** @var PageTemplateBlockType $pageTemplateBlockType */

@@ -28,7 +28,13 @@ services:
       - 9000
     volumes:
         - ./app:/var/www
-    depends_on: 
+        - ./CmsBundle:/var/CmsBundle
+        - ./EasyAdminExtensionBundle:/var/EasyAdminExtensionBundle
+        - ./FosUserExtensionBundle:/var/FosUserExtensionBundle
+        - ./GregwarCaptchaExtensionBundle:/var/GregwarCaptchaExtensionBundle
+        - ./TestFixtures:/var/TestFixtures
+        - ./TestUtils:/var/TestUtils
+    depends_on:
       - mysql
   
   node:

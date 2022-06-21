@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\Site;
 
+use Dades\CmsBundle\Entity\Site;
+use Dades\EasyAdminExtensionBundle\Controller\Admin\Site\SiteCRUDController;
+use Dades\TestUtils\LoginPantherTestCase;
+use Dades\TestUtils\Provider\AssertMessageProvider;
+use Dades\TestUtils\Provider\Selector\Admin\UtilsAdminSelector;
 use Exception;
-use App\Entity\Site;
-use App\Tests\LoginPantherTestCase;
-use App\Tests\Provider\AssertMessageProvider;
-use App\Controller\Admin\Site\SiteCRUDController;
-use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
 use Facebook\WebDriver\Exception\NoSuchElementException;
 use Facebook\WebDriver\Exception\TimeoutException;
 
@@ -25,6 +25,9 @@ use Facebook\WebDriver\Exception\TimeoutException;
  */
 class UpdateSiteControllerTest extends LoginPantherTestCase
 {
+    /**
+     * @throws Exception
+     */
     public function testUpdateWebSiteWithNewTitleAndNewValidImage()
     {
         /** @var Site $site */
@@ -57,6 +60,9 @@ class UpdateSiteControllerTest extends LoginPantherTestCase
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public function testUpdateSiteWithNewTitleAndEmptyImage()
     {
         /** @var Site $site */
@@ -92,6 +98,9 @@ class UpdateSiteControllerTest extends LoginPantherTestCase
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public function testUpdateSiteWithEmptyTitleAndWrongImageType()
     {
         /** @var Site $site */

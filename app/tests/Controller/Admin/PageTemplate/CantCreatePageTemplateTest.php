@@ -11,11 +11,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\Admin\PageTemplate;
 
-use App\Tests\LoginPantherTestCase;
-use App\Entity\Structure\PageTemplate;
-use App\Tests\Provider\AssertMessageProvider;
-use App\Tests\Provider\Selector\Admin\UtilsAdminSelector;
-use App\Controller\Admin\PageTemplate\PageTemplateCRUDController;
+use Dades\CmsBundle\Entity\PageTemplate;
+use Dades\EasyAdminExtensionBundle\Controller\Admin\PageTemplate\PageTemplateCRUDController;
+use Dades\TestUtils\LoginPantherTestCase;
+use Dades\TestUtils\Provider\AssertMessageProvider;
+use Dades\TestUtils\Provider\Selector\Admin\UtilsAdminSelector;
+use Exception;
 use ReflectionException;
 
 /**
@@ -27,6 +28,7 @@ class CantCreatePageTemplateTest extends LoginPantherTestCase
 
     /**
      * @throws ReflectionException
+     * @throws Exception
      */
     public function testCreateNewPageTemplateWithDataAlreadyUsed()
     {

@@ -3,10 +3,7 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    icon_directory: 'uploads/icon/'
-    full_icon_directory_path: '%kernel.project_dir%/public/%icon_directory%'
-    security.captcha.security_key: captcha
+parameters: ~
 
 services:
     # default configuration for services in *this* file
@@ -14,10 +11,6 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:               # bind the following variables for all the project
-            $fullIconDirectoryPath: '%full_icon_directory_path%'
-            $iconDirectory: '%icon_directory%'
-            $directoryPath: '%kernel.project_dir%'
-            $formFactory: '@form.factory'
             $gregwarCaptchaOptions: '%gregwar_captcha.config%'
             $captchaGenerator: '@gregwar_captcha.generator'
 
@@ -39,48 +32,3 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Security\UserRoles:
-        arguments:
-            $roles: '%security.role_hierarchy.roles%'
-
-    App\Security\Admin\Login\Captcha:
-        arguments:
-            $sessionKey: '%security.captcha.security_key%'
-
-    # Decorators
-    App\Decorator\Fos\UserBundle\Command\PromoteUserCommand:
-        decorates:
-            'fos_user.command.promote_user'
-        arguments:
-            $manipulator: '@fos_user.util.user_manipulator'
-
-    App\Decorator\Fos\UserBundle\Command\DemoteUserCommand:
-        decorates:
-            'fos_user.command.demote_user'
-        arguments:
-            $manipulator: '@fos_user.util.user_manipulator'
-
-    App\Decorator\Security\Admin\CaptchaLoginFormDecorator:
-        decorates:
-            'App\Security\Admin\LoginFormAuthenticator'
-
-    # the suffix 'admin' refers to the admin section in security.yaml
-    # for each new firewall on login page, there will be a new service named
-    # security.authentication.form_entry_point.<the name of your firewall>
-    App\Decorator\Security\EntryPoint\FormAuthenticationEntryPoint404:
-        decorates: 'security.authentication.form_entry_point.admin'
-
-    # Listeners
-    App\EventListener\BlockType\PreRemoveBlockTypeListener:
-        tags:
-            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', entity: 'App\Entity\Structure\BlockType' }
-
-    # Rewrites
-    gregwar_captcha.generator:
-        class: App\Rewrite\Gregwar\CaptchaBundle\Generator\CaptchaGenerator
-        public: true
-        arguments:
-            $router: '@router'
-            $builder: '@gregwar_captcha.captcha_builder'
-            $phraseBuilder: '@gregwar_captcha.phrase_builder'
-            $imageFileHandler: '@gregwar_captcha.image_file_handler'
