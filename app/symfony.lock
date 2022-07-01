@@ -198,6 +198,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony-cmf/routing-bundle": {
+        "version": "2.5.1"
+    },
     "symfony/asset": {
         "version": "v4.4.12"
     },

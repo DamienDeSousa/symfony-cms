@@ -6,10 +6,6 @@ Mettre en place un système de log via le logger
 
 ## Evolutions
 
-passer sur php7.4  
-extraire le code dans un dossier à part (en faire un bundle à terme).  
-passer sur symfony 5.4  
-
 ## Installation
 
 Il faut dans un premier temps posséder une première version stable.

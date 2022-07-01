@@ -28,12 +28,11 @@ services:
       - 9000
     volumes:
         - ./app:/var/www
-        - ./CmsBundle:/var/CmsBundle
-        - ./EasyAdminExtensionBundle:/var/EasyAdminExtensionBundle
         - ./FosUserExtensionBundle:/var/FosUserExtensionBundle
         - ./GregwarCaptchaExtensionBundle:/var/GregwarCaptchaExtensionBundle
         - ./TestFixtures:/var/TestFixtures
         - ./TestUtils:/var/TestUtils
+        - ./php-fpm/config.json:/root/.config/composer/config.json
     depends_on:
       - mysql
   

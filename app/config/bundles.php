@@ -22,4 +22,5 @@ return [
     Dades\EasyAdminExtensionBundle\DadesEasyAdminExtensionBundle::class => ['all' => true],
     Dades\FosUserExtensionBundle\DadesFosUserExtensionBundle::class => ['all' => true],
     Dades\GregwarCaptchaExtensionBundle\DadesGregwarCaptchaExtensionBundle::class => ['all' => true],
+    Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle::class => ['all' => true],
 ];

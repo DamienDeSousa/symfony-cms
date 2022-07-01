@@ -1,0 +1,13 @@
+{
+  "config": {},
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/DamienDeSousa/cms-bundle.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/DamienDeSousa/easy-admin-extension-bundle.git"
+    }
+  ]
+}
