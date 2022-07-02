@@ -8,6 +8,10 @@
     {
       "type": "git",
       "url": "https://github.com/DamienDeSousa/easy-admin-extension-bundle.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/DamienDeSousa/fos-user-extension-bundle.git"
     }
   ]
 }
