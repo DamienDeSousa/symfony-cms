@@ -28,7 +28,6 @@ services:
       - 9000
     volumes:
         - ./app:/var/www
-        - ./FosUserExtensionBundle:/var/FosUserExtensionBundle
         - ./GregwarCaptchaExtensionBundle:/var/GregwarCaptchaExtensionBundle
         - ./TestFixtures:/var/TestFixtures
         - ./TestUtils:/var/TestUtils
