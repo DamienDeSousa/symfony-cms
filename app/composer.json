@@ -101,14 +101,6 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../GregwarCaptchaExtensionBundle"
-        },
-        {
-            "type": "path",
-            "url": "../TestFixtures"
-        },
-        {
-            "type": "path",
             "url": "../TestUtils"
         }
     ]

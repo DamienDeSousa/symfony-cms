@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e9607ba97d80f303454bc200ea82e89b",
+    "content-hash": "cc1258279cc043e8b35cf5e01dd01280",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -187,16 +187,17 @@
         {
             "name": "dades/gregwar-captcha-extension-bundle",
             "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "../GregwarCaptchaExtensionBundle",
-                "reference": "5278550f6f437a7640806494c28c2b9b0c771424"
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DamienDeSousa/gregwar-captcha-extension-bundle.git",
+                "reference": "ad78d4f07930fc4101f846dc8768c7756ef58761"
             },
             "require": {
                 "gregwar/captcha-bundle": "^2.2.0",
                 "php": "^8.1.7",
                 "symfony/framework-bundle": "^5.4.9"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -213,24 +214,27 @@
                 }
             ],
             "description": "Symfony bundle that integrates GregwarCaptchaBundle into DadesCmsBundle",
-            "transport-options": {
-                "relative": true
-            }
+            "time": "2022-07-04T08:14:43+00:00"
         },
         {
             "name": "dades/test-fixtures",
             "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "../TestFixtures",
-                "reference": "9edfcac1bc991cc8eb2639608272239f4a69a1d7"
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DamienDeSousa/test-fixtures.git",
+                "reference": "5c36addece59b215e0d88a84b7c75ed37f056e9f"
             },
             "require": {
+                "doctrine/data-fixtures": "^1.5.3",
                 "doctrine/doctrine-fixtures-bundle": "^3.4.2",
+                "php": "^8.1.7"
+            },
+            "require-dev": {
                 "doctrine/orm": "^2.12.2",
-                "php": "^8.1.7",
+                "phpunit/phpunit": "^9.5.20",
                 "symfony/framework-bundle": "^5.4.9"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -247,9 +251,7 @@
                 }
             ],
             "description": "Provides traits to easily execute tests with fixtures",
-            "transport-options": {
-                "relative": true
-            }
+            "time": "2022-07-04T08:53:07+00:00"
         },
         {
             "name": "dades/test-utils",
@@ -286,16 +288,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.13.2",
+            "version": "1.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "5b668aef16090008790395c02c893b1ba13f7e08"
+                "reference": "648b0343343565c4a056bfc8392201385e8d89f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/5b668aef16090008790395c02c893b1ba13f7e08",
-                "reference": "5b668aef16090008790395c02c893b1ba13f7e08",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/648b0343343565c4a056bfc8392201385e8d89f0",
+                "reference": "648b0343343565c4a056bfc8392201385e8d89f0",
                 "shasum": ""
             },
             "require": {
@@ -307,9 +309,10 @@
             "require-dev": {
                 "doctrine/cache": "^1.11 || ^2.0",
                 "doctrine/coding-standard": "^6.0 || ^8.1",
-                "phpstan/phpstan": "^0.12.20",
+                "phpstan/phpstan": "^1.4.10 || ^1.8.0",
                 "phpunit/phpunit": "^7.5 || ^8.0 || ^9.1.5",
-                "symfony/cache": "^4.4 || ^5.2"
+                "symfony/cache": "^4.4 || ^5.2",
+                "vimeo/psalm": "^4.10"
             },
             "type": "library",
             "autoload": {
@@ -352,9 +355,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.13.2"
+                "source": "https://github.com/doctrine/annotations/tree/1.13.3"
             },
-            "time": "2021-08-05T19:00:23+00:00"
+            "time": "2022-07-02T10:48:51+00:00"
         },
         {
             "name": "doctrine/cache",

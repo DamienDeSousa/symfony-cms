@@ -12,6 +12,14 @@
     {
       "type": "git",
       "url": "https://github.com/DamienDeSousa/fos-user-extension-bundle.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/DamienDeSousa/gregwar-captcha-extension-bundle.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/DamienDeSousa/test-fixtures.git"
     }
   ]
 }
